@@ -1,0 +1,19 @@
+{
+  "name": "lol-drafter",
+  "version": "1.0.0",
+  "description": "Real-time League of Legends draft assistant",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/run-tests.js",
+    "test:stats": "electron test/ugg-live.js",
+    "test:draft": "electron test/scenarios.js",
+    "test:bans": "electron test/bans.js",
+    "test:build": "electron test/build.js"
+  },
+  "author": "Tyboky",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

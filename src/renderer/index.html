@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' https://ddragon.leagueoflegends.com data:; style-src 'self' 'unsafe-inline';">
+  <title>LoL Draft Coach</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot" id="statusDot"></span>
+      <div>
+        <div class="title">Draft Coach</div>
+        <div class="sub" id="statusText">Starting...</div>
+      </div>
+    </div>
+    <div class="head-right">
+      <div class="timer" id="timer"></div>
+      <label class="toggle"><input type="checkbox" id="ontop"> on top</label>
+      <button id="refresh" title="Re-run the analysis">&#8635;</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="banner" id="turnBanner" hidden></section>
+
+    <section class="teams">
+      <div class="team">
+        <h2>Your team</h2>
+        <ul id="myTeam" class="roster"></ul>
+      </div>
+      <div class="team">
+        <h2>Enemy team</h2>
+        <ul id="theirTeam" class="roster"></ul>
+      </div>
+    </section>
+
+    <section class="bans">
+      <h2>Bans <span class="hint">not pickable</span></h2>
+      <div class="ban-row" id="bans"></div>
+    </section>
+
+    <section class="comps">
+      <div class="comp" id="compAlly"></div>
+      <div class="comp" id="compEnemy"></div>
+    </section>
+
+    <section class="counters" id="countersSection" hidden>
+      <div class="recs-head">
+        <h2 id="countersTitle">Best into your lane</h2>
+        <span class="hint" id="countersMeta"></span>
+      </div>
+      <div id="counters"></div>
+    </section>
+
+    <section class="build" id="buildSection" hidden>
+      <div class="recs-head">
+        <h2>Build for this game</h2>
+        <span class="hint" id="buildMeta"></span>
+      </div>
+      <div id="build"></div>
+    </section>
+
+    <section class="recs" id="recsSection">
+      <div class="recs-head">
+        <h2 id="recsTitle">Recommended picks</h2>
+        <span class="hint" id="aiStatus"></span>
+      </div>
+      <div id="staleWarn" class="stale-warn" hidden></div>
+      <div id="recs"></div>
+      <div id="avoid" class="avoid"></div>
+      <div id="rejected" class="rejected"></div>
+    </section>
+  </main>
+
+  <div id="idle" class="idle">
+    <div class="idle-inner">
+      <div class="idle-title" id="idleTitle">Waiting for champion select...</div>
+      <div class="idle-sub" id="idleSub">Start a game and this will light up automatically.</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
