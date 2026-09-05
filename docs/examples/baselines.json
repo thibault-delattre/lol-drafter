@@ -1,0 +1,751 @@
+[
+  {
+    "championId": 79,
+    "tier": "Emerald+",
+    "patch": "16_17",
+    "requestedPatch": "16_17",
+    "fallback": false,
+    "role": "Top",
+    "asOf": "2026-09-05T03:51:03.499790Z",
+    "games": 40867,
+    "winRate": 50.4,
+    "runes": {
+      "primary": 8200,
+      "secondary": 8300,
+      "perks": [
+        8230,
+        8210,
+        8226,
+        8236,
+        8304,
+        8313
+      ]
+    },
+    "shards": [
+      5007,
+      5008,
+      5001
+    ],
+    "spells": [
+      4,
+      14
+    ],
+    "starting": [
+      1056,
+      2003,
+      2003
+    ],
+    "skillOrder": "QEW",
+    "core": [
+      {
+        "id": 3100,
+        "games": 1989,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 4645,
+        "games": 1989,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3089,
+        "wins": 1134,
+        "games": 1858,
+        "winRate": 61,
+        "confidence": 58.79527720805054,
+        "lowSample": false
+      }
+    ],
+    "fullBuild": [
+      {
+        "id": 3100,
+        "games": 1989,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 4645,
+        "games": 1989,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3089,
+        "wins": 1134,
+        "games": 1858,
+        "winRate": 61,
+        "confidence": 58.79527720805054,
+        "lowSample": false
+      },
+      {
+        "id": 4629,
+        "wins": 236,
+        "games": 381,
+        "winRate": 61.9,
+        "confidence": 56.97059480041335,
+        "lowSample": false
+      },
+      {
+        "id": 3135,
+        "wins": 87,
+        "games": 154,
+        "winRate": 56.5,
+        "confidence": 48.599539739112664,
+        "lowSample": true
+      }
+    ],
+    "opening": {
+      "games": 1989,
+      "wins": 1071,
+      "items": [
+        3100,
+        3020,
+        4645
+      ],
+      "winRate": 53.8,
+      "confidence": 51.64995279295136,
+      "lowSample": false
+    },
+    "alternatives": [
+      {
+        "slot": 1,
+        "options": [
+          {
+            "id": 3089,
+            "wins": 1134,
+            "games": 1858,
+            "winRate": 61,
+            "confidence": 58.79527720805054,
+            "lowSample": false
+          },
+          {
+            "id": 4629,
+            "wins": 1742,
+            "games": 3146,
+            "winRate": 55.4,
+            "confidence": 53.629293214917375,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 2,
+        "options": [
+          {
+            "id": 4629,
+            "wins": 236,
+            "games": 381,
+            "winRate": 61.9,
+            "confidence": 56.97059480041335,
+            "lowSample": false
+          },
+          {
+            "id": 3089,
+            "wins": 784,
+            "games": 1353,
+            "winRate": 57.9,
+            "confidence": 55.29603078885052,
+            "lowSample": false
+          },
+          {
+            "id": 3157,
+            "wins": 812,
+            "games": 1489,
+            "winRate": 54.5,
+            "confidence": 51.99558897565644,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 3,
+        "options": [
+          {
+            "id": 3089,
+            "wins": 178,
+            "games": 325,
+            "winRate": 54.8,
+            "confidence": 49.33365161189279,
+            "lowSample": false
+          }
+        ]
+      }
+    ],
+    "boots": 3020
+  },
+  {
+    "championId": 516,
+    "tier": "Emerald+",
+    "patch": "16_17",
+    "requestedPatch": "16_17",
+    "fallback": false,
+    "role": "Top",
+    "asOf": "2026-09-05T05:31:45.119543Z",
+    "games": 59050,
+    "winRate": 51.4,
+    "runes": {
+      "primary": 8400,
+      "secondary": 8200,
+      "perks": [
+        8437,
+        8210,
+        8226,
+        8444,
+        8451,
+        8463
+      ]
+    },
+    "shards": [
+      5007,
+      5001,
+      5001
+    ],
+    "spells": [
+      4,
+      14
+    ],
+    "starting": [
+      2031
+    ],
+    "skillOrder": "WEQ",
+    "core": [
+      {
+        "id": 6664,
+        "games": 1516,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 2502,
+        "games": 1516,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 6665,
+        "wins": 4179,
+        "games": 6879,
+        "winRate": 60.8,
+        "confidence": 59.59046758945793,
+        "lowSample": false
+      }
+    ],
+    "fullBuild": [
+      {
+        "id": 6664,
+        "games": 1516,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 2502,
+        "games": 1516,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 6665,
+        "wins": 4179,
+        "games": 6879,
+        "winRate": 60.8,
+        "confidence": 59.59046758945793,
+        "lowSample": false
+      },
+      {
+        "id": 3075,
+        "wins": 947,
+        "games": 1502,
+        "winRate": 63,
+        "confidence": 60.57783824478796,
+        "lowSample": false
+      },
+      {
+        "id": 2525,
+        "wins": 148,
+        "games": 233,
+        "winRate": 63.5,
+        "confidence": 57.16538796656979,
+        "lowSample": true
+      }
+    ],
+    "opening": {
+      "games": 1516,
+      "wins": 859,
+      "items": [
+        6664,
+        3111,
+        2502
+      ],
+      "winRate": 56.7,
+      "confidence": 54.15400966843051,
+      "lowSample": false
+    },
+    "alternatives": [
+      {
+        "slot": 1,
+        "options": [
+          {
+            "id": 6665,
+            "wins": 4179,
+            "games": 6879,
+            "winRate": 60.8,
+            "confidence": 59.59046758945793,
+            "lowSample": false
+          },
+          {
+            "id": 2504,
+            "wins": 3042,
+            "games": 5007,
+            "winRate": 60.8,
+            "confidence": 59.39464974847649,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 2,
+        "options": [
+          {
+            "id": 3075,
+            "wins": 947,
+            "games": 1502,
+            "winRate": 63,
+            "confidence": 60.57783824478796,
+            "lowSample": false
+          },
+          {
+            "id": 6665,
+            "wins": 1009,
+            "games": 1608,
+            "winRate": 62.7,
+            "confidence": 60.357872315426455,
+            "lowSample": false
+          },
+          {
+            "id": 3143,
+            "wins": 837,
+            "games": 1406,
+            "winRate": 59.5,
+            "confidence": 56.94233283178715,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 3,
+        "options": [
+          {
+            "id": 3075,
+            "wins": 162,
+            "games": 262,
+            "winRate": 61.8,
+            "confidence": 55.81873865035249,
+            "lowSample": true
+          },
+          {
+            "id": 2525,
+            "wins": 148,
+            "games": 233,
+            "winRate": 63.5,
+            "confidence": 57.16538796656979,
+            "lowSample": true
+          },
+          {
+            "id": 3143,
+            "wins": 128,
+            "games": 196,
+            "winRate": 65.3,
+            "confidence": 58.405750738065876,
+            "lowSample": true
+          }
+        ]
+      }
+    ],
+    "boots": 3111
+  },
+  {
+    "championId": 36,
+    "tier": "Emerald+",
+    "patch": "16_17",
+    "requestedPatch": "16_17",
+    "fallback": false,
+    "role": "Top",
+    "asOf": "2026-09-05T04:54:36.296477Z",
+    "games": 65607,
+    "winRate": 50,
+    "runes": {
+      "primary": 8400,
+      "secondary": 8300,
+      "perks": [
+        8437,
+        8304,
+        8410,
+        8444,
+        8446,
+        8451
+      ]
+    },
+    "shards": [
+      5005,
+      5001,
+      5001
+    ],
+    "spells": [
+      4,
+      12
+    ],
+    "starting": [
+      1120,
+      2003
+    ],
+    "skillOrder": "EQW",
+    "core": [
+      {
+        "id": 3083,
+        "games": 7556,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3084,
+        "games": 7556,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3748,
+        "wins": 6755,
+        "games": 10944,
+        "winRate": 61.7,
+        "confidence": 60.80868807174817,
+        "lowSample": false
+      }
+    ],
+    "fullBuild": [
+      {
+        "id": 3083,
+        "games": 7556,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3084,
+        "games": 7556,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3748,
+        "wins": 6755,
+        "games": 10944,
+        "winRate": 61.7,
+        "confidence": 60.80868807174817,
+        "lowSample": false
+      },
+      {
+        "id": 2501,
+        "wins": 1408,
+        "games": 2238,
+        "winRate": 62.9,
+        "confidence": 60.89150736355945,
+        "lowSample": false
+      },
+      {
+        "id": 3065,
+        "wins": 356,
+        "games": 576,
+        "winRate": 61.8,
+        "confidence": 57.77185186633298,
+        "lowSample": false
+      }
+    ],
+    "opening": {
+      "games": 7556,
+      "wins": 4409,
+      "items": [
+        3083,
+        3084,
+        3009
+      ],
+      "winRate": 58.4,
+      "confidence": 57.23544072767226,
+      "lowSample": false
+    },
+    "alternatives": [
+      {
+        "slot": 1,
+        "options": [
+          {
+            "id": 3748,
+            "wins": 6755,
+            "games": 10944,
+            "winRate": 61.7,
+            "confidence": 60.80868807174817,
+            "lowSample": false
+          },
+          {
+            "id": 3065,
+            "wins": 6922,
+            "games": 12140,
+            "winRate": 57,
+            "confidence": 56.13540342492984,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 2,
+        "options": [
+          {
+            "id": 3748,
+            "wins": 1354,
+            "games": 2098,
+            "winRate": 64.5,
+            "confidence": 62.46566142943018,
+            "lowSample": false
+          },
+          {
+            "id": 2501,
+            "wins": 1408,
+            "games": 2238,
+            "winRate": 62.9,
+            "confidence": 60.89150736355945,
+            "lowSample": false
+          },
+          {
+            "id": 3065,
+            "wins": 2151,
+            "games": 3534,
+            "winRate": 60.9,
+            "confidence": 59.24578941684203,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 3,
+        "options": [
+          {
+            "id": 3748,
+            "wins": 331,
+            "games": 507,
+            "winRate": 65.3,
+            "confidence": 61.04110448430049,
+            "lowSample": false
+          },
+          {
+            "id": 2501,
+            "wins": 483,
+            "games": 757,
+            "winRate": 63.8,
+            "confidence": 60.319305661415854,
+            "lowSample": false
+          },
+          {
+            "id": 3065,
+            "wins": 356,
+            "games": 576,
+            "winRate": 61.8,
+            "confidence": 57.77185186633298,
+            "lowSample": false
+          }
+        ]
+      }
+    ],
+    "boots": 3009
+  },
+  {
+    "championId": 67,
+    "tier": "Emerald+",
+    "patch": "16_17",
+    "requestedPatch": "16_17",
+    "fallback": false,
+    "role": "Top",
+    "asOf": "2026-09-05T02:34:36.954131Z",
+    "games": 36877,
+    "winRate": 47.2,
+    "runes": {
+      "primary": 8000,
+      "secondary": 8400,
+      "perks": [
+        8008,
+        8014,
+        8429,
+        8451,
+        9104,
+        9111
+      ]
+    },
+    "shards": [
+      5005,
+      5008,
+      5001
+    ],
+    "spells": [
+      4,
+      6
+    ],
+    "starting": [
+      1086,
+      2003,
+      2003
+    ],
+    "skillOrder": "QWE",
+    "core": [
+      {
+        "id": 3073,
+        "games": 4133,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3508,
+        "games": 4133,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3095,
+        "wins": 1457,
+        "games": 2530,
+        "winRate": 57.6,
+        "confidence": 55.65308084264989,
+        "lowSample": false
+      }
+    ],
+    "fullBuild": [
+      {
+        "id": 3073,
+        "games": 4133,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3508,
+        "games": 4133,
+        "winRate": null,
+        "opening": true
+      },
+      {
+        "id": 3095,
+        "wins": 1457,
+        "games": 2530,
+        "winRate": 57.6,
+        "confidence": 55.65308084264989,
+        "lowSample": false
+      },
+      {
+        "id": 3031,
+        "wins": 611,
+        "games": 1018,
+        "winRate": 60,
+        "confidence": 56.97819525817272,
+        "lowSample": false
+      },
+      {
+        "id": 6665,
+        "wins": 148,
+        "games": 273,
+        "winRate": 54.2,
+        "confidence": 48.28471559336568,
+        "lowSample": true
+      }
+    ],
+    "opening": {
+      "games": 4133,
+      "wins": 2137,
+      "items": [
+        3006,
+        3073,
+        3508
+      ],
+      "winRate": 51.7,
+      "confidence": 50.181412298600115,
+      "lowSample": false
+    },
+    "alternatives": [
+      {
+        "slot": 1,
+        "options": [
+          {
+            "id": 3095,
+            "wins": 1457,
+            "games": 2530,
+            "winRate": 57.6,
+            "confidence": 55.65308084264989,
+            "lowSample": false
+          },
+          {
+            "id": 2512,
+            "wins": 1705,
+            "games": 3046,
+            "winRate": 56,
+            "confidence": 54.205676512324544,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 2,
+        "options": [
+          {
+            "id": 3031,
+            "wins": 611,
+            "games": 1018,
+            "winRate": 60,
+            "confidence": 56.97819525817272,
+            "lowSample": false
+          },
+          {
+            "id": 6665,
+            "wins": 756,
+            "games": 1296,
+            "winRate": 58.3,
+            "confidence": 55.62841357539914,
+            "lowSample": false
+          },
+          {
+            "id": 3302,
+            "wins": 590,
+            "games": 1027,
+            "winRate": 57.4,
+            "confidence": 54.402734947016675,
+            "lowSample": false
+          }
+        ]
+      },
+      {
+        "slot": 3,
+        "options": [
+          {
+            "id": 6665,
+            "wins": 148,
+            "games": 273,
+            "winRate": 54.2,
+            "confidence": 48.28471559336568,
+            "lowSample": true
+          },
+          {
+            "id": 3139,
+            "wins": 151,
+            "games": 236,
+            "winRate": 64,
+            "confidence": 57.67948596186569,
+            "lowSample": true
+          },
+          {
+            "id": 3031,
+            "wins": 93,
+            "games": 154,
+            "winRate": 60.4,
+            "confidence": 52.50244217036346,
+            "lowSample": true
+          }
+        ]
+      }
+    ],
+    "boots": 3006
+  }
+]

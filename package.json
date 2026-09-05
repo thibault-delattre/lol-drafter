@@ -4,8 +4,11 @@
   "description": "Real-time League of Legends draft and itemization coach for Windows",
   "main": "src/main/main.js",
   "scripts": {
+    "simulate": "node scripts/electron.js scripts/simulator.js",
+    "test:simulate": "node --test test/simulation.test.js",
+    "test:sim-ui": "node scripts/electron.js test/simulator-ui.js",
     "start": "node scripts/electron.js .",
-    "test": "node test/run-tests.js && node --test test/live.test.js test/orchestration.test.js",
+    "test": "node test/run-tests.js && node --test test/live.test.js test/orchestration.test.js test/simulation.test.js",
     "test:stats": "node scripts/electron.js test/ugg-live.js",
     "test:ui": "node scripts/electron.js test/ui-smoke.js",
     "test:draft": "node scripts/electron.js test/scenarios.js",

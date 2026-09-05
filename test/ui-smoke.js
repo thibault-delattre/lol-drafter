@@ -76,9 +76,10 @@ app.whenReady().then(async () => {
     main.webContents.send('counters', { opponent: 'Vayne', list: [], totalGames: 0, unavailable: true });
     assert.ok(await main.webContents.executeJavaScript('document.getElementById("counters").innerText.includes("unavailable")'));
     main.webContents.send('counters', { mode: 'blind', enemies: ['Diana', 'Xayah', 'Viktor', 'Karma'],
-      list: [{ name: 'Gragas', why: 'Magic damage and disengage.', risk: 'Counterpick still possible.' }] });
+      list: [{ name: 'Gragas', img: `https://ddragon.leagueoflegends.com/cdn/${gameData.version}/img/champion/Gragas.png`, why: 'Magic damage and disengage.', risk: 'Counterpick still possible.' }] });
     assert.ok(await main.webContents.executeJavaScript('document.getElementById("counters").innerText.includes("Gragas")'));
     assert.ok(await main.webContents.executeJavaScript('document.getElementById("countersTitle").innerText.includes("unknown")'));
+    assert.ok(await main.webContents.executeJavaScript('document.querySelector(".blind-portrait").decode().then(() => true)'));
     const order = await main.webContents.executeJavaScript(`
       renderRoster(document.getElementById('myTeam'), [
         {position:'Bot'}, {position:'Jungle'}, {position:'Mid'}, {position:'Top',isLocal:true}, {position:'Support'}

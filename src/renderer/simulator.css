@@ -1,0 +1,10 @@
+* { box-sizing: border-box; } body { margin: 0; padding: 24px; background: #09121b; color: #d9e1e8; font: 14px/1.5 'Segoe UI', sans-serif; }
+h1,h2,h3 { color: #c8aa6e; } h1 { margin: 0; } p { color: #aabac4; }
+.toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:20px 0; }
+button,select,input,textarea { background:#15222e; color:#e6e4d7; border:1px solid #52616b; border-radius:4px; padding:8px; font:inherit; }
+button,.import { cursor:pointer; } button:hover { border-color:#c8aa6e; } .import input { width:185px; }
+.layout { display:grid; grid-template-columns:1fr 1fr; gap:24px; } section { min-width:0; padding:16px; border:1px solid #364653; border-radius:6px; }
+textarea { width:100%; height:460px; font:12px/1.5 Consolas,monospace; resize:vertical; } pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:11px; }
+.card { display:flex; gap:12px; align-items:center; padding:10px; border-bottom:1px solid #364653; } .card img { width:44px; height:44px; border:1px solid #80683b; } .card b { color:#e5d6b5; } .card p { margin:2px 0; font-size:12px; }
+#roster { display:grid; grid-template-columns:1fr 1fr; } #roster .card { padding:4px; font-size:12px; } #roster img { width:26px; height:26px; }
+#itemResults { max-height:120px; overflow:auto; font-size:12px; color:#8dd4c8; } #status { color:#8dd4c8; } @media(max-width:900px) { .layout { grid-template-columns:1fr; } }

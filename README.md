@@ -12,7 +12,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c8aa6e"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4b8bbe">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-33-47848f">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-99%20offline%20%2B%2019%20live-3fb950">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-106%20offline%20%2B%2019%20live-3fb950">
 </p>
 
 LoL Draft Coach follows champion select in real time, evaluates both compositions, and recommends
@@ -27,11 +27,33 @@ or buys anything for you.
 
 | Draft coach | In-game item overlay |
 |:--:|:--:|
-| [![Draft coach showing blind-pick recommendations](docs/screenshots/draft-coach.png)](docs/screenshots/draft-coach.png) | [![Item overlay reacting to a Vayne lane and enemy builds](docs/screenshots/item-overlay.png)](docs/screenshots/item-overlay.png) |
+| [![Computed top three picks with champion portraits](docs/screenshots/draft-coach.png)](docs/screenshots/draft-coach.png) | [![Ornn adapting to a fed Viktor with a six-slot plan](docs/screenshots/item-overlay.png)](docs/screenshots/item-overlay.png) |
 
-The draft view gives an immediate answer even before the model finishes. In the example above, the
-enemy top is still hidden, so the app recommends safe blind picks against the four revealed enemies
-without pretending that it has matchup win-rate data for an unknown lane.
+### Worked example: blind Top, then a fed enemy mage
+
+These screenshots are generated from **fictional inputs passed through the production engine**.
+Recommendations, explanations and item plans are computed; the capture script does not invent
+Claude output or recommendation scores.
+
+1. **You are Top.** Your allies lock Viego, Yasuo, Kai'Sa and Bard. The enemy reveals
+   Diana, Xayah, Viktor and Karma; their top laner is still unknown. Aatrox, Jax,
+   Renekton, Camille, Malphite and Vayne are banned.
+2. **The instant engine returns Gragas → Ornn → Gnar.** Gragas leads the curated blind-pick
+   ranking with sustain, disengage, magic damage and frontline. Ornn offers frontline and engage;
+   Gnar offers range and mobility. These are heuristic blind recommendations, not measured
+   matchup win rates against an unknown champion and not a Claude response.
+3. **You choose Ornn, the second recommendation.** The opponent finishes with Gnar Top.
+   At 25 minutes, Viktor is level 17, 13 kills, 9 assists and 240 CS with three completed AP
+   items; the enemy AD champions have little equipment. You already own Mercury's Treads.
+4. **The computed next item is Force of Nature.** The planner keeps your boots, prioritizes MR
+   against the weighted magic threat, and shows its remaining components and six provisional slots.
+   The base build comes from actual u.gg Top/Emerald+ data; the situational change is a heuristic,
+   not a claim that this exact six-item combination has a measured win rate.
+
+Inspect the [complete inputs and computed outputs](docs/examples/worked-example.json) and
+[recorded statistical builds](docs/examples/baselines.json), including their patch and sample sizes.
+The offline suite replays these inputs and checks that the published picks and item plan reproduce.
+Regenerate both screenshots and records with `node scripts/electron.js scripts/capture-readme.js`.
 
 ## Features
 
@@ -150,8 +172,40 @@ source assumptions and verified payload structure.
 
 ## Development
 
+### Interactive scenario laboratory — no League client needed
+
+```powershell
+npm.cmd run simulate
+```
+
+The HTML laboratory runs in its own Electron window. Choose one of eight regression presets
+or the README's Ornn example, then edit the JSON: picks, hovers, bans, lane override, inventories,
+level, kills, deaths, assists and CS. Results update after editing. The item search gives you IDs
+for swords, bows, Doran items and completed equipment. Export any scenario to keep it as a regression
+case, then import it again later.
+
+Offline mode uses the recorded Gragas, Ornn, Mundo and Vayne build snapshots and clearly marks
+unavailable matchup statistics. Enable **Statistiques u.gg en ligne** to use the real statistics
+provider (which can serve its cache). Champion portraits require access to Riot's image CDN.
+The laboratory executes the production parsers, role inference, blind picks, matchup ranking and
+item planner; it does not connect to LCU or fabricate a model response. Claude scheduling is covered
+separately by orchestration tests and the real model smoke test.
+
+Add assertions to your JSON, for example:
+
+```json
+"expect": { "topPick": "Gragas", "opponent": null }
+```
+
+For live builds, use `target`, `slots` and `planContains` (English item names). Each assertion shows
+its expected value, actual value and pass/fail status. The automated suite also checks 200 reproducible
+draft variations for illegal recommendations. These tests catch regressions; they cannot prove
+that every future patch, matchup or optimal tactical decision is covered.
+
 ```powershell
 npm.cmd test             # deterministic offline and orchestration checks
+npm.cmd run test:simulate # presets, custom assertions and 200 draft variations
+npm.cmd run test:sim-ui   # HTML laboratory rendering and custom input checks
 npm.cmd run test:stats   # current u.gg feed and orientation checks
 npm.cmd run test:ui      # hidden Electron render and lifecycle checks
 npm.cmd run test:build   # real Claude response smoke test

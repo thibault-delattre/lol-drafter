@@ -161,3 +161,4 @@ section { margin-bottom: 16px; }
           letter-spacing: .05em; }
  .lane-controls { display: flex; gap: 12px; margin-bottom: 12px; color: #99adc3; font-size: 12px; }
  .lane-controls select { background: #101722; color: #dce6f2; border: 1px solid #30445a; padding: 4px; max-width: 155px; }
+ .blind-portrait { width: 38px; height: 38px; flex: 0 0 38px; object-fit: cover; border: 1px solid #80683b; }

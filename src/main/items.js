@@ -1,6 +1,6 @@
 'use strict';
 const { attributesFor } = require('./attributes');
-const { buildPlan } = require('./build-plan');
+const { buildPlan, isTankBuild } = require('./build-plan');
 
 const HEALERS = new Set(['Dr. Mundo', 'Vladimir', 'Aatrox', 'Soraka', 'Yuumi', 'Briar',
   'Warwick', 'Zac', 'Swain', 'Sylas', 'Fiora', 'Illaoi', 'Olaf', 'Red Kayn']);
@@ -25,7 +25,7 @@ function itemAdvice(state, champions, gameData, roles, baseline, tuned) {
   const meta = gameData ? gameData.itemMeta : {};
   const owned = new Set((state.me.items || []).map(String));
   const mine = attributesFor(me);
-  const tank = (me.tags || []).includes('Tank') || mine.frontline >= 2;
+  const tank = isTankBuild(me, [...owned], baseline, meta);
   const mage = !tank && mine.damage === 'AP';
   const attackCarry = !tank && (me.tags || []).includes('Marksman');
   const opponent = roles && roles.opponent;

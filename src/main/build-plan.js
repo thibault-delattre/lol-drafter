@@ -1,6 +1,13 @@
 'use strict';
 const { attributesFor } = require('./attributes');
 
+function isTankBuild(champion, owned, baseline, meta) {
+  const core = baseline && (baseline.fullBuild || baseline.core) || [];
+  const offensiveAP = [...owned, ...core.slice(0, 2).map(it => String(it.id))]
+    .some(id => (meta[id]?.stats?.FlatMagicDamageMod || 0) >= 60);
+  return !offensiveAP && ((champion.tags || []).includes('Tank') || attributesFor(champion).frontline >= 2);
+}
+
 // Visible item investment is a proxy for power, not enemy gold or measured DPS.
 function threatProfile(state, champions, meta, opponent) {
   const threats = state.theirTeam.filter(p => champions[p.championId]).map(p => {
@@ -39,7 +46,9 @@ function buildPlan(state, champions, data, roles, baseline, options, tuned) {
   const me = champions[state.me.championId];
   const owned = (state.me.items || []).map(String);
   const profile = threatProfile(state, champions, meta, roles && roles.opponent);
-  const tank = (me.tags || []).includes('Tank') || attributesFor(me).frontline >= 2;
+  // A frontline champion can be playing an AP build (e.g. Gragas). Its role tag
+  // alone is not permission to replace offensive slots with full tank items.
+  const tank = isTankBuild(me, owned, baseline, meta);
   const icon = id => data.version ? `https://ddragon.leagueoflegends.com/cdn/${data.version}/img/item/${id}.png` : null;
   const entry = (id, why) => ({ id: String(id), name: data.itemNames[id], image: icon(id), why,
     shortWhy: why, owned: owned.includes(String(id)) });
@@ -136,4 +145,4 @@ function buildPlan(state, champions, data, roles, baseline, options, tuned) {
   return { plan, starting, components, target, profile, alerts, adaptation,
     planComplete: plan.length === 6, planLabel: plan.length === 6 ? '6-slot plan · provisional' : `${plan.length}/6 slots · limited build data` };
 }
-module.exports = { buildPlan, threatProfile };
+module.exports = { buildPlan, threatProfile, isTankBuild };

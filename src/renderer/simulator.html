@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://ddragon.leagueoflegends.com; style-src 'self';">
+<title>Draft Coach · Laboratoire</title><link rel="stylesheet" href="simulator.css"></head>
+<body><header><h1>Draft Coach · Laboratoire</h1><p>Une draft fictive, le vrai moteur. Modifiez un scénario et comparez les résultats sans lancer LoL.</p></header>
+<div class="toolbar"><select id="preset" aria-label="Scénario"></select><button id="run">Analyser</button><button id="next">Scénario suivant →</button><label><input id="online" type="checkbox"> Statistiques u.gg en ligne</label><button id="export">Exporter le scénario</button><label class="import">Importer JSON<input id="import" type="file" accept=".json,application/json"></label></div>
+<div class="layout"><section><h2>Scénario personnalisé</h2><p>Slots : Top, Jungle, Mid, Bot, Support. <code>champion</code> = verrouillé ; <code>hover</code> = intention. En live : items (IDs), level, kills, deaths, assists, cs.</p>
+<textarea id="editor" spellcheck="false" aria-label="Scénario JSON"></textarea>
+<p>Assertions facultatives : <code>expect: {topPick, opponent, target, slots, planContains: []}</code>. Les noms sont en anglais, comme dans le jeu de données.</p>
+<label>Rechercher un objet <input id="itemSearch" placeholder="Doran, bow, sword…"></label><div id="itemResults"></div>
+<p>Les modifications sont recalculées automatiquement. Les résultats Claude ne sont pas simulés ; ce labo teste les règles, les statistiques et le plan d’achats de production.</p></section>
+<section><h2 id="title">Résultats</h2><p id="status" role="status"></p><div id="summary"></div><div id="roster"></div><h3>Recommandations / achats</h3><div id="results"></div><h3>Changements depuis le dernier calcul</h3><p id="changes"></p><details><summary>Résultat complet · sources et estimations</summary><pre id="raw"></pre></details></section></div>
+<script src="simulator.js"></script></body></html>

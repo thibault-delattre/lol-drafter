@@ -1,0 +1,1169 @@
+{
+  "generatedAt": "2026-09-05T12:27:26.432Z",
+  "provenance": "Fictional draft and scoreboard; real deterministic production functions and u.gg build data. No Claude call.",
+  "draftInput": {
+    "title": "Blind Top · Diana / Xayah / Viktor / Karma",
+    "mode": "draft",
+    "role": "Top",
+    "allies": [
+      {},
+      {
+        "champion": "Viego"
+      },
+      {
+        "champion": "Yasuo"
+      },
+      {
+        "champion": "Kai'Sa"
+      },
+      {
+        "champion": "Bard"
+      }
+    ],
+    "enemies": [
+      {
+        "champion": "Diana"
+      },
+      {
+        "champion": "Xayah"
+      },
+      {
+        "champion": "Viktor"
+      },
+      {
+        "champion": "Karma"
+      },
+      {}
+    ],
+    "bans": [
+      "Aatrox",
+      "Jax",
+      "Renekton",
+      "Camille",
+      "Malphite",
+      "Vayne"
+    ],
+    "expect": {
+      "topPick": "Gragas",
+      "opponent": null
+    }
+  },
+  "draftResult": {
+    "title": "Blind Top · Diana / Xayah / Viktor / Karma",
+    "patch": "16.17.1",
+    "checks": [
+      {
+        "label": "Top pick",
+        "expected": "Gragas",
+        "actual": "Gragas",
+        "pass": true
+      },
+      {
+        "label": "Lane opponent",
+        "expected": null,
+        "actual": null,
+        "pass": true
+      }
+    ],
+    "engine": "Production deterministic engine; no fabricated Claude response",
+    "roles": {
+      "picked": [
+        "Diana",
+        "Xayah",
+        "Viktor",
+        "Karma"
+      ],
+      "assigned": {
+        "Support": "Karma",
+        "Mid": "Viktor",
+        "Bot": "Xayah",
+        "Jungle": "Diana"
+      },
+      "unplaced": [],
+      "opponent": null,
+      "likelyOpponent": null,
+      "uncertain": false,
+      "warning": null
+    },
+    "counters": {
+      "mode": "blind",
+      "warning": null,
+      "enemies": [
+        "Diana",
+        "Xayah",
+        "Viktor",
+        "Karma"
+      ],
+      "list": [
+        {
+          "championId": 79,
+          "name": "Gragas",
+          "why": "Sustain and disengage for an unknown lane; adds magic damage. Fills your frontline gap. Plan MR for the revealed magic threats.",
+          "risk": "Mana and cooldown management; can still be counterpicked.",
+          "score": 23,
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gragas.png"
+        },
+        {
+          "championId": 516,
+          "name": "Ornn",
+          "why": "Durable scaling frontline and engage; can adapt resistances. Fills your frontline gap. Plan MR for the revealed magic threats.",
+          "risk": "Early ranged pressure; not a guaranteed lane win.",
+          "score": 22,
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ornn.png"
+        },
+        {
+          "championId": 150,
+          "name": "Gnar",
+          "why": "Range and mobility to manage uncertain melee matchups. Fills your frontline gap. Plan MR for the revealed magic threats.",
+          "risk": "Manage rage; vulnerable to coordinated dives.",
+          "score": 21,
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gnar.png"
+        }
+      ]
+    },
+    "items": null,
+    "draft": {
+      "localCellId": 0,
+      "me": {
+        "cellId": 0,
+        "position": "Top",
+        "championId": 0,
+        "hoveredId": 0,
+        "isLocal": true
+      },
+      "myPosition": "Top",
+      "myTeam": [
+        {
+          "cellId": 0,
+          "position": "Top",
+          "championId": 0,
+          "hoveredId": 0,
+          "isLocal": true,
+          "champion": null,
+          "hovered": null
+        },
+        {
+          "cellId": 1,
+          "position": "Jungle",
+          "championId": 234,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 234,
+            "slug": "Viego",
+            "name": "Viego",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 200,
+            "partype": "None",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viego.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 2,
+          "position": "Mid",
+          "championId": 157,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 157,
+            "slug": "Yasuo",
+            "name": "Yasuo",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 175,
+            "partype": "Flow",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yasuo.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 3,
+          "position": "Bot",
+          "championId": 145,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 145,
+            "slug": "Kaisa",
+            "name": "Kai'Sa",
+            "tags": [
+              "Marksman",
+              "Mage"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kaisa.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 4,
+          "position": "Support",
+          "championId": 432,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 432,
+            "slug": "Bard",
+            "name": "Bard",
+            "tags": [
+              "Support",
+              "Mage"
+            ],
+            "attackRange": 500,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Bard.png"
+          },
+          "hovered": null
+        }
+      ],
+      "theirTeam": [
+        {
+          "cellId": 5,
+          "position": null,
+          "championId": 131,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 131,
+            "slug": "Diana",
+            "name": "Diana",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 150,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Diana.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 6,
+          "position": null,
+          "championId": 498,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 498,
+            "slug": "Xayah",
+            "name": "Xayah",
+            "tags": [
+              "Marksman"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Xayah.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 7,
+          "position": null,
+          "championId": 112,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 112,
+            "slug": "Viktor",
+            "name": "Viktor",
+            "tags": [
+              "Mage"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viktor.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 8,
+          "position": null,
+          "championId": 43,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": {
+            "id": 43,
+            "slug": "Karma",
+            "name": "Karma",
+            "tags": [
+              "Mage",
+              "Support"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Karma.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 9,
+          "position": null,
+          "championId": 0,
+          "hoveredId": 0,
+          "isLocal": false,
+          "champion": null,
+          "hovered": null
+        }
+      ],
+      "allyBans": [
+        {
+          "id": 266,
+          "slug": "Aatrox",
+          "name": "Aatrox",
+          "tags": [
+            "Fighter"
+          ],
+          "attackRange": 175,
+          "partype": "Blood Well",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Aatrox.png"
+        },
+        {
+          "id": 24,
+          "slug": "Jax",
+          "name": "Jax",
+          "tags": [
+            "Fighter"
+          ],
+          "attackRange": 125,
+          "partype": "Mana",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jax.png"
+        },
+        {
+          "id": 58,
+          "slug": "Renekton",
+          "name": "Renekton",
+          "tags": [
+            "Fighter",
+            "Tank"
+          ],
+          "attackRange": 125,
+          "partype": "Fury",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Renekton.png"
+        },
+        {
+          "id": 164,
+          "slug": "Camille",
+          "name": "Camille",
+          "tags": [
+            "Fighter",
+            "Assassin"
+          ],
+          "attackRange": 125,
+          "partype": "Mana",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Camille.png"
+        },
+        {
+          "id": 54,
+          "slug": "Malphite",
+          "name": "Malphite",
+          "tags": [
+            "Tank",
+            "Mage"
+          ],
+          "attackRange": 125,
+          "partype": "Mana",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Malphite.png"
+        },
+        {
+          "id": 67,
+          "slug": "Vayne",
+          "name": "Vayne",
+          "tags": [
+            "Marksman",
+            "Assassin"
+          ],
+          "attackRange": 550,
+          "partype": "Mana",
+          "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Vayne.png"
+        }
+      ],
+      "enemyBans": [],
+      "unavailable": [
+        266,
+        24,
+        58,
+        164,
+        54,
+        67,
+        234,
+        157,
+        145,
+        432,
+        131,
+        498,
+        112,
+        43
+      ],
+      "isMyTurn": true,
+      "myActionType": "pick",
+      "timeLeft": 22,
+      "phase": "BAN_PICK",
+      "analysis": {
+        "ally": {
+          "picked": 4,
+          "ad": 2.5,
+          "ap": 1.5,
+          "adPct": 63,
+          "apPct": 37,
+          "frontline": 1,
+          "cc": 4,
+          "engage": 0,
+          "gaps": [
+            "Very little frontline",
+            "No hard engage - hard to start fights"
+          ],
+          "strengths": [],
+          "champions": [
+            "Viego",
+            "Yasuo",
+            "Kai'Sa",
+            "Bard"
+          ]
+        },
+        "enemy": {
+          "picked": 4,
+          "ad": 1,
+          "ap": 3,
+          "adPct": 25,
+          "apPct": 75,
+          "frontline": 1,
+          "cc": 7,
+          "engage": 1,
+          "gaps": [
+            "Very little frontline"
+          ],
+          "strengths": [],
+          "champions": [
+            "Diana",
+            "Xayah",
+            "Viktor",
+            "Karma"
+          ]
+        }
+      }
+    }
+  },
+  "liveInput": {
+    "title": "Ornn chosen from the top 3 · fed Viktor",
+    "mode": "live",
+    "role": "Top",
+    "time": 1500,
+    "allies": [
+      {
+        "champion": "Ornn",
+        "items": [
+          3111
+        ],
+        "level": 13
+      },
+      {
+        "champion": "Viego"
+      },
+      {
+        "champion": "Yasuo"
+      },
+      {
+        "champion": "Kai'Sa"
+      },
+      {
+        "champion": "Bard"
+      }
+    ],
+    "enemies": [
+      {
+        "champion": "Gnar",
+        "items": [
+          1036
+        ],
+        "level": 11
+      },
+      {
+        "champion": "Diana",
+        "items": [
+          1052
+        ],
+        "level": 10
+      },
+      {
+        "champion": "Viktor",
+        "items": [
+          3089,
+          3137,
+          3157
+        ],
+        "level": 17,
+        "kills": 13,
+        "assists": 9,
+        "cs": 240
+      },
+      {
+        "champion": "Xayah",
+        "items": [
+          1036
+        ],
+        "level": 10
+      },
+      {
+        "champion": "Karma",
+        "items": [
+          1052
+        ],
+        "level": 9
+      }
+    ],
+    "bans": []
+  },
+  "liveResult": {
+    "title": "Ornn chosen from the top 3 · fed Viktor",
+    "patch": "16.17.1",
+    "checks": [],
+    "engine": "Production deterministic engine; no fabricated Claude response",
+    "roles": {
+      "picked": [
+        "Gnar",
+        "Diana",
+        "Viktor",
+        "Xayah",
+        "Karma"
+      ],
+      "assigned": {
+        "Top": "Gnar",
+        "Support": "Karma",
+        "Mid": "Viktor",
+        "Bot": "Xayah",
+        "Jungle": "Diana"
+      },
+      "unplaced": [],
+      "opponent": "Gnar",
+      "likelyOpponent": "Gnar",
+      "uncertain": false,
+      "warning": null
+    },
+    "counters": null,
+    "items": {
+      "plan": [
+        {
+          "id": "3111",
+          "name": "Mercury's Treads",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/3111.png",
+          "why": "Owned · keep",
+          "shortWhy": "Owned · keep",
+          "owned": true
+        },
+        {
+          "id": "4401",
+          "name": "Force of Nature",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/4401.png",
+          "why": "MR priority · strongest weighted threats",
+          "shortWhy": "2800g remaining · MR priority · strongest weighted threats",
+          "owned": false,
+          "remainingGold": 2800
+        },
+        {
+          "id": "6664",
+          "name": "Hollow Radiance",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/6664.png",
+          "why": "Opening · 56.7% WR / 1516 games",
+          "shortWhy": "Opening · 56.7% WR / 1516 games",
+          "owned": false
+        },
+        {
+          "id": "2502",
+          "name": "Unending Despair",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/2502.png",
+          "why": "Opening · 56.7% WR / 1516 games",
+          "shortWhy": "Opening · 56.7% WR / 1516 games",
+          "owned": false
+        },
+        {
+          "id": "6665",
+          "name": "Jak'Sho, The Protean",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/6665.png",
+          "why": "60.8% WR · 6879 games",
+          "shortWhy": "60.8% WR · 6879 games",
+          "owned": false
+        },
+        {
+          "id": "3075",
+          "name": "Thornmail",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/3075.png",
+          "why": "63% WR · 1502 games",
+          "shortWhy": "63% WR · 1502 games",
+          "owned": false
+        }
+      ],
+      "starting": [],
+      "components": [
+        {
+          "id": "1033",
+          "name": "Null-Magic Mantle",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/1033.png",
+          "why": "400g · component → Force of Nature",
+          "shortWhy": "400g · for Force of Nature",
+          "owned": false,
+          "quantity": 1
+        },
+        {
+          "id": "1028",
+          "name": "Ruby Crystal ×2",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/1028.png",
+          "why": "400g · component → Force of Nature",
+          "shortWhy": "800g · for Force of Nature",
+          "owned": false,
+          "quantity": 2
+        }
+      ],
+      "target": {
+        "id": "4401",
+        "name": "Force of Nature",
+        "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/4401.png",
+        "why": "MR priority · strongest weighted threats",
+        "shortWhy": "2800g remaining · MR priority · strongest weighted threats",
+        "owned": false,
+        "remainingGold": 2800
+      },
+      "profile": {
+        "apShare": 0.7264455541596376,
+        "threats": [
+          {
+            "name": "Viktor",
+            "investment": 9750,
+            "armor": 50,
+            "mr": 0,
+            "apShare": 0.9809402795425667,
+            "power": 8.13888888888889,
+            "level": 17,
+            "scores": {
+              "kills": 13,
+              "deaths": 0,
+              "assists": 9,
+              "cs": 240
+            },
+            "evidence": "Item investment + level + K/A/CS; estimated damage mix"
+          },
+          {
+            "name": "Gnar",
+            "investment": 350,
+            "armor": 0,
+            "mr": 0,
+            "apShare": 0.10714285714285714,
+            "power": 2.338888888888889,
+            "level": 11,
+            "scores": {
+              "kills": 0,
+              "deaths": 0,
+              "assists": 0,
+              "cs": 0
+            },
+            "evidence": "Item investment + level + K/A/CS; estimated damage mix"
+          },
+          {
+            "name": "Diana",
+            "investment": 400,
+            "armor": 0,
+            "mr": 0,
+            "apShare": 0.8993288590604027,
+            "power": 2.2444444444444445,
+            "level": 10,
+            "scores": {
+              "kills": 0,
+              "deaths": 0,
+              "assists": 0,
+              "cs": 0
+            },
+            "evidence": "Item investment + level + K/A/CS; estimated damage mix"
+          },
+          {
+            "name": "Xayah",
+            "investment": 350,
+            "armor": 0,
+            "mr": 0,
+            "apShare": 0.10714285714285714,
+            "power": 2.227777777777778,
+            "level": 10,
+            "scores": {
+              "kills": 0,
+              "deaths": 0,
+              "assists": 0,
+              "cs": 0
+            },
+            "evidence": "Item investment + level + K/A/CS; estimated damage mix"
+          },
+          {
+            "name": "Karma",
+            "investment": 400,
+            "armor": 0,
+            "mr": 0,
+            "apShare": 0.8993288590604027,
+            "power": 2.1333333333333333,
+            "level": 9,
+            "scores": {
+              "kills": 0,
+              "deaths": 0,
+              "assists": 0,
+              "cs": 0
+            },
+            "evidence": "Item investment + level + K/A/CS; estimated damage mix"
+          }
+        ],
+        "estimated": true
+      },
+      "alerts": [
+        "Top threat: Viktor · estimated 73% magic pressure"
+      ],
+      "adaptation": {
+        "id": "4401",
+        "name": "Force of Nature",
+        "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/4401.png",
+        "why": "MR priority · strongest weighted threats",
+        "shortWhy": "MR priority · strongest weighted threats",
+        "owned": false
+      },
+      "planComplete": true,
+      "planLabel": "6-slot plan · provisional",
+      "champion": "Ornn",
+      "opponent": "Gnar",
+      "live": true,
+      "notes": [
+        "MR priority · strongest weighted threats. Based on observed equipment and scoreboard; estimated, not measured DPS.",
+        "Lane first: Gnar (check role if lane-swapped)."
+      ],
+      "laneLabel": "vs Gnar · lane",
+      "shortSource": "u.gg · 16_17 · Emerald+",
+      "options": [
+        {
+          "id": "4401",
+          "name": "Force of Nature",
+          "why": "MR priority · strongest weighted threats",
+          "priority": 120,
+          "shortWhy": "MR priority · strongest weighted threats",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/4401.png"
+        },
+        {
+          "id": "6664",
+          "name": "Hollow Radiance",
+          "why": "Opening combination: 56.7% / 1516 games; adapt to lane.",
+          "priority": 50,
+          "shortWhy": "Opening · 56.7% WR · 1516 games",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/6664.png"
+        },
+        {
+          "id": "2502",
+          "name": "Unending Despair",
+          "why": "Opening combination: 56.7% / 1516 games; adapt to lane.",
+          "priority": 50,
+          "shortWhy": "Opening · 56.7% WR · 1516 games",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/2502.png"
+        },
+        {
+          "id": "6665",
+          "name": "Jak'Sho, The Protean",
+          "why": "Same-slot result: 60.8% / 6879 games; ranked by confidence.",
+          "priority": 50,
+          "shortWhy": "60.8% WR · 6879 games · same slot",
+          "image": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/6665.png"
+        }
+      ],
+      "source": "u.gg Emerald+ / 16_17 / 59050 games",
+      "updatedAt": 1788611246428
+    },
+    "draft": {
+      "me": {
+        "cellId": 0,
+        "championId": 516,
+        "hoveredId": 0,
+        "isLocal": true,
+        "position": "Top",
+        "level": 13,
+        "scores": {
+          "kills": 0,
+          "deaths": 0,
+          "assists": 0,
+          "cs": 0
+        },
+        "currentGold": 0,
+        "items": [
+          3111
+        ]
+      },
+      "myPosition": "Top",
+      "myTeam": [
+        {
+          "cellId": 0,
+          "championId": 516,
+          "hoveredId": 0,
+          "isLocal": true,
+          "position": "Top",
+          "level": 13,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": 0,
+          "items": [
+            3111
+          ],
+          "champion": {
+            "id": 516,
+            "slug": "Ornn",
+            "name": "Ornn",
+            "tags": [
+              "Tank"
+            ],
+            "attackRange": 175,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ornn.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 1,
+          "championId": 234,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Jungle",
+          "level": 1,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [],
+          "champion": {
+            "id": 234,
+            "slug": "Viego",
+            "name": "Viego",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 200,
+            "partype": "None",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viego.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 2,
+          "championId": 157,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Mid",
+          "level": 1,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [],
+          "champion": {
+            "id": 157,
+            "slug": "Yasuo",
+            "name": "Yasuo",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 175,
+            "partype": "Flow",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yasuo.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 3,
+          "championId": 145,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Bot",
+          "level": 1,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [],
+          "champion": {
+            "id": 145,
+            "slug": "Kaisa",
+            "name": "Kai'Sa",
+            "tags": [
+              "Marksman",
+              "Mage"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kaisa.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 4,
+          "championId": 432,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Support",
+          "level": 1,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [],
+          "champion": {
+            "id": 432,
+            "slug": "Bard",
+            "name": "Bard",
+            "tags": [
+              "Support",
+              "Mage"
+            ],
+            "attackRange": 500,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Bard.png"
+          },
+          "hovered": null
+        }
+      ],
+      "theirTeam": [
+        {
+          "cellId": 0,
+          "championId": 150,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Top",
+          "level": 11,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [
+            1036
+          ],
+          "champion": {
+            "id": 150,
+            "slug": "Gnar",
+            "name": "Gnar",
+            "tags": [
+              "Fighter",
+              "Tank"
+            ],
+            "attackRange": 175,
+            "partype": "Rage",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gnar.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 1,
+          "championId": 131,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Jungle",
+          "level": 10,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [
+            1052
+          ],
+          "champion": {
+            "id": 131,
+            "slug": "Diana",
+            "name": "Diana",
+            "tags": [
+              "Fighter",
+              "Assassin"
+            ],
+            "attackRange": 150,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Diana.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 2,
+          "championId": 112,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Mid",
+          "level": 17,
+          "scores": {
+            "kills": 13,
+            "deaths": 0,
+            "assists": 9,
+            "cs": 240
+          },
+          "currentGold": null,
+          "items": [
+            3089,
+            3137,
+            3157
+          ],
+          "champion": {
+            "id": 112,
+            "slug": "Viktor",
+            "name": "Viktor",
+            "tags": [
+              "Mage"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viktor.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 3,
+          "championId": 498,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Bot",
+          "level": 10,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [
+            1036
+          ],
+          "champion": {
+            "id": 498,
+            "slug": "Xayah",
+            "name": "Xayah",
+            "tags": [
+              "Marksman"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Xayah.png"
+          },
+          "hovered": null
+        },
+        {
+          "cellId": 4,
+          "championId": 43,
+          "hoveredId": 0,
+          "isLocal": false,
+          "position": "Support",
+          "level": 9,
+          "scores": {
+            "kills": 0,
+            "deaths": 0,
+            "assists": 0,
+            "cs": 0
+          },
+          "currentGold": null,
+          "items": [
+            1052
+          ],
+          "champion": {
+            "id": 43,
+            "slug": "Karma",
+            "name": "Karma",
+            "tags": [
+              "Mage",
+              "Support"
+            ],
+            "attackRange": 525,
+            "partype": "Mana",
+            "img": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Karma.png"
+          },
+          "hovered": null
+        }
+      ],
+      "allyBans": [],
+      "enemyBans": [],
+      "unavailable": [
+        516,
+        234,
+        157,
+        145,
+        432,
+        150,
+        131,
+        112,
+        498,
+        43
+      ],
+      "isMyTurn": false,
+      "myActionType": null,
+      "timeLeft": null,
+      "live": true,
+      "gameTime": 1500,
+      "analysis": {
+        "ally": {
+          "picked": 5,
+          "ad": 2.5,
+          "ap": 2.5,
+          "adPct": 50,
+          "apPct": 50,
+          "frontline": 3,
+          "cc": 7,
+          "engage": 1,
+          "gaps": [],
+          "strengths": [
+            "Well-balanced AD/AP damage"
+          ],
+          "champions": [
+            "Ornn",
+            "Viego",
+            "Yasuo",
+            "Kai'Sa",
+            "Bard"
+          ]
+        },
+        "enemy": {
+          "picked": 5,
+          "ad": 2,
+          "ap": 3,
+          "adPct": 40,
+          "apPct": 60,
+          "frontline": 3,
+          "cc": 9,
+          "engage": 2,
+          "gaps": [],
+          "strengths": [
+            "Well-balanced AD/AP damage",
+            "Heavy crowd control",
+            "Multiple engage tools"
+          ],
+          "champions": [
+            "Gnar",
+            "Diana",
+            "Viktor",
+            "Xayah",
+            "Karma"
+          ]
+        }
+      }
+    }
+  }
+}

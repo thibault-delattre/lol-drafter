@@ -243,6 +243,11 @@ function renderCounters(payload) {
       ' Revealed: ' + (payload.enemies.join(', ') || 'none')));
     for (const pick of payload.list) {
       const row = el('div', 'b-item');
+      if (pick.img) {
+        const portrait = document.createElement('img');
+        portrait.src = pick.img; portrait.alt = pick.name; portrait.className = 'blind-portrait';
+        row.appendChild(portrait);
+      }
       const body = el('div');
       body.append(el('b', null, pick.name), el('div', 'w', pick.why), el('div', 'hint', 'Risk: ' + pick.risk));
       row.append(body); box.append(row);
