@@ -122,6 +122,8 @@ app.whenReady().then(async () => {
       assert.equal(build.tier, 'Emerald+');
       assert.ok([u.patchKey(version), u.previousPatch(u.patchKey(version))].includes(build.patch));
       assert.ok(build.games > 0 && build.core.length > 0);
+      assert.equal(build.fullBuild.length, 5, 'five non-boot slots are available');
+      assert.equal(new Set(build.fullBuild.map(it => it.id)).size, 5);
       for (const it of build.core) assert.equal(gameData.itemMeta[it.id].purchasable, true);
       console.log('  Mundo baseline:', build.patch, build.games, 'games,', build.core.map((it) => gameData.itemNames[it.id]).join(' -> '));
     });

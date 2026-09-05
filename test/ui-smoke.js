@@ -56,6 +56,15 @@ app.whenReady().then(async () => {
     assert.equal(authorClicks, 1);
     fs.mkdirSync(path.resolve(__dirname, 'artifacts'), { recursive: true });
     fs.writeFileSync(path.resolve(__dirname, 'artifacts/overlay.png'), (await overlay.webContents.capturePage()).toPNG());
+    const full = itemAdvice(state, champions, gameData, { opponent: 'Vayne' }, {
+      boots: 3047, starting: [1054, 2003], core: [], tier: 'Emerald+', patch: '16_17', games: 1000,
+      fullBuild: [3083, 3084, 3065, 3143, 3075].map(id => ({ id, winRate: 53, games: 1000 })),
+    });
+    await overlay.webContents.executeJavaScript(`render(${JSON.stringify(full)})`);
+    assert.equal(await overlay.webContents.executeJavaScript('document.querySelectorAll(".plan-slot").length'), 6);
+    assert.ok(await overlay.webContents.executeJavaScript('document.querySelector("main").scrollHeight <= document.querySelector("main").clientHeight'), 'six-slot plan clipped');
+    await overlay.webContents.executeJavaScript('Promise.all([...document.images].map(img => img.decode()))');
+    fs.writeFileSync(path.resolve(__dirname, 'artifacts/full-plan.png'), (await overlay.webContents.capturePage()).toPNG());
     const main = make();
     await main.loadFile(path.resolve(__dirname, '../src/renderer/index.html'));
     main.webContents.send('ai', { status: 'done', mode: 'build', build: { summary: 'test', core: [] } });

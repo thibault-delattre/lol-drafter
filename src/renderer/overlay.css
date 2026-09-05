@@ -13,6 +13,11 @@ h1 { font: bold 21px/1.2 Georgia, 'Times New Roman', serif; color: #f0e6ce; marg
 #status.stale { color: #efa968; }
 #lane { color: #c8aa6e; padding: 5px 0 7px; border-top: 1px solid #a88a493d; }
 main { flex: 1; min-height: 0; overflow: hidden; }
+#planLabel { color: #a99a76; font-size: 9px; margin-bottom: 4px; }
+#plan { display: flex; gap: 7px; }
+.plan-slot { width: 40px; height: 40px; border: 1px solid #80683b; color: #80683b; text-align: center; line-height: 38px; }
+.plan-slot img { width: 100%; height: 100%; display: block; }
+.plan-slot.owned { border: 2px solid #6ed5c2; opacity: .6; }
 article { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-bottom: 1px solid #b9a36b1a; }
 .portrait { flex: 0 0 36px; height: 36px; border: 1px solid #917541; background: #172736; box-shadow: 0 2px 7px #0009; position: relative; }
 .portrait::before { content: '◆'; position: absolute; inset: 7px; color: #9c8352; text-align: center; }

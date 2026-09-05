@@ -22,6 +22,74 @@ const advice = (raw, mine) => {
   return itemAdvice(state, champions, data, { opponent: mine || raw.allPlayers[1].championName });
 };
 
+const planBaseline = {
+  boots: 3006, starting: [1055, 2003], tier: 'Emerald+', patch: '16_17', games: 1000,
+  fullBuild: [3153, 3124, 3091, 3072, 3026].map(id => ({ id, winRate: 53, games: 1000 })),
+  core: [], alternatives: [],
+};
+test('six final slots exclude starters; recipes consume component counts and keep owned items', () => {
+  const raw = fixture('Vayne', ['Gnar']); raw.gameData.gameTime = 0;
+  let state = parseLiveGame(raw, champions);
+  let result = itemAdvice(state, champions, data, { opponent: 'Gnar' }, planBaseline);
+  assert.equal(result.plan.length, 6);
+  assert.equal(result.plan.filter(it => data.itemMeta[it.id].boots).length, 1);
+  assert.deepEqual(result.starting.map(it => it.id), ['1055', '2003']);
+  raw.allPlayers[0].items = [{ itemID: 3153 }, { itemID: 1043 }, { itemID: 3006 }];
+  raw.gameData.gameTime = 1000;
+  state = parseLiveGame(raw, champions);
+  result = itemAdvice(state, champions, data, { opponent: 'Gnar' }, planBaseline);
+  assert.equal(result.target.id, '3124');
+  assert.ok(result.plan.find(it => it.id === '3153').owned);
+  assert.ok(!result.components.some(it => it.id === '1043'));
+  assert.equal(result.starting.length, 0);
+});
+test('fed AP purchases on an AD champion shift tank priority to MR without selling owned gear', () => {
+  const raw = fixture('Dr. Mundo', ['Jax', 'Jinx', 'Garen']);
+  raw.gameData.gameTime = 1400;
+  raw.allPlayers[1].items = [3089, 3137, 3115, 3157].map(itemID => ({ itemID }));
+  raw.allPlayers[1].level = 17;
+  raw.allPlayers[1].scores = { kills: 15, assists: 10, creepScore: 240 };
+  raw.allPlayers[2].items = [{ itemID: 1036 }];
+  raw.allPlayers[3].items = [{ itemID: 1036 }];
+  raw.allPlayers[0].items = [{ itemID: 3143 }, { itemID: 3006 }];
+  const result = itemAdvice(parseLiveGame(raw, champions), champions, data, { opponent: 'Garen' }, planBaseline);
+  assert.ok(result.profile.apShare > 0.6);
+  assert.equal(result.profile.threats[0].name, 'Jax');
+  assert.equal(result.target.id, '3065');
+  assert.ok(result.plan.find(it => it.id === '3143').owned);
+});
+test('scoreboard progression refreshes advice but passive gold does not churn model runs', () => {
+  const raw = fixture();
+  const before = inventorySignature(parseLiveGame(raw, champions));
+  raw.activePlayer.currentGold = 900;
+  assert.equal(inventorySignature(parseLiveGame(raw, champions)), before);
+  raw.allPlayers[1].scores = { kills: 7, creepScore: 140 };
+  assert.notEqual(inventorySignature(parseLiveGame(raw, champions)), before);
+});
+test('Vayne keeps damage core into stacked armor and does not auto-buy penetration', () => {
+  const raw = fixture('Vayne', ['Gnar']);
+  raw.allPlayers[0].items = [{ itemID: 3006 }];
+  raw.allPlayers[1].items = [3143, 3075].map(itemID => ({ itemID }));
+  const result = itemAdvice(parseLiveGame(raw, champions), champions, data, { opponent: 'Gnar' }, planBaseline);
+  assert.equal(result.target.id, '3153');
+  assert.ok(result.alerts.some(text => text.includes('Silver Bolts bypass armor')));
+  assert.ok(!result.plan.some(it => ['3036', '3033', '6694'].includes(it.id)));
+});
+test('a finished six-slot inventory never gains a seventh item or replacement boots', () => {
+  const raw = fixture('Vayne', ['Gnar']);
+  raw.allPlayers[0].items = [3006, 3153, 3124, 3091, 3072, 3026].map(itemID => ({ itemID }));
+  const result = itemAdvice(parseLiveGame(raw, champions), champions, data, { opponent: 'Gnar' }, planBaseline);
+  assert.equal(result.plan.length, 6);
+  assert.ok(result.plan.every(it => it.owned));
+  assert.equal(result.target, undefined);
+  assert.deepEqual(result.components, []);
+});
+test('missing statistical data stays explicitly incomplete', () => {
+  const result = advice(fixture('Vayne', ['Gnar']));
+  assert.equal(result.planComplete, false);
+  assert.match(result.planLabel, /limited build data/);
+});
+
 test('in-progress championId is hover until the action is completed', () => {
   const s = buildSession(id);
   s.myTeam[3].championId = id('Orianna');

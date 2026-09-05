@@ -12,7 +12,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c8aa6e"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4b8bbe">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-33-47848f">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-93%20offline%20%2B%2019%20live-3fb950">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-99%20offline%20%2B%2019%20live-3fb950">
 </p>
 
 LoL Draft Coach follows champion select in real time, evaluates both compositions, and recommends
@@ -46,8 +46,21 @@ without pretending that it has matchup win-rate data for an unknown lane.
 - Considers build win rate only among alternatives from the same purchase slot.
 - Shows the opening combination's win rate separately from champion and individual-item rates.
 - Reacts to enemy crit, healing, damage mix, true damage, and your current inventory.
+- Plans six final slots (five items + boots), with a separate starting purchase and remaining
+  components/cost for the next item. Missing statistical slots are explicitly marked incomplete.
+- Reweights threats from visible item investment, level, kills, assists and farm, with extra
+  lane weight early. AP purchases can override an AD champion's usual profile.
+- Prioritizes tank resistances against weighted threats; preserves carry opening damage items.
+  Carry penetration/MR deviations require supported champion build alternatives. Vayne does
+  not automatically buy armor penetration into armor: Silver Bolts already bypass armor.
 - Enforces one boots recommendation and removes completed items or covered components.
 - Continues with deterministic item rules when u.gg or the model is unavailable.
+
+The live purchase plan updates on each successful game poll; model refinements run separately.
+Threat weights and damage mix are heuristics, not measured DPS or a proven optimal build.
+Enemy exact gold is unavailable: item investment and scoreboard stats are visible power proxies.
+The planner keeps completed equipment and does not automatically recommend selling it.
+Starting items and components are purchases along the way, not additional final equipment slots.
 
 ## Quick start
 
@@ -165,6 +178,7 @@ The runtime has one npm dependency: Electron. Application code uses CommonJS and
 | `src/main/ugg.js` | Matchup/build retrieval, caching, and statistical ranking |
 | `src/main/analyze.js` | Local composition analysis |
 | `src/main/items.js` | Immediate inventory-aware item options |
+| `src/main/build-plan.js` | Six-slot purchase plan, recipes and estimated live threat weights |
 | `src/main/live.js` | Riot Live Client Data normalization |
 | `src/main/prompt.js` | Pure draft and build prompt construction |
 | `src/main/main.js` | Polling, scheduling, IPC, and window lifecycle |

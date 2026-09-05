@@ -295,7 +295,13 @@ Apply anti-heal with damage appropriate to your champion, and do not duplicate c
 Do not recommend mana efficiency to a manaless champion. Tenacity does not reduce knockups or suppression.
 CURRENT INVENTORIES (${state.live ? 'observed' : 'unknown; do not invent purchases'}): ${JSON.stringify(
     [...state.myTeam, ...state.theirTeam].map((p) => ({ champion: nameOf(champions, p.championId),
-      mine: p.isLocal, items: (p.items || []).map(item) })))}
+      mine: p.isLocal, items: (p.items || []).map(item), level: p.level, scores: p.scores })))}
+Prioritize actual offensive purchases over champion AD/AP stereotypes. Weight enemy item investment,
+level, kills, assists and farm when judging the biggest threat; enemy exact gold and damage dealt are unknown.
+Preserve the carry's damage engine. Enemy armor alone does not justify armor penetration on Vayne:
+Silver Bolts bypass armor, so assess attack-speed/on-hit synergy first. Tank resistances should answer
+the strongest observed threats, with extra lane weight early. Never recommend selling completed core
+items just because the estimated damage mix changed.
 Only use these CURRENT PURCHASABLE SUMMONER'S RIFT ITEMS:
 ${Object.entries(gameData.itemMeta || {}).filter(([, m]) => m.purchasable === true).map(([id]) => item(id)).join(', ')}
 AUTHORITATIVE CURRENT ITEM EFFECTS (do not invent effects or confuse crit with on-hit):

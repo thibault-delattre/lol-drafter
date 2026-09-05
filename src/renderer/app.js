@@ -395,6 +395,19 @@ window.coach.onItems((data) => {
   $('recsSection').hidden = true;
   $('itemNotes').textContent = data.notes.join(' ');
   $('itemOptions').replaceChildren();
+  if (data.plan && data.plan.length) {
+    $('itemOptions').appendChild(el('p', 'hint', data.planLabel + ' · highlighted in popup; owned items kept'));
+    for (const option of data.plan) $('itemOptions').appendChild(buildItemRow(option, null));
+    if (data.starting.length) {
+      $('itemOptions').appendChild(el('p', 'hint', 'Starting purchase'));
+      for (const option of data.starting) $('itemOptions').appendChild(buildItemRow(option, null));
+    }
+    if (data.components.length) {
+      $('itemOptions').appendChild(el('p', 'hint', 'Remaining components for ' + data.target.name));
+      for (const option of data.components) $('itemOptions').appendChild(buildItemRow(option, null));
+    }
+    $('itemOptions').appendChild(el('p', 'hint', 'Situational options'));
+  }
   for (const option of data.options) $('itemOptions').appendChild(buildItemRow(option, null));
   $('itemSource').textContent = data.source;
 });

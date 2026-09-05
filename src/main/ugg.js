@@ -375,7 +375,7 @@ function openingRecord(section) {
     confidence: wilsonLowerBound(wins, games), lowSample: games < 300 };
 }
 
-function buildCore(sections, itemMeta) {
+function buildCore(sections, itemMeta, limit = 3) {
   const isRealItem = (id) => {
     const m = itemMeta && itemMeta[String(id)];
     return !!m && m.purchasable !== false && !m.consumable && !m.trinket && !m.boots && m.gold >= 1600;
@@ -391,12 +391,12 @@ function buildCore(sections, itemMeta) {
     taken.add(id);
   }
   for (const slot of Array.isArray(sections[BUILD.items]) ? sections[BUILD.items] : []) {
-    if (core.length >= 3) break;
+    if (core.length >= limit) break;
     const top = rankBuildOptions(slot, { isRealItem, taken })[0];
     if (!top) continue;
     core.push(top); taken.add(top.id);
   }
-  return core.slice(0, 3);
+  return core.slice(0, limit);
 }
 
 /**
@@ -409,7 +409,7 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
   const patch = patchKey(ddragonVersion);
   if (!roleId || !patch || !championId) return null;
 
-  const cacheName = `build_v4_${patch}_${championId}_${roleId}.json`;
+  const cacheName = `build_v5_${patch}_${championId}_${roleId}.json`;
   const cached = cacheRead(cacheName);
   if (cached) return cached;
 
@@ -447,6 +447,7 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
       starting: starting ? (starting[2] || []) : [],
       skillOrder: skills ? (skills[3] || null) : null,
       core: buildCore(s, itemMeta),
+      fullBuild: buildCore(s, itemMeta, 5),
       opening: openingRecord(sec(BUILD.boots)),
       alternatives: (itemSlots || []).map((rows, index) => ({ slot: index + 1,
         options: rankBuildOptions(rows, { isRealItem: (id) => {

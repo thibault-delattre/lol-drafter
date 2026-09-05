@@ -34,6 +34,12 @@ function parseLiveGame(data, champions, previous) {
       norm(c.name) === norm(p.championName));
     return { cellId: i, championId: champ ? champ.id : 0, hoveredId: 0,
       isLocal: p === local, position: prettyPosition(p.position),
+      level: Number(p.level) || 1,
+      scores: { kills: Number(p.scores && p.scores.kills) || 0,
+        deaths: Number(p.scores && p.scores.deaths) || 0,
+        assists: Number(p.scores && p.scores.assists) || 0,
+        cs: Number(p.scores && p.scores.creepScore) || 0 },
+      currentGold: p === local && Number.isFinite(active.currentGold) ? active.currentGold : null,
       items: (Array.isArray(p.items) ? p.items : []).map((it) => Number(it.itemID)).filter(Boolean) };
   };
   const myTeam = data.allPlayers.filter((p) => p.team === local.team).map(player);
@@ -50,7 +56,8 @@ function parseLiveGame(data, champions, previous) {
 
 function inventorySignature(state) {
   return JSON.stringify([state.me.championId, state.myPosition, state.opponentOverrideId || null,
-    ...[...state.myTeam, ...state.theirTeam].map((p) => [p.championId, [...(p.items || [])].sort()])]);
+    ...[...state.myTeam, ...state.theirTeam].map((p) => [p.championId, [...(p.items || [])].sort(),
+      p.level, p.scores && [p.scores.kills, p.scores.deaths, p.scores.assists, Math.floor(p.scores.cs / 20)]])]);
 }
 
 module.exports = { readLiveGame, parseLiveGame, inventorySignature };

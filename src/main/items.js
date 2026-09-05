@@ -1,5 +1,6 @@
 'use strict';
 const { attributesFor } = require('./attributes');
+const { buildPlan } = require('./build-plan');
 
 const HEALERS = new Set(['Dr. Mundo', 'Vladimir', 'Aatrox', 'Soraka', 'Yuumi', 'Briar',
   'Warwick', 'Zac', 'Swain', 'Sylas', 'Fiora', 'Illaoi', 'Olaf', 'Red Kayn']);
@@ -123,7 +124,13 @@ function itemAdvice(state, champions, gameData, roles, baseline, tuned) {
   else if (trueThreats.length) alerts.push('True damage: armor / MR bypassed');
   if (tank && healing.length && !hasWounds(state.me.items)) alerts.push('Bramble needs attacks · unreliable vs spell healing');
   if (state.myTeam.some((p) => !p.isLocal && hasWounds(p.items))) alerts.push('Ally anti-heal: check target coverage');
-  return { champion: me.name, opponent, live: !!state.live, notes,
+  const purchase = buildPlan(state, champions, gameData || { itemNames: names, itemMeta: meta }, roles, baseline, options, tuned);
+  if (purchase.adaptation) {
+    add(purchase.adaptation.id, purchase.adaptation.why, 120, purchase.adaptation.shortWhy);
+    notes.unshift(purchase.adaptation.why + '. Based on observed equipment and scoreboard; estimated, not measured DPS.');
+  }
+  alerts.push(...purchase.alerts);
+  return { ...purchase, champion: me.name, opponent, live: !!state.live, notes,
     alerts, laneLabel: opponent ? `vs ${opponent} · ${state.opponentOverrideId ? 'manual' : state.live ? 'lane' : 'inferred'}` : 'Lane unknown · provisional',
     shortSource: baseline ? `u.gg · ${baseline.patch} · ${baseline.tier}${baseline.fallback ? ' · previous patch' : ''}` : 'Situational rules · no build stats',
     options: singleBootChoice(options.sort((a, b) => b.priority - a.priority), meta, state.me.items).slice(0, 5),
