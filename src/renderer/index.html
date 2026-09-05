@@ -24,6 +24,10 @@
   </header>
 
   <main id="main">
+    <div class="lane-controls">
+      <label>My role <select id="roleOverride"><option value="">Auto</option><option>Top</option><option>Jungle</option><option>Mid</option><option>Bot</option><option>Support</option></select></label>
+      <label>Lane opponent <select id="opponentOverride"><option value="">Auto (inferred)</option></select></label>
+    </div>
     <section class="banner" id="turnBanner" hidden></section>
 
     <section class="teams">
@@ -55,6 +59,10 @@
       <div id="counters"></div>
     </section>
 
+    <section class="build" id="itemsSection" hidden>
+      <h2>Lane first · item options</h2>
+      <div id="itemNotes"></div><div id="itemOptions"></div><p class="hint" id="itemSource"></p>
+    </section>
     <section class="build" id="buildSection" hidden>
       <div class="recs-head">
         <h2>Build for this game</h2>

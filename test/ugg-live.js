@@ -3,7 +3,7 @@
 // fingerprint. Run with:  npm run test:stats
 const { app } = require('electron');
 const assert = require('assert');
-const { loadChampions } = require('../src/main/champdata');
+const { loadChampions, loadGameData } = require('../src/main/champdata');
 const u = require('../src/main/ugg');
 
 let passed = 0;
@@ -52,12 +52,15 @@ app.whenReady().then(async () => {
     const gwenM = await u.laneMatchups(byName.Gwen, 'Top', version);
     check('the Emerald+ bucket is the one being read', () =>
       assert.strictEqual(gwenM.tier, 'Emerald+'));
-    check("K'Sante into Gwen reproduces u.gg's published 54.68%", () => {
+    const ksM = await u.laneMatchups(byName["K'Sante"], 'Top', version);
+    check('Gwen/K\'Sante reciprocal files agree on current-patch orientation', () => {
       const ks = u.winRateAgainst(gwenM, byName["K'Sante"]);
       assert.ok(ks, 'no sample for the matchup');
       const gwenWr = 100 - ks.winRate;
-      assert.ok(Math.abs(gwenWr - 54.68) < 0.5,
-        'Gwen should win ~54.68%, got ' + gwenWr.toFixed(2) + '%');
+      const gwen = u.winRateAgainst(ksM, byName.Gwen);
+      assert.ok(gwen, 'no reciprocal sample');
+      assert.ok(Math.abs(gwenWr - gwen.winRate) < 1,
+        'reciprocal win rates disagree; feeds may have different refresh timestamps');
     });
     const teemoM = await u.laneMatchups(byName.Teemo, 'Top', version);
     check('Teemo beats Vayne, not the other way round', () => {
@@ -66,7 +69,7 @@ app.whenReady().then(async () => {
       assert.ok(v.winRate < 45, 'Vayne into Teemo should be well under 50%, got ' + v.winRate + '%');
     });
     const malphM = await u.laneMatchups(byName.Malphite, 'Top', version);
-    check('Malphite beats Vayne, whose damage his armour blanks', () => {
+    check('Malphite/Vayne empirical orientation guard (armor does not block true damage)', () => {
       const v = u.winRateAgainst(malphM, byName.Vayne);
       assert.ok(v, 'no sample');
       assert.ok(v.winRate < 45, 'Vayne into Malphite should be well under 50%, got ' + v.winRate + '%');
@@ -86,7 +89,7 @@ app.whenReady().then(async () => {
       const counters = u.rankCounters(m, { limit: 10 });
       check('counters are ordered best first', () => {
         for (let i = 1; i < counters.length; i++) {
-          assert.ok(counters[i - 1].winRate >= counters[i].winRate);
+          assert.ok(counters[i - 1].confidence >= counters[i].confidence);
         }
       });
       check('counters clear 50% (they actually beat Teemo)', () =>
@@ -112,6 +115,16 @@ app.whenReady().then(async () => {
       console.log('  cached re-read: ' + (Date.now() - t1) + 'ms');
     }
 
+    const gameData = await loadGameData();
+    const build = await u.championBuild(byName['Dr. Mundo'], 'Top', version, gameData.itemMeta);
+    check('Mundo build uses the same Emerald+ population and reports its patch', () => {
+      assert.ok(build, 'no current build');
+      assert.equal(build.tier, 'Emerald+');
+      assert.ok([u.patchKey(version), u.previousPatch(u.patchKey(version))].includes(build.patch));
+      assert.ok(build.games > 0 && build.core.length > 0);
+      for (const it of build.core) assert.equal(gameData.itemMeta[it.id].purchasable, true);
+      console.log('  Mundo baseline:', build.patch, build.games, 'games,', build.core.map((it) => gameData.itemNames[it.id]).join(' -> '));
+    });
     console.log('');
     console.log(passed + ' passed, ' + failed + ' failed');
   } catch (err) {

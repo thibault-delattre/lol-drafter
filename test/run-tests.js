@@ -17,7 +17,7 @@ function check(label, fn) {
 }
 
 (async () => {
-  const { champions } = await loadChampions();
+  const { champions } = require('../src/data/champions.cache.json');
   const byName = {};
   for (const id of Object.keys(champions)) byName[champions[id].name] = parseInt(id, 10);
   const id = (n) => {
@@ -83,13 +83,13 @@ function check(label, fn) {
 
   console.log('\nComposition analysis');
   const a = analyzeDraft(state, champions);
-  check('counts my hover toward my team comp', () => {
-    assert.deepStrictEqual(a.ally.champions.sort(), ['Jinx', 'Leona', 'Malphite', 'Viktor'].sort());
+  check('my uncommitted hover does not fill the team composition', () => {
+    assert.deepStrictEqual(a.ally.champions.sort(), ['Jinx', 'Leona', 'Malphite'].sort());
   });
   check('AD/AP split is right (Jinx AD vs Malph/Leona/Viktor AP)', () => {
     assert.strictEqual(a.ally.ad, 1);
-    assert.strictEqual(a.ally.ap, 3);
-    assert.strictEqual(a.ally.adPct, 25);
+    assert.strictEqual(a.ally.ap, 2);
+    assert.strictEqual(a.ally.adPct, 33);
   });
   check('frontline totals Malphite 2 + Leona 2 = 4', () => assert.strictEqual(a.ally.frontline, 4));
   check('flags strong frontline and engage', () => {
@@ -215,10 +215,10 @@ function check(label, fn) {
   check('skew early in the draft is not yet a constraint', () =>
     assert.strictEqual(damageConstraint({ picked: 4, adPct: 100, apPct: 0 }, 4), null));
 
-  check('last pick weighs composition first', () => {
+  check('known lane remains the priority on last pick', () => {
     const t = priorityBlock({ isLastPick: true, opponent: 'Teemo', alliesAfter: 0 });
-    assert.ok(t.indexOf('1. TEAM COMPOSITION') !== -1);
-    assert.ok(t.indexOf('1. TEAM COMPOSITION') < t.indexOf('2. LANE'));
+    assert.ok(t.includes('1. LANE'));
+    assert.ok(t.indexOf('1. LANE') < t.indexOf('2. TEAM COMPOSITION'));
   });
   check('known lane opponent mid-draft weighs the lane first', () => {
     const t = priorityBlock({ isLastPick: false, opponent: 'Teemo', alliesAfter: 2 });

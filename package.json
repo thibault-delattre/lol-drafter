@@ -1,18 +1,28 @@
 {
   "name": "lol-drafter",
   "version": "1.0.0",
-  "description": "Real-time League of Legends draft assistant",
+  "description": "Real-time League of Legends draft and itemization coach for Windows",
   "main": "src/main/main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "node test/run-tests.js",
-    "test:stats": "electron test/ugg-live.js",
-    "test:draft": "electron test/scenarios.js",
-    "test:bans": "electron test/bans.js",
-    "test:build": "electron test/build.js"
+    "start": "node scripts/electron.js .",
+    "test": "node test/run-tests.js && node --test test/live.test.js test/orchestration.test.js",
+    "test:stats": "node scripts/electron.js test/ugg-live.js",
+    "test:ui": "node scripts/electron.js test/ui-smoke.js",
+    "test:draft": "node scripts/electron.js test/scenarios.js",
+    "test:bans": "node scripts/electron.js test/bans.js",
+    "test:build": "node scripts/electron.js test/build.js"
   },
-  "author": "Tyboky",
+  "author": "Thibault Delattre",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thibault-delattre/lol-drafter.git"
+  },
+  "homepage": "https://github.com/thibault-delattre/lol-drafter#readme",
+  "bugs": {
+    "url": "https://github.com/thibault-delattre/lol-drafter/issues"
+  },
+  "keywords": ["league-of-legends", "draft", "overlay", "electron", "itemization"],
   "devDependencies": {
     "electron": "^33.0.0"
   }

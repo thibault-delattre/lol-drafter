@@ -1,5 +1,11 @@
 # CLAUDE.md — working rules for this project
 
+Current update (2026-09-05): a local baseline commit now exists. The original 65 checks
+still run, with additional Node lifecycle/item tests and `npm run test:ui`. Live coaching
+and a separate click-through overlay are implemented. Build/matchup ranks are pinned;
+opening core comes from overview section 3 before section 5's later items. Read the
+updated README and docs/DATA_RESEARCH.md before relying on historical audit details below.
+
 Read this first, then [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The
 [README](README.md) is the user-facing story and explains *why* most decisions were made —
 it is unusually good and worth reading before proposing changes.

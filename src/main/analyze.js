@@ -64,7 +64,7 @@ function findGaps(t) {
 function teamChampions(team, champions) {
   const out = [];
   for (const p of team) {
-    const id = p.championId || p.hoveredId;
+    const id = p.championId || (!p.isLocal && p.hoveredId);
     if (id && champions[id]) out.push(champions[id]);
   }
   return out;

@@ -26,12 +26,16 @@ function readActions(session) {
 function buildPlayer(p, isLocal, actions) {
   // A player's own in-progress action reveals what they are hovering.
   const own = actions.flat.find((a) => a.actorCellId === p.cellId && a.isInProgress);
-  const hovered = p.championPickIntent || (own && own.type === 'pick' ? own.championId : 0) || 0;
+  const picks = actions.flat.filter((a) => a.actorCellId === p.cellId && a.type === 'pick');
+  // Some client sessions populate championId before the pick action is completed.
+  const locked = picks.length ? picks.some((a) => a.completed) : !!p.championId;
+  const championId = locked ? (p.championId || (picks.find((a) => a.completed) || {}).championId || 0) : 0;
+  const hovered = (own && own.type === 'pick' ? own.championId : 0) || p.championPickIntent || p.championId || 0;
   return {
     cellId: p.cellId,
     position: prettyPosition(p.assignedPosition),
-    championId: p.championId || 0,
-    hoveredId: p.championId ? 0 : hovered,
+    championId,
+    hoveredId: championId ? 0 : hovered,
     isLocal,
   };
 }
@@ -90,9 +94,10 @@ function parseSession(session) {
  */
 function signature(state) {
   const picks = [...state.myTeam, ...state.theirTeam]
-    .map((p) => `${p.championId}:${p.isLocal ? 0 : p.hoveredId}`).join(',');
+    .map((p) => `${p.cellId}:${p.position}:${p.championId}:${p.isLocal ? 0 : p.hoveredId}`).join(',');
   return [picks, state.allyBans.join('-'), state.enemyBans.join('-'),
-          state.isMyTurn, state.myActionType].join('|');
+          state.isMyTurn, state.myActionType, state.myPosition,
+          state.myActionType === 'ban' && state.me ? state.me.hoveredId : 0].join('|');
 }
 
 module.exports = { parseSession, prettyPosition, signature };

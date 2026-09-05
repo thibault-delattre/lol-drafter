@@ -1,0 +1,7 @@
+* { box-sizing: border-box; }
+body { margin: 0; padding: 14px; background: #101722; color: #e8eef7; font: 13px/1.4 'Segoe UI', sans-serif; border: 1px solid #41627f; }
+header { display: flex; justify-content: space-between; border-bottom: 1px solid #30445a; padding-bottom: 9px; }
+header b { color: #f1cc75; } #status, footer { color: #99adc3; font-size: 11px; }
+#notes p { margin: 8px 0; } article { border-top: 1px solid #29384b; padding: 7px 0; }
+article b { color: #8cdcc8; } article p { margin: 3px 0 0; color: #c4d2e0; font-size: 12px; }
+footer { margin-top: 8px; } .stale { color: #ffc372 !important; }

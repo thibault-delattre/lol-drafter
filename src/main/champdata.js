@@ -83,6 +83,12 @@ async function loadGameData() {
         consumable: !!(it.tags && it.tags.includes('Consumable')),
         boots: !!(it.tags && it.tags.includes('Boots')),
         trinket: !!(it.tags && it.tags.includes('Trinket')),
+        purchasable: !!(it.gold && it.gold.purchasable) && !!(it.maps && it.maps['11']) && !it.requiredAlly,
+        description: it.description.replace(/<[^>]*>/g, ' '),
+        tags: it.tags || [],
+        stats: it.stats || {},
+        from: it.from || [],
+        into: it.into || [],
       };
     }
 

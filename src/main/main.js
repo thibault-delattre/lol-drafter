@@ -1,5 +1,5 @@
 'use strict';
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, globalShortcut } = require('electron');
 const path = require('path');
 const { LcuClient } = require('./lcu');
 const { loadChampions, loadGameData, squareUrl } = require('./champdata');
@@ -10,6 +10,9 @@ const { buildPrompt, buildBuildPrompt, inferEnemyRoles } = require('./prompt');
 const { lanesFor } = require('./lanes');
 const ugg = require('./ugg');
 const { Analyzer, extractJson, validate, progressivePicks } = require('./ai');
+const { readLiveGame, parseLiveGame, inventorySignature } = require('./live');
+const { itemAdvice, singleBootChoice } = require('./items');
+const { blindPicks } = require('./blind');
 
 const POLL_MS = 1500;
 const AI_DEBOUNCE_MS = 700;
@@ -33,6 +36,36 @@ let uggRoles = null;   // u.gg primary roles, null until loaded
 let idByName = {};
 let gameData = null;
 let lastOpponent = null;
+let overlay = null;
+let overlayPayload = null;
+let overlayEnabled = true;
+let liveSignature = null;
+let polling = false;
+let schedulerId = 0;
+let counterId = 0;
+let currentBaseline = null;
+let tunedBuild = null;
+let roleOverride = null;
+let opponentOverrideId = null;
+
+function applyOverrides(state) {
+  if (roleOverride) { state.myPosition = roleOverride; if (state.me) state.me.position = roleOverride; }
+  state.opponentOverrideId = opponentOverrideId;
+  return state;
+}
+
+function publishItems(state, roles) {
+  const baseline = currentBaseline && currentBaseline.championId === state.me.championId &&
+    currentBaseline.role === state.myPosition ? currentBaseline : null;
+  const tuned = tunedBuild && tunedBuild.championId === state.me.championId &&
+    tunedBuild.signature === inventorySignature(state) ? tunedBuild.build : null;
+  overlayPayload = itemAdvice(state, champions, gameData, roles, baseline, tuned);
+  send('items', overlayPayload);
+  if (!overlay || overlay.isDestroyed()) return;
+  overlay.webContents.send('items', overlayPayload);
+  if (overlayPayload && overlayEnabled) overlay.showInactive();
+  else overlay.hide();
+}
 
 function send(channel, payload) {
   if (process.env.COACH_DEBUG && channel === 'ai') {
@@ -75,6 +108,7 @@ function toViewModel(state, analysis) {
     allyBans: state.allyBans.map(champView).filter(Boolean),
     enemyBans: state.enemyBans.map(champView).filter(Boolean),
     analysis,
+    opponentOverrideId,
   };
 }
 
@@ -139,16 +173,26 @@ function preemptAi() {
 // screen long before Claude finishes writing. This is what you read when the pick
 // timer is nearly out.
 async function pushCounters(state, roles) {
+  const requestId = ++counterId;
+  if (isLockedIn(state)) return send('counters', null);
   const focus = statsFocus(state, roles);
-  if (!focus) return send('counters', null);
+  if (!focus) {
+    const list = blindPicks(state, champions, analyzeDraft(state, champions));
+    return send('counters', list.length ? { mode: 'blind',
+      warning: roles.warning, enemies: roles.picked, list: list.map((p) => ({ ...p,
+        img: squareUrl(patch, champions[p.championId].slug) })) } : null);
+  }
   let stats = null;
   try { stats = await gatherStats(state, roles); } catch (_) { stats = null; }
-  if (!stats) return send('counters', null);
+  if (requestId !== counterId) return;
+  if (!stats) return send('counters', { opponent: focus.name, mode: focus.mode, list: [],
+    unavailable: true, totalGames: 0 });
 
   send('counters', {
     opponent: stats.opponent,
     mode: stats.mode || 'pick',
     asOf: stats.asOf,
+    patch: stats.patch, tier: stats.tier, fallback: stats.fallback,
     totalGames: stats.totalGames,
     list: stats.counters.slice(0, 6).map((c) => {
       const champ = champions[c.championId];
@@ -169,6 +213,7 @@ function shapeBuild(parsed, baseline) {
   const byItemName = {};
   if (gameData) {
     for (const id of Object.keys(gameData.itemNames)) {
+      if (!gameData.itemMeta[id] || gameData.itemMeta[id].purchasable !== true) continue;
       byItemName[gameData.itemNames[id].toLowerCase()] = id;
     }
   }
@@ -183,7 +228,9 @@ function shapeBuild(parsed, baseline) {
               : { id: null, name: raw, note: null };
   };
   const entry = (e) => {
+    if (!e || typeof e.item !== 'string') return null;
     const it = resolve(e.item);
+    if (!it || !it.id) return null;
     return {
       name: it ? it.name : e.item,
       id: it ? it.id : null,
@@ -193,14 +240,23 @@ function shapeBuild(parsed, baseline) {
       keep: e.keep,
     };
   };
+  const core = Array.isArray(parsed.core) ? parsed.core.map(entry).filter(Boolean) : [];
+  const situational = Array.isArray(parsed.situational) ? parsed.situational.map(entry).filter(Boolean) : [];
+  const isBoot = (it) => gameData && gameData.itemMeta[it.id] && gameData.itemMeta[it.id].boots;
+  const bootCandidates = [parsed.boots && entry(parsed.boots), ...core, ...situational].filter(Boolean).filter(isBoot);
+  const boots = singleBootChoice(bootCandidates, gameData ? gameData.itemMeta : {},
+    lastState && lastState.me ? lastState.me.items : []);
   return {
     summary: parsed.summary || '',
-    boots: parsed.boots ? entry(parsed.boots) : null,
-    core: Array.isArray(parsed.core) ? parsed.core.map(entry) : [],
-    situational: Array.isArray(parsed.situational) ? parsed.situational.map(entry) : [],
+    boots: boots[0] || null,
+    core: core.filter((it) => !isBoot(it)),
+    situational: situational.filter((it) => !isBoot(it)),
     baseline: {
       games: baseline.games,
+      patch: baseline.patch, tier: baseline.tier, fallback: baseline.fallback,
       winRate: baseline.winRate,
+      opening: baseline.opening ? { ...baseline.opening,
+        names: baseline.opening.items.map((id) => gameData.itemNames[id] || String(id)) } : null,
       spells: baseline.spells.map((x) => (gameData ? gameData.spellNames[x] : x) || x),
       starting: baseline.starting.map((x) => (gameData ? gameData.itemNames[x] : x) || x),
       boots: baseline.boots && gameData ? gameData.itemNames[baseline.boots] : null,
@@ -208,6 +264,7 @@ function shapeBuild(parsed, baseline) {
         name: (gameData ? gameData.itemNames[c.id] : null) || String(c.id),
         id: String(c.id),
         winRate: c.winRate,
+        games: c.games, lowSample: c.lowSample,
       })),
       skills: baseline.skillOrder ? baseline.skillOrder.split('').join(' > ') : null,
     },
@@ -225,32 +282,44 @@ async function runAi(state, analysis) {
 
   // Champion locked: switch from "what should I pick" to "how do I build to beat
   // this team", which is the only question still open.
-  if (isLockedIn(state) && gameData) {
-    const build = await ugg.championBuild(state.me.championId, state.myPosition, patch, gameData.itemMeta)
-      .catch(() => null);
+  if (isLockedIn(state)) {
+    publishItems(state, roles);
+    const build = gameData ? await ugg.championBuild(state.me.championId, state.myPosition, patch, gameData.itemMeta)
+      .catch(() => null) : null;
+    if (runId !== aiRunId) return;
+    currentBaseline = build;
+    publishItems(lastState || state, inferEnemyRoles(lastState || state, champions, lanesLookup));
     const bp = build && buildBuildPrompt(state, analysis, champions, gameData, build, { patch, enemyRoles: roles });
     if (bp) {
       send('ai', { status: 'running', mode: 'build', startedAt: started });
       return analyzer.run(bp, {}).then((raw) => {
         if (runId !== aiRunId) return;
+        if (lastState && inventorySignature(lastState) !== inventorySignature(state)) return;
         const parsed = extractJson(raw);
         if (!parsed) return send('ai', { status: 'error', message: 'Claude did not return usable JSON.' });
+        const shaped = shapeBuild(parsed, build);
+        tunedBuild = { championId: state.me.championId, signature: inventorySignature(state), build: shaped };
+        publishItems(lastState || state, inferEnemyRoles(lastState || state, champions, lanesLookup));
         send('ai', {
           status: 'done',
           mode: 'build',
-          build: shapeBuild(parsed, build),
+          build: shaped,
           elapsed: Date.now() - started,
         });
       }).catch((err) => {
         if (runId !== aiRunId) return;
         send('ai', { status: 'error', message: err.message });
-      }).finally(finishAi);
+      });
     }
+    send('ai', { status: 'done', mode: 'build', build: {
+      summary: 'Statistical build unavailable. Use the lane and item options above.', core: [], situational: [] }, elapsed: Date.now() - started });
+    return;
   }
   const basedOn = state.theirTeam
     .map((p) => (p.championId && champions[p.championId] ? champions[p.championId].name : null))
     .filter(Boolean);
   const stats = await gatherStats(state, roles).catch(() => null);
+  if (runId !== aiRunId) return;
   const prompt = buildPrompt(state, analysis, champions, {
     patch, stats, enemyRoles: roles, lanesLookup,
   });
@@ -258,13 +327,13 @@ async function runAi(state, analysis) {
   send('ai', { status: 'running', startedAt: started });
 
   let lastCount = 0;
-  analyzer.run(prompt, {
+  return analyzer.run(prompt, {
     onDelta: (_chunk, full) => {
       if (runId !== aiRunId) return;
       const partial = progressivePicks(full);
       if (partial.length > lastCount) {
         lastCount = partial.length;
-        const shaped = validate({ picks: partial }, state, champions);
+        const shaped = validate({ picks: partial }, lastState || state, champions);
         send('ai', { status: 'streaming', picks: shaped.picks, rejected: shaped.rejected, startedAt: started });
       }
     },
@@ -274,7 +343,7 @@ async function runAi(state, analysis) {
     if (!parsed) {
       return send('ai', { status: 'error', message: 'Claude did not return usable JSON.', raw: raw.slice(0, 400) });
     }
-    const result = validate(parsed, state, champions);
+    const result = validate(parsed, lastState || state, champions);
     if (stats && stats.matchups) {
       for (const p of result.picks) {
         const wr = ugg.winRateAgainst(stats.matchups, p.championId);
@@ -289,7 +358,7 @@ async function runAi(state, analysis) {
   }).catch((err) => {
     if (runId !== aiRunId) return;
     send('ai', { status: 'error', message: err.message });
-  }).finally(finishAi);
+  });
 }
 
 // An analysis takes longer than the gap between draft actions, so cancelling the
@@ -311,16 +380,16 @@ function startAi(state, analysis) {
     return;
   }
   aiBusy = true;
+  const ticket = ++schedulerId;
   lastAiAt = Date.now();
   Promise.resolve(runAi(state, analysis)).catch((err) => {
-    send('ai', { status: 'error', message: err.message });
-    finishAi();
-  });
+    if (ticket === schedulerId) send('ai', { status: 'error', message: err.message });
+  }).finally(() => { if (ticket === schedulerId) finishAi(); });
 }
 
 function scheduleAi(state, analysis, urgent) {
   clearTimeout(aiTimer);
-  aiTimer = setTimeout(() => startAi(state, analysis), urgent ? 200 : AI_DEBOUNCE_MS);
+  aiTimer = setTimeout(() => startAi(state, analysis), state.live ? 12000 : urgent ? 200 : AI_DEBOUNCE_MS);
 }
 
 let lastState = null;
@@ -341,13 +410,16 @@ function mockSession() {
 }
 
 async function tick() {
+  if (polling) return;
+  polling = true;
   try {
     if (process.env.COACH_MOCK) {
-      const state = parseSession(mockSession());
+      const state = applyOverrides(parseSession(mockSession()));
       const analysis = analyzeDraft(state, champions);
       lastState = state;
       lastAnalysis = analysis;
       send('state', { status: 'draft', draft: toViewModel(state, analysis) });
+      if (isLockedIn(state)) publishItems(state, inferEnemyRoles(state, champions, lanesLookup));
       const sig = signature(state);
       if (sig !== lastSignature) {
         lastSignature = sig;
@@ -360,11 +432,39 @@ async function tick() {
       return;
     }
 
+    // Game data is independent of the launcher, which may close/minimize during a match.
+    const live = parseLiveGame(await readLiveGame(), champions, lastState);
+    if (live) {
+      applyOverrides(live);
+      if (!liveSignature) {
+        clearTimeout(aiTimer);
+        preemptAi();
+        pendingRun = null;
+      }
+      lastState = live;
+      lastAnalysis = analyzeDraft(live, champions);
+      send('state', { status: 'live', draft: toViewModel(live, lastAnalysis) });
+      publishItems(live, inferEnemyRoles(live, champions, lanesLookup));
+      const sig = inventorySignature(live) + ':' + opponentOverrideId;
+      if (sig !== liveSignature) {
+        liveSignature = sig;
+        scheduleAi(live, lastAnalysis, false);
+      }
+      return;
+    }
     const phase = await lcu.getPhase();
+    if (['InProgress', 'GameStart', 'Reconnect'].includes(phase)) {
+      if (overlayPayload && overlay) overlay.webContents.send('items', { ...overlayPayload,
+        disconnected: true });
+      return;
+    }
     if (phase !== 'ChampSelect') {
       // The draft is over - this is the one place a running analysis is dropped.
-      if (aiBusy || pendingRun) {
+      {
         clearTimeout(aiTimer);
+        aiRunId++;
+        schedulerId++;
+        counterId++;
         analyzer.cancel();
         aiBusy = false;
         pendingRun = null;
@@ -372,17 +472,31 @@ async function tick() {
       lastSignature = null;
       prevIsMyTurn = false;
       lastOpponent = null;
+      lastState = null;
+      lastAnalysis = null;
+      liveSignature = null;
+      currentBaseline = null;
+      tunedBuild = null;
+      overlayPayload = null;
+      opponentOverrideId = null;
+      send('items', null);
+      if (overlay) overlay.hide();
       return send('state', { status: 'waiting', phase: phase || 'Unknown' });
     }
 
     const session = await lcu.getSession();
     const state = parseSession(session);
     if (!state) return send('state', { status: 'waiting', phase: 'ChampSelect (loading)' });
+    applyOverrides(state);
 
     const analysis = analyzeDraft(state, champions);
+    const justLocked = isLockedIn(state) && (!lastState || !isLockedIn(lastState));
     lastState = state;
     lastAnalysis = analysis;
     send('state', { status: 'draft', draft: toViewModel(state, analysis) });
+    if (isLockedIn(state)) publishItems(state, inferEnemyRoles(state, champions, lanesLookup));
+    else { overlayPayload = null; if (overlay) overlay.hide(); send('items', null); }
+    if (justLocked) preemptAi();
 
     const sig = signature(state);
     if (sig !== lastSignature) {
@@ -398,7 +512,7 @@ async function tick() {
 
       // Learning who you actually face outranks finishing an analysis that did
       // not know it.
-      if (opponentChanged && focus && focus.mode === 'pick') preemptAi();
+      if (opponentChanged) preemptAi();
 
       const urgent = (state.isMyTurn && !prevIsMyTurn) || (opponentChanged && !!focus);
       scheduleAi(state, analysis, urgent);
@@ -409,6 +523,9 @@ async function tick() {
       ? 'League client not running'
       : err.message;
     send('state', { status: 'error', message: msg });
+    if (overlayPayload && overlay) overlay.webContents.send('items', { ...overlayPayload, disconnected: true });
+  } finally {
+    polling = false;
   }
 }
 
@@ -435,6 +552,24 @@ function createWindow() {
   });
   win.setMenuBarVisibility(false);
   win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
+  const bounds = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea;
+  overlay = new BrowserWindow({ x: bounds.x + 12, y: bounds.y + 12,
+    width: 380, height: Math.min(540, bounds.height - 24), frame: false, show: false,
+    focusable: false, skipTaskbar: true, resizable: false, alwaysOnTop: true,
+    backgroundColor: '#101722', webPreferences: {
+      preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false } });
+  overlay.setAlwaysOnTop(true, 'screen-saver');
+  overlay.setIgnoreMouseEvents(true);
+  overlay.loadFile(path.join(__dirname, '..', 'renderer', 'overlay.html'));
+  globalShortcut.register('CommandOrControl+Shift+O', () => {
+    overlayEnabled = !overlayEnabled;
+    if (overlayEnabled && overlayPayload) overlay.showInactive(); else overlay.hide();
+  });
+  globalShortcut.register('CommandOrControl+Shift+M', () => {
+    const area = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea;
+    overlay.setPosition(area.x + 12, area.y + 12);
+  });
+  win.on('closed', () => app.quit());
 }
 
 app.whenReady().then(() => {
@@ -456,6 +591,7 @@ app.whenReady().then(() => {
       readyInfo = { patch, championCount: Object.keys(champions).length };
       loadGameData().then((g) => {
         gameData = g;
+        lastSignature = null;
         if (process.env.COACH_DEBUG) {
           console.log('[gamedata] ' + (g ? Object.keys(g.itemNames).length + ' items' : 'unavailable'));
         }
@@ -478,17 +614,34 @@ app.whenReady().then(() => {
 });
 
 ipcMain.handle('init', () => readyInfo);
+ipcMain.handle('items-init', () => overlayPayload);
+ipcMain.handle('set-role', (_e, role) => {
+  roleOverride = ['Top', 'Jungle', 'Mid', 'Bot', 'Support'].includes(role) ? role : null;
+  lastSignature = null;
+  liveSignature = null;
+  return roleOverride;
+});
+ipcMain.handle('set-opponent', (_e, id) => {
+  opponentOverrideId = lastState && lastState.theirTeam.some((p) => p.championId === Number(id))
+    ? Number(id) : null;
+  lastSignature = null;
+  liveSignature = null;
+  return opponentOverrideId;
+});
 
 ipcMain.handle('refresh', () => {
   if (lastState && lastAnalysis) {
     lastAiAt = Date.now();
-    runAi(lastState, lastAnalysis);
+    clearTimeout(aiTimer);
+    startAi(lastState, lastAnalysis);
     return true;
   }
   return false;
 });
 
 ipcMain.handle('set-model', (_e, model) => {
+  preemptAi();
+  analyzer.cancel();
   analyzer = new Analyzer({ model });
   return model;
 });
@@ -499,3 +652,4 @@ ipcMain.handle('set-always-on-top', (_e, value) => {
 });
 
 app.on('window-all-closed', () => { app.quit(); });
+app.on('will-quit', () => { globalShortcut.unregisterAll(); analyzer.cancel(); clearInterval(pollTimer); clearTimeout(aiTimer); });

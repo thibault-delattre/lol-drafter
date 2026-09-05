@@ -195,20 +195,14 @@ function largestBucket(data, roleId) {
   return best;
 }
 
-// Emerald+ worldwide, falling back to the broadest available slice only when that
-// bucket is missing or too thin to be useful.
+// Keep the population consistent even on thin patches; sample filters handle uncertainty.
 function pickBucket(data, roleId) {
-  const preferred = readBucket(data, WORLD_REGION, EMERALD_PLUS, roleId);
-  if (preferred && preferred.games >= MIN_BUCKET_GAMES) return preferred;
-  const fallback = largestBucket(data, roleId);
-  if (preferred && (!fallback || preferred.games >= fallback.games)) return preferred;
-  return fallback;
+  return readBucket(data, WORLD_REGION, EMERALD_PLUS, roleId);
 }
 
 /**
  * How every champion performs against `championId` in `role`.
- * Rows are [opponentChampionId, wins, games] from the subject champion's point of
- * view, so a challenger's win rate is the complement.
+ * Rows are [opponentChampionId, wins, games], crediting the named opponent.
  * Returns null (never throws) when the data cannot be had.
  */
 async function laneMatchups(championId, role, ddragonVersion) {
@@ -216,12 +210,12 @@ async function laneMatchups(championId, role, ddragonVersion) {
   const patch = patchKey(ddragonVersion);
   if (!roleId || !patch || !championId) return null;
 
-  const cacheName = `matchups_${patch}_${championId}_${roleId}.json`;
+  const cacheName = `matchups_v2_${patch}_${championId}_${roleId}.json`;
   const cached = cacheRead(cacheName);
   if (cached) return cached;
 
   try {
-    const { data } = await fetchWithPatchFallback(
+    const { data, patch: dataPatch } = await fetchWithPatchFallback(
       (p) => `https://stats2.u.gg/lol/1.5/matchups/${p}/ranked_solo_5x5/${championId}/1.5.0.json`,
       patch);
     const bucket = pickBucket(data, roleId);
@@ -230,7 +224,7 @@ async function laneMatchups(championId, role, ddragonVersion) {
     const against = [];
     for (const r of bucket.rows) {
       const [oppId, wins, games] = r;
-      if (!games) continue;
+      if (!Number.isFinite(games) || games <= 0 || !Number.isFinite(wins) || wins < 0 || wins > games) continue;
       // The wins in each row belong to the champion NAMED in that row, not to the
       // champion whose file this is. Reading it the other way inverts every
       // matchup - it claimed Vayne beat Teemo 62.7% when Teemo in fact wins.
@@ -243,6 +237,7 @@ async function laneMatchups(championId, role, ddragonVersion) {
     }
     const result = {
       subject: championId, role, asOf: bucket.asOf, totalGames: bucket.games,
+      patch: dataPatch, requestedPatch: patch, fallback: dataPatch !== patch,
       tier: bucket.tier === EMERALD_PLUS && bucket.region === WORLD_REGION ? 'Emerald+' : 'mixed ranks',
       against,
     };
@@ -325,12 +320,23 @@ async function buildLaneStats({ opponentId, opponentName, mode, role, patch, cha
   const losers = rankVictims(m, { limit: 30 }).map(named).filter(pickable).slice(0, 6);
 
 
-  return { opponent: opponentName, mode: mode || 'pick', asOf: m.asOf, totalGames: m.totalGames, counters, losers, matchups: m };
+  return { opponent: opponentName, mode: mode || 'pick', asOf: m.asOf, patch: m.patch,
+    tier: m.tier, fallback: m.fallback, totalGames: m.totalGames, counters, losers, matchups: m };
 }
 
 // Layout of u.gg's overview payload, confirmed by decoding a champion whose build
 // is well known (Darius: Flash+Ghost, Doran's Blade, Conqueror).
 const BUILD = { runes: 0, spells: 1, starting: 2, boots: 3, skills: 4, items: 5, record: 6, shards: 8 };
+
+function pickBuildBucket(data, roleId) {
+  const bucket = data && data[WORLD_REGION] && data[WORLD_REGION][EMERALD_PLUS] &&
+    data[WORLD_REGION][EMERALD_PLUS][roleId];
+  const secs = bucket && bucket[0];
+  const record = Array.isArray(secs) && secs[BUILD.record];
+  if (!Array.isArray(record) || !Number.isFinite(record[1]) || record[1] <= 0 ||
+      !Number.isFinite(record[0]) || record[0] < 0 || record[0] > record[1]) return null;
+  return { secs, games: record[1], asOf: typeof bucket[1] === 'string' ? bucket[1] : null };
+}
 
 // Slots contain potions and repeats of an item already bought earlier, so a raw
 // "most played" pick produces nonsense like Thresh building Thornmail twice.
@@ -347,6 +353,52 @@ function pickTop(rows, { isRealItem, taken } = {}) {
   return { id: best[0], games, winRate: games ? +((best[1] / games) * 100).toFixed(1) : null };
 }
 
+function rankBuildOptions(rows, { isRealItem, taken, minGames = 300 } = {}) {
+  if (!Array.isArray(rows)) return [];
+  const options = rows.filter((r) => Array.isArray(r) && Number.isFinite(r[1]) &&
+    Number.isFinite(r[2]) && r[2] > 0 && r[1] >= 0 && r[1] <= r[2])
+    .filter((r) => (!isRealItem || isRealItem(r[0])) && (!taken || !taken.has(r[0])))
+    .map(([id, wins, games]) => ({ id, wins, games,
+      winRate: +(100 * wins / games).toFixed(1), confidence: wilsonLowerBound(wins, games),
+      lowSample: games < minGames }));
+  // Compare within a purchase slot only. Late completed items naturally have inflated rates.
+  const supported = options.filter((it) => !it.lowSample);
+  return supported.length ? supported.sort((a, b) => b.confidence - a.confidence || b.games - a.games)
+    : options.sort((a, b) => b.games - a.games); // Explicit low-sample popularity fallback.
+}
+
+function openingRecord(section) {
+  if (!Array.isArray(section) || !Array.isArray(section[2])) return null;
+  const [games, wins, items] = section;
+  if (!Number.isFinite(games) || games <= 0 || !Number.isFinite(wins) || wins < 0 || wins > games) return null;
+  return { games, wins, items, winRate: +(100 * wins / games).toFixed(1),
+    confidence: wilsonLowerBound(wins, games), lowSample: games < 300 };
+}
+
+function buildCore(sections, itemMeta) {
+  const isRealItem = (id) => {
+    const m = itemMeta && itemMeta[String(id)];
+    return !!m && m.purchasable !== false && !m.consumable && !m.trinket && !m.boots && m.gold >= 1600;
+  };
+  const core = [];
+  const taken = new Set();
+  // Section 3 includes the OPENING core and boots. Section 5 starts AFTER it.
+  // Starting at section 5 told Mundo to rush Spirit Visage and skipped Warmog/Heartsteel.
+  const opening = sections[BUILD.boots];
+  for (const id of opening && Array.isArray(opening[2]) ? opening[2] : []) {
+    if (!isRealItem(id) || taken.has(id)) continue;
+    core.push({ id, games: opening[0], winRate: null, opening: true });
+    taken.add(id);
+  }
+  for (const slot of Array.isArray(sections[BUILD.items]) ? sections[BUILD.items] : []) {
+    if (core.length >= 3) break;
+    const top = rankBuildOptions(slot, { isRealItem, taken })[0];
+    if (!top) continue;
+    core.push(top); taken.add(top.id);
+  }
+  return core.slice(0, 3);
+}
+
 /**
  * The statistically standard build for a champion in a role: runes, spells,
  * starting items and the usual first three item slots, each with its win rate.
@@ -357,32 +409,16 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
   const patch = patchKey(ddragonVersion);
   if (!roleId || !patch || !championId) return null;
 
-  const cacheName = `build_${patch}_${championId}_${roleId}.json`;
+  const cacheName = `build_v4_${patch}_${championId}_${roleId}.json`;
   const cached = cacheRead(cacheName);
   if (cached) return cached;
 
   try {
-    const { data } = await fetchWithPatchFallback(
+    const { data, patch: dataPatch } = await fetchWithPatchFallback(
       (p) => `https://stats2.u.gg/lol/1.5/overview/${p}/ranked_solo_5x5/${championId}/1.5.0.json`,
       patch);
 
-    // Same trick as the matchups: take the broadest bucket rather than trusting
-    // u.gg's region/tier numbering.
-    let best = null;
-    for (const region of Object.keys(data)) {
-      const tiers = data[region];
-      if (!tiers || typeof tiers !== 'object') continue;
-      for (const tier of Object.keys(tiers)) {
-        const bucket = tiers[tier] && tiers[tier][roleId];
-        const secs = bucket && bucket[0];
-        if (!Array.isArray(secs) || !secs.length) continue;
-        const rec = secs[BUILD.record];
-        const games = Array.isArray(rec) ? (rec[1] || 0) : 0;
-        if (!best || games > best.games) {
-          best = { games, secs, asOf: typeof bucket[1] === 'string' ? bucket[1] : null };
-        }
-      }
-    }
+    const best = pickBuildBucket(data, roleId);
     if (!best) return null;
 
     const s = best.secs;
@@ -400,6 +436,7 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
 
     const result = {
       championId,
+      tier: 'Emerald+', patch: dataPatch, requestedPatch: patch, fallback: dataPatch !== patch,
       role,
       asOf: best.asOf,
       games,
@@ -409,28 +446,16 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
       spells: spells ? (spells[2] || []) : [],
       starting: starting ? (starting[2] || []) : [],
       skillOrder: skills ? (skills[3] || null) : null,
-      core: [],
+      core: buildCore(s, itemMeta),
+      opening: openingRecord(sec(BUILD.boots)),
+      alternatives: (itemSlots || []).map((rows, index) => ({ slot: index + 1,
+        options: rankBuildOptions(rows, { isRealItem: (id) => {
+          const m = itemMeta && itemMeta[id];
+          return m && m.purchasable !== false && !m.boots && !m.consumable && !m.trinket && m.gold >= 1600;
+        } }).slice(0, 3) })).filter((slot) => slot.options.length),
     };
 
-    // Slot 0 is the first completed item, slot 1 the second, and so on. Skip
-    // consumables and anything already taken so the build reads as a real path.
-    const isRealItem = (id) => {
-      if (!itemMeta) return true;
-      const m = itemMeta[String(id)];
-      return !!m && !m.consumable && !m.trinket && !m.boots && m.gold >= 1600;
-    };
-    if (Array.isArray(itemSlots)) {
-      const taken = new Set();
-      for (const slot of itemSlots.slice(0, 5)) {
-        const top = pickTop(slot, { isRealItem, taken });
-        if (!top) continue;
-        taken.add(top.id);
-        result.core.push(top);
-        if (result.core.length === 3) break;
-      }
-    }
-
-    // Boots live in their own section alongside a couple of items.
+    // Boots share the opening-build section with the first core items.
     const bootsSec = sec(BUILD.boots);
     if (bootsSec && Array.isArray(bootsSec[2]) && itemMeta) {
       const b = bootsSec[2].find((id) => itemMeta[String(id)] && itemMeta[String(id)].boots);
@@ -445,5 +470,5 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
 
 module.exports = {
   loadPrimaryRoles, laneMatchups, rankCounters, winRateAgainst, buildLaneStats, championBuild, pickTop, wilsonLowerBound, rankVictims, MIN_MATCHUP_GAMES,
-  patchKey, previousPatch, largestBucket, pickBucket, ROLE_IDS,
+  patchKey, previousPatch, largestBucket, pickBucket, pickBuildBucket, buildCore, rankBuildOptions, openingRecord, ROLE_IDS,
 };

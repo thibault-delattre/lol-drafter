@@ -1,5 +1,14 @@
 # Known issues and backlog
 
+Update 2026-09-05: the entries below are the historical audit. Issues 1–5, 7, 9, and
+the role-override part of 11 are now fixed. Scheduler, live inventory and renderer
+coverage was added for 10. The opening-build parser also had an additional defect:
+it skipped section 3's opening core and read section 5's later items as a rush; fixed
+with a regression test. See [current README](../README.md) and [data review](DATA_RESEARCH.md).
+Remaining limitations include exclusive-fullscreen visibility, incomplete curated
+champion traits, undocumented data endpoints, model factual errors, and no measured
+lane-gold or cross-patch trend model. Other entries below may describe superseded behavior.
+
 Every entry below was found by reading the code on 2026-09-05 against patch 16.17.1, with
 `npm test` green (65/65). Each one states how it was verified, so you can re-check rather than
 trust this file. Nothing here has been fixed — this is a to-do list, not a changelog.

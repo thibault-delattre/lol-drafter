@@ -4,10 +4,10 @@ const fs = require('fs');
 const { execFile } = require('child_process');
 
 const LOCKFILE_PATHS = [
-  'C:\Riot Games\League of Legends\lockfile',
-  'C:\Program Files\Riot Games\League of Legends\lockfile',
-  'C:\Program Files (x86)\Riot Games\League of Legends\lockfile',
-  'D:\Riot Games\League of Legends\lockfile',
+  'C:/Riot Games/League of Legends/lockfile',
+  'C:/Program Files/Riot Games/League of Legends/lockfile',
+  'C:/Program Files (x86)/Riot Games/League of Legends/lockfile',
+  'D:/Riot Games/League of Legends/lockfile',
 ];
 
 // The client serves a self-signed cert, so verification has to be off for 127.0.0.1.

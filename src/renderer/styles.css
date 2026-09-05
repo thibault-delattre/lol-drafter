@@ -159,3 +159,5 @@ section { margin-bottom: 16px; }
 .b-base b { color: #9fb2cc; font-weight: 600; }
 .b-note { font-size: 9.5px; color: var(--gold); font-weight: 600; text-transform: uppercase;
           letter-spacing: .05em; }
+ .lane-controls { display: flex; gap: 12px; margin-bottom: 12px; color: #99adc3; font-size: 12px; }
+ .lane-controls select { background: #101722; color: #dce6f2; border: 1px solid #30445a; padding: 4px; max-width: 155px; }

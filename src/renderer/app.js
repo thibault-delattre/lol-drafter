@@ -39,7 +39,7 @@ function showDraft() {
 
 function renderRoster(ul, players, isAlly) {
   ul.textContent = '';
-  const ordered = isAlly ? sortByRole(players) : players;
+  const ordered = players; // Preserve the client slots, including pick-order swaps.
 
   ordered.forEach((p, i) => {
     const li = el('li', p.isLocal ? 'me' : '');
@@ -230,21 +230,39 @@ function stopElapsed() {
 function renderCounters(payload) {
   const section = $('countersSection');
   const box = $('counters');
-  if (!payload || !payload.list || !payload.list.length) {
+  if (!payload || !payload.list) {
     section.hidden = true;
     box.textContent = '';
     return;
   }
   section.hidden = false;
+  if (payload.mode === 'blind') {
+    $('countersTitle').textContent = 'Blind picks · enemy laner unknown';
+    $('countersMeta').textContent = 'Instant provisional advice · no matchup win-rate claim';
+    box.replaceChildren(el('p', 'hint', (payload.warning || 'Enemy can counterpick your lane.') +
+      ' Revealed: ' + (payload.enemies.join(', ') || 'none')));
+    for (const pick of payload.list) {
+      const row = el('div', 'b-item');
+      const body = el('div');
+      body.append(el('b', null, pick.name), el('div', 'w', pick.why), el('div', 'hint', 'Risk: ' + pick.risk));
+      row.append(body); box.append(row);
+    }
+    return;
+  }
   // Banning inverts the question: the subject is your own champion, and the list
   // is what beats it - i.e. what is worth denying.
   $('countersTitle').textContent = payload.mode === 'ban'
     ? 'Biggest threats to ' + payload.opponent
     : 'Best into ' + payload.opponent;
-  $('countersMeta').textContent = 'u.gg · ' + payload.totalGames.toLocaleString() + ' games' +
+  $('countersMeta').textContent = 'u.gg ' + (payload.tier || '') + ' / ' + (payload.patch || '') +
+    (payload.fallback ? ' (previous patch)' : '') + ' · ' + payload.totalGames.toLocaleString() + ' games' +
     (payload.asOf ? ' · ' + String(payload.asOf).slice(0, 10) : '');
 
   box.textContent = '';
+  if (!payload.list.length) {
+    box.textContent = payload.unavailable ? 'Matchup statistics unavailable. Check your role selection or refresh later.'
+      : 'No winning matchup clears the 300-game sample threshold.';
+  }
   for (const c of payload.list) {
     const row = el('div', 'ctr-row');
     if (c.img) {
@@ -309,9 +327,11 @@ function renderBuild(b) {
   if (!b) { section.hidden = true; box.textContent = ''; return; }
   section.hidden = false;
   box.textContent = '';
+  $('buildMeta').textContent = '';
 
   if (b.baseline) {
-    $('buildMeta').textContent = 'u.gg baseline · ' + b.baseline.winRate + '% · ' +
+    $('buildMeta').textContent = 'u.gg ' + (b.baseline.tier || '') + ' / ' + (b.baseline.patch || '') +
+      (b.baseline.fallback ? ' (previous patch)' : '') + ' · champion overall ' + b.baseline.winRate + '% · ' +
       b.baseline.games.toLocaleString() + ' games';
   }
   if (b.summary) box.appendChild(el('div', 'b-sum', b.summary));
@@ -347,6 +367,11 @@ function renderBuild(b) {
       d.appendChild(line);
     };
     add('Standard', base.core.map((c) => c.name).join(' > '));
+    if (base.opening) add('Opening combination', base.opening.names.join(' + ') + ' — ' +
+      base.opening.winRate + '% / ' + base.opening.games.toLocaleString() + ' games' +
+      (base.opening.lowSample ? ' (low sample)' : ''));
+    for (const c of base.core) if (c.winRate != null) add(c.name + ' (later slot)',
+      c.winRate + '% / ' + (c.games || 0).toLocaleString() + ' games' + (c.lowSample ? ' (low sample)' : ''));
     add('Start', base.starting.join(', '));
     add('Summoners', base.spells.join(' + '));
     add('Skills', base.skills);
@@ -363,6 +388,16 @@ function applyReady(info) {
 }
 
 window.coach.onCounters(renderCounters);
+$('turnBanner').after($('countersSection')); // Put the instant answer above the tall roster/meters.
+window.coach.onItems((data) => {
+  $('itemsSection').hidden = !data;
+  if (!data) return;
+  $('recsSection').hidden = true;
+  $('itemNotes').textContent = data.notes.join(' ');
+  $('itemOptions').replaceChildren();
+  for (const option of data.options) $('itemOptions').appendChild(buildItemRow(option, null));
+  $('itemSource').textContent = data.source;
+});
 window.coach.onReady(applyReady);
 window.coach.init().then(applyReady);
 
@@ -381,6 +416,7 @@ window.coach.onState((msg) => {
     renderCounters(null);
     renderBuild(null);
     buildMode = false;
+    $('recsSection').hidden = false;
     stopElapsed();
     $('aiStatus').textContent = '';
     showIdle('Waiting for champion select...', 'Currently in ' + msg.phase + '. This updates automatically.');
@@ -388,8 +424,17 @@ window.coach.onState((msg) => {
   }
 
   const d = msg.draft;
+  const opponentSelect = $('opponentOverride');
+  const choices = d.theirTeam.filter((p) => p.champion).map((p) => p.champion);
+  const key = choices.map((c) => c.id).join(',');
+  if (opponentSelect.dataset.key !== key) {
+    opponentSelect.replaceChildren(new Option('Auto (inferred)', ''), ...choices.map((c) => new Option(c.name, c.id)));
+    opponentSelect.dataset.key = key;
+  }
+  opponentSelect.value = d.opponentOverrideId || '';
   showDraft();
-  setStatus(d.myPosition ? 'drafting as ' + d.myPosition : 'draft in progress', 'live');
+  setStatus(msg.status === 'live' ? 'in game · inventory updates active' :
+    d.myPosition ? 'drafting as ' + d.myPosition : 'draft in progress', 'live');
   $('timer').textContent = d.timeLeft != null && d.timeLeft > 0 ? d.timeLeft : '';
 
   const banner = $('turnBanner');
@@ -418,6 +463,8 @@ window.coach.onAi((msg) => {
   if (msg.status === 'running') {
     aiStartedAt = msg.startedAt || Date.now();
     buildMode = msg.mode === 'build';
+    $('recsSection').hidden = buildMode;
+    if (!buildMode) renderBuild(null);
     startElapsed();
     // Keep the previous answer up while refreshing - a slightly old read is far
     // more useful mid-draft than an empty panel.
@@ -435,6 +482,7 @@ window.coach.onAi((msg) => {
     return;
   }
   if (msg.status === 'streaming') {
+    $('recsSection').hidden = false;
     $('recs').classList.remove('stale');
     hasResult = true;
     renderPicks(msg.picks);
@@ -450,6 +498,8 @@ window.coach.onAi((msg) => {
     return;
   }
   if (msg.status === 'done') {
+    $('recsSection').hidden = false;
+    renderBuild(null);
     stopElapsed();
     $('recs').classList.remove('stale');
     hasResult = true;
@@ -481,4 +531,6 @@ window.coach.onAi((msg) => {
 });
 
 $('refresh').addEventListener('click', () => window.coach.refresh());
+$('roleOverride').addEventListener('change', (e) => window.coach.setRole(e.target.value));
+$('opponentOverride').addEventListener('change', (e) => window.coach.setOpponent(e.target.value));
 $('ontop').addEventListener('change', (e) => window.coach.setAlwaysOnTop(e.target.checked));

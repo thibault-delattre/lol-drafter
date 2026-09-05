@@ -1,5 +1,13 @@
 # Architecture — LoL Draft Coach
 
+Update 2026-09-05: this original architecture reference predates the live overlay.
+`live.js` reads and normalizes Riot's in-game feed; `items.js` computes immediate
+inventory-aware options. `overlay.html/js/css` renders a separate click-through window.
+Main serializes AI runs and uses generation guards across cancellations. Both u.gg
+paths now pin Emerald+; overview section 3 supplies opening items before section 5's
+later slots. See [README](../README.md) and [DATA_RESEARCH](DATA_RESEARCH.md) for current
+behavior; older claims below about no live support, build buckets and tests are superseded.
+
 Developer reference. The [README](../README.md) explains *what the app does and why*, in prose,
 and is the better first read for product intent. This file is the map of the code: what each
 module owns, the exact shapes that cross module boundaries, the external data formats, and the

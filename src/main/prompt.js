@@ -41,6 +41,16 @@ function inferEnemyRoles(state, champions, lanesLookup) {
 
   const myRole = state.myPosition;
   let opponent = myRole && assigned[myRole] ? assigned[myRole] : null;
+  const likelyOpponent = opponent;
+  // A lone Nasus may still be Mid; do not sell a Top counterpick before the flex resolves.
+  const flexible = opponent && picked.length < 5 && lanesFor(opponent)
+    .some((role) => role !== myRole && !assigned[role]);
+  if (flexible) opponent = null;
+  // Live data may report positions even though ranked champion select hides them.
+  const reported = state.theirTeam.find((p) => p.position === myRole && p.championId);
+  if (reported) opponent = nameOf(champions, reported.championId);
+  const override = state.theirTeam.find((p) => p.championId === state.opponentOverrideId);
+  if (override) opponent = nameOf(champions, override.championId);
   if (!opponent && myRole) {
     // A champion that only ever plays my lane is still my opponent even if the
     // greedy assignment could not seat it.
@@ -50,12 +60,15 @@ function inferEnemyRoles(state, champions, lanesLookup) {
     });
     if (forced) opponent = forced;
   }
-  return { picked, assigned, unplaced, opponent };
+  const uncertain = !opponent && !!flexible;
+  return { picked, assigned, unplaced, opponent, likelyOpponent,
+    uncertain, warning: uncertain ? `${likelyOpponent} could play another unfilled role. Enemy laner is unconfirmed; avoid committing to a narrow counterpick.` : null };
 }
 
 function describeEnemies(state, roles) {
   if (!roles.picked.length) return '  nobody has picked yet';
   const lines = [];
+  if (roles.warning) lines.push('  ROLE UNCERTAINTY: ' + roles.warning);
   for (const role of ROLE_ORDER) {
     if (roles.assigned[role]) lines.push(`  ${role}: ${roles.assigned[role]}`);
   }
@@ -79,7 +92,7 @@ function priorityBlock(ctx) {
   const lines = [];
   const threats = '3. ENEMY THREATS - how it holds up against their team as a whole in a fight.';
 
-  if (ctx.isLastPick) {
+  if (ctx.isLastPick && !ctx.opponent) {
     lines.push('You are the LAST pick on your team. Your composition is otherwise fixed, so this is');
     lines.push('the only remaining chance to cover what it is missing. Weigh:');
     lines.push('1. TEAM COMPOSITION - close the gaps listed above (damage type, frontline, CC, engage).');
@@ -88,8 +101,9 @@ function priorityBlock(ctx) {
       : '2. LANE - your opponent is not revealed; avoid picks that are easy to counter.');
     lines.push(threats);
   } else if (ctx.opponent) {
-    lines.push(`Your lane opponent is already known (${ctx.opponent}), and ${ctx.alliesAfter} ally pick(s) come after`);
-    lines.push('you, so the composition can still be fixed by someone else. Weigh:');
+    lines.push(`Your lane opponent is already known (${ctx.opponent}). Lane is the primary goal.`);
+    lines.push(ctx.isLastPick ? 'You are last pick: use team balance to choose among viable lane answers.'
+      : `${ctx.alliesAfter} allies can still adjust the composition. Weigh:`);
     lines.push(`1. LANE - beating ${ctx.opponent} is the priority. Say concretely why the matchup is`);
     lines.push('   good: range, all-in power, wave control, how the enemy wins if they do.');
     lines.push('2. TEAM COMPOSITION - among the champions that beat the lane, prefer the one that also');
@@ -129,6 +143,9 @@ function statsBlock(stats, role) {
   const subject = stats.opponent;
   const asOf = stats.asOf ? `, as of ${String(stats.asOf).slice(0, 10)}` : '';
   const lines = [];
+  lines.push(`DATA SCOPE: ${stats.tier || 'rank unspecified'}, patch ${stats.patch || 'unknown'}${stats.fallback ? ' (previous patch)' : ''}.`);
+  lines.push('These are GAME win rates, not lane win rates or gold-at-15. Do not claim they prove lane dominance.');
+  lines.push('Rates are not normalized matchup deltas; champion strength and sample noise also affect them.');
 
   // Ban mode inverts the question: the subject is the champion YOU intend to
   // play, so the same "who beats the subject" list becomes the ban shortlist.
@@ -228,12 +245,15 @@ function buildBuildPrompt(state, analysis, champions, gameData, build, opts) {
     .join(', ') || 'nobody else locked yet';
 
   const lines = [];
-  lines.push(`STATISTICAL BASELINE for ${me.name} ${state.myPosition || ''} - u.gg, ${build.games.toLocaleString()} games, ${build.winRate}% win rate`);
+  lines.push(`STATISTICAL BASELINE for ${me.name} ${state.myPosition || ''} - u.gg ${build.tier || 'rank unknown'}, patch ${build.patch || 'unknown'}${build.fallback ? ' (previous patch fallback)' : ''}, ${build.games.toLocaleString()} games, ${build.winRate}% win rate`);
   if (build.spells.length) lines.push('  Summoners : ' + build.spells.map(spell).join(' + '));
   if (build.starting.length) lines.push('  Start     : ' + build.starting.map(item).join(', '));
   if (build.boots) lines.push('  Boots     : ' + item(build.boots));
+  if (build.opening) lines.push(`  Opening combination: ${build.opening.items.map(item).join(' + ')}: ${build.opening.winRate}% over ${build.opening.games} games${build.opening.lowSample ? ' (LOW SAMPLE)' : ''}. This rate belongs to the combination, not the entire six-item build.`);
+  for (const slot of build.alternatives || []) lines.push(`  Later purchase slot ${slot.slot} alternatives: ` +
+    slot.options.map((it) => `${item(it.id)}: ${it.winRate}% / ${it.games} games / confidence floor ${it.confidence.toFixed(1)}%${it.lowSample ? ' LOW SAMPLE; popularity fallback' : ''}`).join('; '));
   if (build.core.length) {
-    lines.push('  Core      : ' + build.core.map((c) => `${item(c.id)} (${c.winRate}%)`).join(' -> '));
+    lines.push('  Core      : ' + build.core.map((c) => `${item(c.id)} (${c.winRate == null ? 'opening path; no standalone item win rate' : c.winRate + '%'})`).join(' -> '));
   }
   if (build.skillOrder) lines.push('  Skills    : ' + build.skillOrder.split('').join(' > '));
   if (build.runes && build.runes.perks && build.runes.perks.length) {
@@ -243,6 +263,9 @@ function buildBuildPrompt(state, analysis, champions, gameData, build, opts) {
   return `You are an expert League of Legends coach. Patch ${o.patch || 'current'}, Summoner's Rift ranked.
 
 I have LOCKED IN ${me.name} ${state.myPosition || ''}. The draft is decided - do not suggest a different champion.
+LANE PRIORITY: ${o.enemyRoles && o.enemyRoles.opponent || 'unknown opponent (do not invent one)'}. Early recalls and first core should solve this matchup before later teamfight adaptations.
+${o.enemyRoles && o.enemyRoles.warning || ''}
+Recommend exactly ONE pair of boots. Never put another pair in core or situational purchases.
 
 ENEMY TEAM: ${enemyLine}
 ENEMY DAMAGE: ${compLine(analysis.enemy)}
@@ -255,6 +278,30 @@ MY TEAM DAMAGE: ${compLine(analysis.ally)}
 ${lines.join('\n')}
 
 That baseline is the average game across every opponent. Tune it to beat THIS enemy team.
+Build win rates are observational and affected by purchase timing and winning-game bias; they do not prove an optimal build.
+Use the supplied win rates AND sample sizes when selecting items: prefer stronger supported results
+within the SAME purchase slot, then adapt for lane, champion synergy and observed enemy threats.
+Explain a matchup-based deviation from the statistical leader. Never compare a late-item rate
+against an opening-item rate, or call the champion overall win rate a build win rate.
+Composition AD/AP percentages are rough champion archetypes, not measured damage; account separately for true damage.
+Vayne has physical attacks AND max-health true damage. Armor/Steelcaps do not reduce Silver Bolts.
+For Vayne, preserve Berserker's Greaves as the default attack-speed power spike. Do not switch
+to Steelcaps solely because her laner deals physical damage, especially against a mixed/AP-heavy team.
+Defensive boots are conditional alternatives with an explicit lost-damage tradeoff; MR boots do not reduce knockups.
+A small lifesteal component on a non-healing champion does not justify rushing wounds ahead of your core.
+Randuin's answers critical strikes, not all physical damage or on-hit/true damage. During draft, crit purchases are only conditional.
+Bramble/Thornmail anti-heal requires the enemy to attack you; it is unreliable against Vladimir's spell healing.
+Apply anti-heal with damage appropriate to your champion, and do not duplicate completed wounds items.
+Do not recommend mana efficiency to a manaless champion. Tenacity does not reduce knockups or suppression.
+CURRENT INVENTORIES (${state.live ? 'observed' : 'unknown; do not invent purchases'}): ${JSON.stringify(
+    [...state.myTeam, ...state.theirTeam].map((p) => ({ champion: nameOf(champions, p.championId),
+      mine: p.isLocal, items: (p.items || []).map(item) })))}
+Only use these CURRENT PURCHASABLE SUMMONER'S RIFT ITEMS:
+${Object.entries(gameData.itemMeta || {}).filter(([, m]) => m.purchasable === true).map(([id]) => item(id)).join(', ')}
+AUTHORITATIVE CURRENT ITEM EFFECTS (do not invent effects or confuse crit with on-hit):
+${[...new Set([...(build.core || []).map((it) => it.id), build.boots, 3143, 3047, 3111, 3076,
+    3075, 3916, 3123, 3165, 3033, 3139, 3157, 3156, 3065, 3110, 3082].filter(Boolean))]
+    .map((id) => `${item(id)}: ${gameData.itemMeta[id] && gameData.itemMeta[id].description || 'effect unavailable; do not invent it'}`).join('\n')}
 Think about, only where it actually applies:
 - armour versus magic resist, given their ${analysis.enemy.adPct}% AD / ${analysis.enemy.apPct}% AP split
 - boots: armour, magic resist or tenacity, depending on what actually kills you

@@ -20,7 +20,7 @@ const BY_LANE = {
         Diana, Ekko, Fizz, Galio, Gragas, Heimerdinger, Hwei, Irelia, Kassadin, Katarina, LeBlanc,
         Lissandra, Lux, Malzahar, Mel, Naafiri, Neeko, Orianna, Pantheon, Qiyana, Ryze, Seraphine,
         Swain, Sylas, Syndra, Taliyah, Talon, Twisted Fate, Veigar, Vex, Viktor, Vladimir, Xerath,
-        Yasuo, Yone, Zed, Ziggs, Zoe, Ambessa, Vel'Koz, Kayle`,
+        Yasuo, Yone, Zed, Ziggs, Zoe, Ambessa, Vel'Koz, Kayle, Nasus`,
 
   Bot: `Aphelios, Ashe, Caitlyn, Corki, Draven, Ezreal, Jhin, Jinx, Kai'Sa, Kalista, Kog'Maw,
         Lucian, Miss Fortune, Nilah, Samira, Senna, Sivir, Smolder, Tristana, Twitch, Varus,
@@ -56,34 +56,36 @@ function lanesFor(name) {
  */
 function assignRoles(names, lookup) {
   const lanesOf = lookup || lanesFor;
-  const entries = names.map((name) => ({ name, lanes: lanesOf(name) || [] }));
+  const entries = names.map((name) => {
+    const raw = lanesOf(name) || [];
+    const supported = lanesFor(name);
+    // The provider lists ALL five lanes, including fringe play. They are not five plausible roles.
+    const lanes = supported.length ? raw.filter((r) => supported.includes(r)) : raw.slice(0, 1);
+    return { name, lanes };
+  }).sort((a, b) => a.lanes.length - b.lanes.length || a.name.localeCompare(b.name));
 
-  // Every (champion, lane) pairing, tagged with how strongly that champion
-  // belongs in that lane - position 0 is their main lane.
-  const pairs = [];
-  entries.forEach((e, order) => {
-    e.lanes.forEach((role, rank) => {
-      pairs.push({ name: e.name, role, rank, order, breadth: e.lanes.length });
+  // Optimize the whole assignment: Diana can jungle, but Viktor needs Mid. A greedy
+  // Diana->Mid assignment previously pushed Viktor into a fictitious Top matchup.
+  let best = { count: -1, cost: Infinity, assigned: {} };
+  function visit(i, assigned, count, cost) {
+    if (i === entries.length) {
+      if (count > best.count || (count === best.count && cost < best.cost))
+        best = { count, cost, assigned: { ...assigned } };
+      return;
+    }
+    const entry = entries[i];
+    entry.lanes.forEach((role, rank) => {
+      if (assigned[role]) return;
+      assigned[role] = entry.name;
+      visit(i + 1, assigned, count + 1, cost + rank);
+      delete assigned[role];
     });
-  });
-
-  // Settle the most confident pairings first, so a flex pick cannot claim a lane
-  // another champion mains - Kled takes Top ahead of Neeko whichever order they
-  // were picked in. Rank comes first (u.gg lists a champion's real main lane
-  // first); breadth breaks ties for sources that only say which lanes are
-  // plausible, letting a one-lane Teemo beat a three-lane Gragas to Top.
-  pairs.sort((a, b) => a.rank - b.rank || a.breadth - b.breadth || a.order - b.order);
-
-  const assigned = {};
-  const placed = new Set();
-  for (const p of pairs) {
-    if (placed.has(p.name) || assigned[p.role]) continue;
-    assigned[p.role] = p.name;
-    placed.add(p.name);
+    visit(i + 1, assigned, count, cost);
   }
-
-  const unplaced = entries.filter((e) => !placed.has(e.name)).map((e) => e.name);
-  return { assigned, unplaced };
+  visit(0, {}, 0, 0);
+  const assigned = best.assigned;
+  const placed = new Set(Object.values(assigned));
+  return { assigned, unplaced: names.filter((name) => !placed.has(name)) };
 }
 
 module.exports = { lanesFor, assignRoles, ROLES };
