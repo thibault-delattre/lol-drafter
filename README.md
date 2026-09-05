@@ -78,7 +78,10 @@ Use League in **Borderless** or **Windowed** mode so the overlay can remain visi
 - `Ctrl+Shift+O` — hide or show the item overlay.
 - `Ctrl+Shift+M` — move it to the top-left corner of the monitor under your cursor.
 
-The overlay never takes keyboard focus and allows mouse clicks to pass through to League.
+The compact 320 × 390 overlay uses item portraits, short tactical cues, and a dark-and-gold
+League-inspired design. Available build statistics retain their win rate and sample size.
+It never takes keyboard focus; mouse clicks pass through to League except over the
+**© Thibault Delattre** signature, which opens the author's GitHub profile.
 
 ## How recommendations are selected
 

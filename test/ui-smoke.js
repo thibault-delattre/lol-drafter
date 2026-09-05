@@ -18,6 +18,10 @@ const state = parseLiveGame(raw, champions);
 const payload = itemAdvice(state, champions, gameData, { opponent: 'Vayne' });
 ipcMain.handle('init', () => ({ patch: gameData.version, championCount: Object.keys(champions).length }));
 ipcMain.handle('items-init', () => payload);
+const interactions = [];
+let authorClicks = 0;
+ipcMain.handle('overlay-interactive', (_e, value) => interactions.push(value));
+ipcMain.handle('overlay-author', () => { authorClicks++; });
 app.whenReady().then(async () => {
   const make = () => {
     const w = new BrowserWindow({ show: false, width: 380, height: 540, frame: false,
@@ -27,6 +31,7 @@ app.whenReady().then(async () => {
   };
   try {
     const overlay = make();
+    overlay.setSize(320, 390);
     await overlay.loadFile(path.resolve(__dirname, '../src/renderer/overlay.html'));
     await overlay.webContents.executeJavaScript('window.coach.itemsInit().then(render)');
     const text = await overlay.webContents.executeJavaScript('document.body.innerText');
@@ -35,6 +40,20 @@ app.whenReady().then(async () => {
     assert.ok(text.includes('Bramble'));
     const size = await overlay.webContents.executeJavaScript('({height:document.documentElement.scrollHeight,client:window.innerHeight})');
     assert.ok(size.height <= size.client, 'overlay is clipped: ' + JSON.stringify(size));
+    assert.ok(await overlay.webContents.executeJavaScript('document.querySelector("main").scrollHeight <= document.querySelector("main").clientHeight'), 'item content clipped');
+    const images = await overlay.webContents.executeJavaScript(`Promise.all([...document.images].map(async img => {
+      await img.decode(); return img.naturalWidth > 0;
+    }))`);
+    assert.equal(images.length, 4);
+    assert.ok(images.every(Boolean), 'item icons must load');
+    await overlay.webContents.executeJavaScript(`
+      document.getElementById('author').dispatchEvent(new MouseEvent('mousemove', {bubbles:true}));
+      document.getElementById('author').click();
+      document.body.dispatchEvent(new MouseEvent('mousemove', {bubbles:true}));
+      window.coach.itemsInit();
+    `);
+    assert.deepEqual(interactions, [true, false]);
+    assert.equal(authorClicks, 1);
     fs.mkdirSync(path.resolve(__dirname, 'artifacts'), { recursive: true });
     fs.writeFileSync(path.resolve(__dirname, 'artifacts/overlay.png'), (await overlay.webContents.capturePage()).toPNG());
     const main = make();

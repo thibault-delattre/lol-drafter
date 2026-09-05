@@ -1,5 +1,5 @@
 'use strict';
-const { app, BrowserWindow, ipcMain, screen, globalShortcut } = require('electron');
+const { app, BrowserWindow, ipcMain, screen, globalShortcut, shell } = require('electron');
 const path = require('path');
 const { LcuClient } = require('./lcu');
 const { loadChampions, loadGameData, squareUrl } = require('./champdata');
@@ -554,12 +554,12 @@ function createWindow() {
   win.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
   const bounds = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea;
   overlay = new BrowserWindow({ x: bounds.x + 12, y: bounds.y + 12,
-    width: 380, height: Math.min(540, bounds.height - 24), frame: false, show: false,
+    width: 320, height: Math.min(390, bounds.height - 24), frame: false, show: false,
     focusable: false, skipTaskbar: true, resizable: false, alwaysOnTop: true,
     backgroundColor: '#101722', webPreferences: {
       preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false } });
   overlay.setAlwaysOnTop(true, 'screen-saver');
-  overlay.setIgnoreMouseEvents(true);
+  overlay.setIgnoreMouseEvents(true, { forward: true });
   overlay.loadFile(path.join(__dirname, '..', 'renderer', 'overlay.html'));
   globalShortcut.register('CommandOrControl+Shift+O', () => {
     overlayEnabled = !overlayEnabled;
@@ -615,6 +615,14 @@ app.whenReady().then(() => {
 
 ipcMain.handle('init', () => readyInfo);
 ipcMain.handle('items-init', () => overlayPayload);
+ipcMain.handle('overlay-interactive', (event, interactive) => {
+  if (!overlay || overlay.isDestroyed() || event.sender !== overlay.webContents) return;
+  overlay.setIgnoreMouseEvents(interactive !== true, { forward: true });
+});
+ipcMain.handle('overlay-author', (event) => {
+  if (!overlay || overlay.isDestroyed() || event.sender !== overlay.webContents) return;
+  return shell.openExternal('https://github.com/thibault-delattre');
+});
 ipcMain.handle('set-role', (_e, role) => {
   roleOverride = ['Top', 'Jungle', 'Mid', 'Bot', 'Support'].includes(role) ? role : null;
   lastSignature = null;

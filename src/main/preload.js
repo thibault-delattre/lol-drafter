@@ -8,6 +8,8 @@ contextBridge.exposeInMainWorld('coach', {
   onReady: (cb) => ipcRenderer.on('ready', (_e, payload) => cb(payload)),
   onItems: (cb) => ipcRenderer.on('items', (_e, payload) => cb(payload)),
   itemsInit: () => ipcRenderer.invoke('items-init'),
+  overlayInteractive: (value) => ipcRenderer.invoke('overlay-interactive', value),
+  openAuthor: () => ipcRenderer.invoke('overlay-author'),
   setRole: (role) => ipcRenderer.invoke('set-role', role),
   setOpponent: (id) => ipcRenderer.invoke('set-opponent', id),
   init: () => ipcRenderer.invoke('init'),

@@ -33,7 +33,7 @@ function itemAdvice(state, champions, gameData, roles, baseline, tuned) {
   const lane = enemies.find((p) => p.name === opponent);
   const options = [];
   const notes = [];
-  const add = (id, why, priority) => {
+  const add = (id, why, priority, shortWhy) => {
     id = String(id);
     // Suppress bought components when an owned upgrade already includes them.
     const includes = (root, target, seen = new Set()) => {
@@ -44,7 +44,17 @@ function itemAdvice(state, champions, gameData, roles, baseline, tuned) {
     };
     if (!names[id] || !meta[id] || meta[id].purchasable !== true ||
         [...owned].some((x) => includes(x, id)) || options.some((x) => x.id === id)) return;
-    options.push({ id, name: names[id], why, priority });
+    const labels = {
+      3006: 'Attack speed · damage timing', 3047: 'Physical attacks · defensive option',
+      3082: 'Armor · no protection from true damage', 1029: 'Lane armor · conditional',
+      3211: 'Lane MR · sustain', 1033: 'Lane MR · conditional',
+      3143: 'Observed crit · reduce crit damage',
+      3076: 'Anti-heal · only when attacked', 3916: 'Anti-heal · apply magic damage',
+      3123: 'Anti-heal · apply physical damage',
+    };
+    options.push({ id, name: names[id], why, priority,
+      shortWhy: shortWhy || labels[id] || (meta[id].boots ? 'Baseline boots · one pair' : 'Adapted core'),
+      image: gameData.version ? `https://ddragon.leagueoflegends.com/cdn/${gameData.version}/img/item/${id}.png` : null });
   };
   // Preserve the champion's offensive engine. A physical lane opponent alone is
   // insufficient evidence to trade Vayne's attack speed for defensive boots.
@@ -104,8 +114,18 @@ function itemAdvice(state, champions, gameData, roles, baseline, tuned) {
   if (tuned) for (const it of tuned.core || []) add(it.id, it.why || 'Adapted core item for this draft.', 55);
   if (baseline) for (const it of baseline.core || []) add(it.id, it.opening
     ? `Opening combination${baseline.opening ? ': ' + baseline.opening.winRate + '% / ' + baseline.opening.games + ' games' : ''}; adapt to lane.`
-    : `Same-slot result: ${it.winRate}% / ${it.games} games${it.lowSample ? ' (low sample; popularity fallback)' : '; ranked by confidence'}.`, 50);
+    : `Same-slot result: ${it.winRate}% / ${it.games} games${it.lowSample ? ' (low sample; popularity fallback)' : '; ranked by confidence'}.`, 50,
+    it.opening
+      ? baseline.opening ? `Opening · ${baseline.opening.winRate}% WR · ${baseline.opening.games} games` : 'Opening core · lane priority'
+      : `${it.winRate}% WR · ${it.games} games${it.lowSample ? ' · low sample' : ' · same slot'}`);
+  const alerts = [];
+  if (opponent === 'Vayne') alerts.push('Silver Bolts: true damage · short trades');
+  else if (trueThreats.length) alerts.push('True damage: armor / MR bypassed');
+  if (tank && healing.length && !hasWounds(state.me.items)) alerts.push('Bramble needs attacks · unreliable vs spell healing');
+  if (state.myTeam.some((p) => !p.isLocal && hasWounds(p.items))) alerts.push('Ally anti-heal: check target coverage');
   return { champion: me.name, opponent, live: !!state.live, notes,
+    alerts, laneLabel: opponent ? `vs ${opponent} · ${state.opponentOverrideId ? 'manual' : state.live ? 'lane' : 'inferred'}` : 'Lane unknown · provisional',
+    shortSource: baseline ? `u.gg · ${baseline.patch} · ${baseline.tier}${baseline.fallback ? ' · previous patch' : ''}` : 'Situational rules · no build stats',
     options: singleBootChoice(options.sort((a, b) => b.priority - a.priority), meta, state.me.items).slice(0, 5),
     source: baseline ? `u.gg ${baseline.tier} / ${baseline.patch} / ${baseline.games} games${baseline.fallback ? ' (previous patch)' : ''}`
       : 'Situational rules; statistical build unavailable', updatedAt: Date.now() };
