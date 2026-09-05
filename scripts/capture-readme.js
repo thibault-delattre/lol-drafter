@@ -61,11 +61,20 @@ app.whenReady().then(async () => {
       basedOn: ['Diana', 'Xayah', 'Viktor', 'Karma'],
       read: 'AP-heavy enemy core with peel and scaling; blind durable engage without sacrificing lane safety.',
       picks: [
-        { championId: byName.Gragas.id, champ: 'Gragas', score: 91, lane: 'Safe blind with sustain and disengage.', fit: 'AP damage, frontline and engage.', risk: 'Needs clean spacing and mana use.' },
-        { championId: byName.Ornn.id, champ: 'Ornn', score: 87, lane: 'Stable into many unrevealed tops.', fit: 'Frontline and initiation for Kai\'Sa/Yasuo.', risk: 'Limited early pressure.' },
-        { championId: byName.Gnar.id, champ: 'Gnar', score: 83, lane: 'Range and mobility limit hard counters.', fit: 'Side-lane pressure and AoE engage.', risk: 'Rage can be mistimed.' },
+        { championId: byName.Gragas.id, slug: byName.Gragas.slug, champ: 'Gragas', score: 91, lane: 'Safe blind with sustain and disengage.', fit: 'AP damage, frontline and engage.', risk: 'Needs clean spacing and mana use.' },
+        { championId: byName.Ornn.id, slug: byName.Ornn.slug, champ: 'Ornn', score: 87, lane: 'Stable into many unrevealed tops.', fit: 'Frontline and initiation for Kai\'Sa/Yasuo.', risk: 'Limited early pressure.' },
+        { championId: byName.Gnar.id, slug: byName.Gnar.slug, champ: 'Gnar', score: 83, lane: 'Range and mobility limit hard counters.', fit: 'Side-lane pressure and AoE engage.', risk: 'Rage can be mistimed.' },
       ], avoid: [], rejected: [] });
-    await new Promise((resolve) => setTimeout(resolve, 1800));
+    // Fail the capture if a portrait is missing, instead of publishing empty slots.
+    await win.webContents.executeJavaScript(`(async () => {
+      const images = [...document.images];
+      if (images.length < 14) throw new Error('Draft portraits not rendered');
+      await Promise.race([
+        Promise.all(images.map(img => img.decode())),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Portrait loading timed out')), 20000))
+      ]);
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    })()`);
     fs.writeFileSync(path.join(outputDir, 'draft-coach.png'),
       (await win.webContents.capturePage()).toPNG());
     console.log('Created docs/screenshots/draft-coach.png');
