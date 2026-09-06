@@ -32,6 +32,26 @@ app.whenReady().then(async () => {
     assert.ok(await win.webContents.executeJavaScript('document.getElementById("results").innerText.includes("6-slot")'));
     await win.webContents.executeJavaScript("document.getElementById('editor').value = '{'; run()");
     assert.ok(await win.webContents.executeJavaScript('document.getElementById("status").innerText.includes("JSON invalide")'));
+    await win.webContents.executeJavaScript(`(async () => {
+      resetDraft();
+      frameIndex = 6; await showFrame();
+    })()`);
+    assert.ok(await win.webContents.executeJavaScript('document.getElementById("roster").innerText.includes("survol")'));
+    await win.webContents.executeJavaScript('frameIndex = 7; showFrame()');
+    assert.ok(await win.webContents.executeJavaScript('document.getElementById("roster").innerText.includes("verrouillé")'));
+    await win.webContents.executeJavaScript(`(async () => {
+      document.getElementById('speed').value = '900';
+      document.getElementById('play').click();
+      await new Promise(resolve => setTimeout(resolve, 1100));
+      document.getElementById('play').click();
+    })()`);
+    const paused = await win.webContents.executeJavaScript('frameIndex');
+    assert.ok(paused > 7, 'autoplay must advance');
+    await win.webContents.executeJavaScript('new Promise(resolve => setTimeout(resolve, 1100))');
+    assert.equal(await win.webContents.executeJavaScript('frameIndex'), paused, 'pause must stop playback');
+    await win.webContents.executeJavaScript('frameIndex = 22; showFrame()');
+    await win.webContents.executeJavaScript('Promise.all([...document.images].map(img => img.decode()))');
+    fs.writeFileSync(path.resolve(__dirname, 'artifacts/animated-draft.png'), (await win.webContents.capturePage()).toPNG());
     console.log('PASS: simulator presets, production calculation, portraits, custom editing and invalid JSON');
     app.exit(0);
   } catch (error) { console.error(error); app.exit(1); }

@@ -6,6 +6,30 @@ const { champions } = require('../src/data/champions.cache.json');
 const data = require('../src/data/gamedata.cache.json');
 const fixtures = require('./simulation-fixtures');
 const clone = value => JSON.parse(JSON.stringify(value));
+const timeline = require('../src/renderer/draft-timeline');
+
+test('animated draft follows ranked pick order on both sides, with no future picks revealed', async () => {
+  for (const side of ['blue', 'red']) {
+    const frames = timeline.frames(side);
+    const locks = frames.filter(f => f.phase === 'lock');
+    assert.deepEqual(locks.map(f => f.active.side), ['blue','red','red','blue','blue','red','red','blue','blue','red']);
+    assert.equal(frames[5].spec.bans.length, 10);
+    for (let i = 0; i < locks.length; i++) {
+      const state = createState(locks[i].spec, champions, data);
+      assert.equal([...state.myTeam, ...state.theirTeam].filter(p => p.championId).length, i + 1);
+    }
+    for (const frame of frames.filter(f => f.phase === 'hover')) {
+      const result = await simulate(frame.spec, champions, data);
+      const myTurn = frame.active.team === 'allies' && frame.active.slot === 0;
+      assert.equal(result.draft.isMyTurn, myTurn);
+      if (myTurn) { assert.equal(result.items, null); assert.equal(result.draft.me.championId, 0); }
+    }
+    const final = await simulate(frames.at(-1).spec, champions, data);
+    assert.ok(final.items);
+    assert.equal(final.counters, null);
+    assert.equal(final.draft.isMyTurn, false);
+  }
+});
 
 test('all scenario presets run without LoL or a model and satisfy their assertions', async () => {
   for (const fixture of fixtures) {

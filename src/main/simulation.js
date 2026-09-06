@@ -59,11 +59,15 @@ function createState(spec, champions, data) {
       assignedPosition: enemy ? RAW_ROLES[ROLES.indexOf(p.role)] || '' : RAW_ROLES[i],
       championId: id(p.champion), championPickIntent: id(p.hover) }));
     const mine = spec.allies[localIndex];
+    const action = spec.turn === undefined ? [{ actorCellId: localIndex, type: 'pick',
+      championId: id(mine.champion || mine.hover), completed: !!mine.champion, isInProgress: !mine.champion }]
+      : spec.turn ? [{ actorCellId: (spec.turn.team === 'enemies' ? 5 : 0) + spec.turn.slot,
+        type: spec.turn.type || 'pick', championId: id(spec[spec.turn.team][spec.turn.slot].hover),
+        completed: false, isInProgress: true }] : [];
     state = parseSession({ localPlayerCellId: localIndex, myTeam: team(spec.allies, false),
       theirTeam: team(spec.enemies, true), bans: { myTeamBans: bans, theirTeamBans: [] },
       timer: { adjustedTimeLeftInPhase: 22000, phase: 'BAN_PICK' },
-      actions: [[{ actorCellId: localIndex, type: 'pick', championId: id(mine.champion || mine.hover),
-        completed: !!mine.champion, isInProgress: !mine.champion }]] });
+      actions: [action] });
   }
   if (spec.opponent) {
     const override = id(spec.opponent);
