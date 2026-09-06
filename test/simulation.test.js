@@ -7,6 +7,21 @@ const data = require('../src/data/gamedata.cache.json');
 const fixtures = require('./simulation-fixtures');
 const clone = value => JSON.parse(JSON.stringify(value));
 const timeline = require('../src/renderer/draft-timeline');
+test('randomized rosters pick from top to bottom, including Support first, after bans', () => {
+  assert.notDeepEqual(timeline.randomSlots(() => 0), timeline.randomSlots(() => 0.99));
+  for (const side of ['blue', 'red']) {
+    const allies = [4, 2, 0, 3, 1]; const enemies = [3, 1, 4, 0, 2];
+    const frames = timeline.frames(side, undefined, 'Top', allies, enemies);
+    assert.deepEqual(frames.filter(f => f.phase === 'lock' && f.active.team === 'allies').map(f => f.active.slot), allies);
+    assert.deepEqual(frames.filter(f => f.phase === 'lock' && f.active.team === 'enemies').map(f => f.active.slot), enemies);
+    assert.deepEqual(frames[0].spec.displayOrder, { myTeam: allies, theirTeam: enemies });
+    for (const frame of frames.filter(f => f.phase.startsWith('ban'))) {
+      assert.ok([...frame.spec.allies, ...frame.spec.enemies].every(p => !p.champion && !p.hover));
+    }
+    assert.equal(frames.find(f => f.phase === 'hover').spec.bans.length, 10);
+    assert.equal(timeline.delay('ban'), 15000);
+  }
+});
 test('all five selected roles identify the right local player on either side', async () => {
   for (const side of ['blue', 'red']) for (const role of timeline.roles) {
     const frames = timeline.frames(side, undefined, role);

@@ -12,7 +12,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c8aa6e"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4b8bbe">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-33-47848f">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-109%20offline%20%2B%2019%20live-3fb950">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-110%20offline%20%2B%2019%20live-3fb950">
 </p>
 
 LoL Draft Coach follows champion select in real time, evaluates both compositions, and recommends
@@ -180,7 +180,10 @@ npm.cmd run simulate
 
 The HTML laboratory first asks for **your role** (Top, Jungle, Mid, Bot or Support).
 Choosing it starts an empty **animated ranked draft**:
-bans are revealed in five pairs, then picks follow **Blue 1 → Red 2 → Blue 2 → Red 2 → Blue 2 → Red 1**.
+A separate 15-second ban phase comes first; bans are then revealed in five pairs before any pick.
+Both teams receive independently shuffled player orders on restart. The displayed roster follows
+that order from top to bottom, so any role (including Support) can pick first. Swaps move the rows
+while preserving completed picks. Picks follow **Blue 1 → Red 2 → Blue 2 → Red 2 → Blue 2 → Red 1**.
 Each pick locks after **15 seconds**, with a visible countdown; an accelerated test speed is optional.
 Use **Échanger mon tour avec** to swap your pick order with an unlocked teammate. Your role stays
 the same, completed picks cannot move, and swapping does not reset the clock.

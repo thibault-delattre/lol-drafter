@@ -35,15 +35,19 @@ app.whenReady().then(async () => {
     await win.webContents.executeJavaScript(`(async () => {
       document.getElementById('role').value = 'Top';
       resetDraft();
+      alliedOrder = [4, 1, 3, 2, 0];
+      enemyOrder = [2, 0, 4, 1, 3];
+      draftFrames = DraftTimeline.frames('blue', undefined, 'Top', alliedOrder, enemyOrder);
       frameIndex = 6; await showFrame();
     })()`);
+    assert.ok(await win.webContents.executeJavaScript('document.querySelector("#roster .card").innerText.includes("Support")'), 'Support must be displayed first when first in pick order');
     const duration = await win.webContents.executeJavaScript(`
       document.getElementById('play').click();
       const duration = deadline - Date.now(); pauseDraft(); duration;
     `);
     assert.ok(duration > 14500 && duration <= 15000, 'default pick duration must be 15 seconds');
     await win.webContents.executeJavaScript(`
-      document.getElementById('swapMate').value = '1';
+      document.getElementById('swapMate').value = '4';
       document.getElementById('swapTurn').click();
     `);
     assert.equal(await win.webContents.executeJavaScript('draftFrames[frameIndex].spec.role'), 'Top');

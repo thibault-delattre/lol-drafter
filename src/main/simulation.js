@@ -33,6 +33,11 @@ function createState(spec, champions, data) {
   const picked = [...spec.allies, ...spec.enemies].filter(p => p.champion).map(p => id(p.champion));
   if (new Set(picked).size !== picked.length) throw new Error('A champion cannot occupy two slots');
   const bans = (spec.bans || []).map(id);
+  if (spec.displayOrder) for (const team of ['myTeam', 'theirTeam']) {
+    const order = spec.displayOrder[team];
+    if (!Array.isArray(order) || order.length !== 5 || new Set(order).size !== 5 ||
+      order.some(i => !Number.isInteger(i) || i < 0 || i > 4)) throw new Error('Invalid display order');
+  }
   if (picked.some(c => bans.includes(c))) throw new Error('A picked champion is also banned');
   const localIndex = ROLES.indexOf(spec.role);
   let state;
@@ -110,7 +115,7 @@ async function simulate(spec, champions, data, provider = {}) {
   return { title: spec.title || 'Custom scenario', patch: data.version, checks,
     engine: 'Production deterministic engine; no fabricated Claude response',
     roles, counters, items,
-    draft: { ...state, unavailable: [...state.unavailable], analysis, myTeam: state.myTeam.map(player),
+    draft: { ...state, displayOrder: spec.displayOrder, unavailable: [...state.unavailable], analysis, myTeam: state.myTeam.map(player),
       theirTeam: state.theirTeam.map(player), allyBans: state.allyBans.map(picture), enemyBans: state.enemyBans.map(picture) } };
 }
 module.exports = { createState, simulate };

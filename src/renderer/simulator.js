@@ -4,6 +4,7 @@ let catalog; let timer; let revision = 0; let previous = '';
 let playbackTimer; let playing = false; let frameIndex = 0; let playbackGeneration = 0;
 let draftFrames = DraftTimeline.frames('blue');
 let alliedOrder = DraftTimeline.defaultSlots('blue');
+let enemyOrder = DraftTimeline.defaultSlots('red');
 let remainingMs = null; let deadline = null;
 function pauseDraft() {
   if (playing && deadline !== null) remainingMs = Math.max(0, deadline - Date.now());
@@ -14,7 +15,7 @@ function pauseDraft() {
 async function showFrame() {
   const frame = draftFrames[frameIndex];
   updateSwapChoices(frame);
-  $('turnLabel').textContent = frame.label;
+  $('turnLabel').textContent = (frame.phase.startsWith('ban') ? 'PHASE DE BANS · ' : 'PHASE DE PICKS · ') + frame.label;
   $('banList').textContent = 'Bans : ' + (frame.spec.bans.join(' · ') || 'en attente');
   $('editor').value = JSON.stringify(frame.spec, null, 2);
   $('turnOrder').replaceChildren();
@@ -50,8 +51,9 @@ function resetDraft() {
     $('swapMate').replaceChildren(); $('swapTurn').disabled = true;
     $('results').replaceChildren(); $('roster').replaceChildren(); return;
   }
-  alliedOrder = DraftTimeline.defaultSlots($('side').value);
-  draftFrames = DraftTimeline.frames($('side').value, undefined, role, alliedOrder);
+  alliedOrder = DraftTimeline.randomSlots();
+  enemyOrder = DraftTimeline.randomSlots();
+  draftFrames = DraftTimeline.frames($('side').value, undefined, role, alliedOrder, enemyOrder);
   $('allyTitle').textContent = 'Mon équipe · ' + ($('side').value === 'blue' ? 'Bleu' : 'Rouge');
   $('enemyTitle').textContent = 'Adversaires · ' + ($('side').value === 'blue' ? 'Rouge' : 'Bleu');
   $('play').textContent = '▶ Lancer la draft';
@@ -82,7 +84,7 @@ function updateSwapChoices(frame) {
 $('swapTurn').onclick = () => {
   try {
     alliedOrder = DraftTimeline.swap(draftFrames[frameIndex].spec, alliedOrder, Number($('swapMate').value));
-    draftFrames = DraftTimeline.frames($('side').value, undefined, $('role').value, alliedOrder);
+    draftFrames = DraftTimeline.frames($('side').value, undefined, $('role').value, alliedOrder, enemyOrder);
     $('swapStatus').textContent = 'Échange accepté · ton rôle reste ' + $('role').value;
     showFrame(); // Keep the current deadline; swapping does not buy extra time.
   } catch (error) { $('swapStatus').textContent = error.message; }
@@ -111,9 +113,11 @@ async function run() {
   $('summary').textContent = 'Lane : ' + (r.roles.opponent || 'inconnue') + ' · ' + (r.roles.warning || '') + ' · Patch ' + r.patch;
   $('roster').replaceChildren();
   for (let i = 0; i < 5; i++) for (const team of ['myTeam','theirTeam']) {
-    const p = r.draft[team][i]; const c = p && (p.champion || p.hovered);
+    const index = r.draft.displayOrder?.[team]?.[i] ?? i;
+    const p = r.draft[team][index]; const c = p && (p.champion || p.hovered);
     card($('roster'), c && c.img, c ? c.name : 'Non choisi',
-      (p && p.position || 'Rôle incertain') + (p?.hovered ? ' · survol, non verrouillé' : p?.champion ? ' · verrouillé' : ''));
+      '#' + (i + 1) + ' · ' + (p && p.position || 'Rôle incertain') + (p?.isLocal ? ' · toi' : '') +
+      (p?.hovered ? ' · survol, non verrouillé' : p?.champion ? ' · verrouillé' : ''));
     $('roster').lastElementChild.classList.toggle('hover', !!p?.hovered);
   }
   $('results').replaceChildren();
