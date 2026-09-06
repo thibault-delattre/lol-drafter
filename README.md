@@ -12,7 +12,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c8aa6e"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4b8bbe">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-33-47848f">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-107%20offline%20%2B%2019%20live-3fb950">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-109%20offline%20%2B%2019%20live-3fb950">
 </p>
 
 LoL Draft Coach follows champion select in real time, evaluates both compositions, and recommends
@@ -178,8 +178,12 @@ source assumptions and verified payload structure.
 npm.cmd run simulate
 ```
 
-The HTML laboratory opens with an empty **animated ranked draft**. Click **Lancer la draft**:
+The HTML laboratory first asks for **your role** (Top, Jungle, Mid, Bot or Support).
+Choosing it starts an empty **animated ranked draft**:
 bans are revealed in five pairs, then picks follow **Blue 1 → Red 2 → Blue 2 → Red 2 → Blue 2 → Red 1**.
+Each pick locks after **15 seconds**, with a visible countdown; an accelerated test speed is optional.
+Use **Échanger mon tour avec** to swap your pick order with an unlocked teammate. Your role stays
+the same, completed picks cannot move, and swapping does not reset the clock.
 Every pick has a hover and a separate lock-in; the production coach recalculates after each event,
 and item advice starts only after your lock. Choose blue/red side, playback speed, pause,
 step forward or restart. These are scripted fictional players, not a connection to a real match.

@@ -3,12 +3,17 @@ const $ = id => document.getElementById(id);
 let catalog; let timer; let revision = 0; let previous = '';
 let playbackTimer; let playing = false; let frameIndex = 0; let playbackGeneration = 0;
 let draftFrames = DraftTimeline.frames('blue');
+let alliedOrder = DraftTimeline.defaultSlots('blue');
+let remainingMs = null; let deadline = null;
 function pauseDraft() {
+  if (playing && deadline !== null) remainingMs = Math.max(0, deadline - Date.now());
+  deadline = null;
   playing = false; clearTimeout(playbackTimer); playbackGeneration++;
   $('play').textContent = '▶ Continuer';
 }
 async function showFrame() {
   const frame = draftFrames[frameIndex];
+  updateSwapChoices(frame);
   $('turnLabel').textContent = frame.label;
   $('banList').textContent = 'Bans : ' + (frame.spec.bans.join(' · ') || 'en attente');
   $('editor').value = JSON.stringify(frame.spec, null, 2);
@@ -22,29 +27,70 @@ async function showFrame() {
   await run();
   if (frame === draftFrames[frameIndex] && frame.phase === 'complete') { pauseDraft(); $('play').textContent = '✓ Draft terminée'; }
 }
-async function playbackTick(generation) {
+function scheduleTick(generation) {
+  const wait = remainingMs ?? DraftTimeline.delay(draftFrames[frameIndex].phase, Number($('speed').value));
+  remainingMs = null; deadline = Date.now() + wait;
+  playbackTimer = setTimeout(() => playbackTick(generation), wait);
+}
+function playbackTick(generation) {
   if (!playing || generation !== playbackGeneration) return;
+  deadline = null; remainingMs = null;
   if (frameIndex < draftFrames.length - 1) frameIndex++;
-  await showFrame();
-  if (playing && generation === playbackGeneration) playbackTimer = setTimeout(() => playbackTick(generation), Number($('speed').value));
+  showFrame();
+  if (draftFrames[frameIndex].phase === 'complete') { pauseDraft(); return; }
+  if (playing && generation === playbackGeneration) scheduleTick(generation);
 }
 function resetDraft() {
   pauseDraft(); clearTimeout(timer); revision++;
-  draftFrames = DraftTimeline.frames($('side').value); frameIndex = 0;
+  remainingMs = null; frameIndex = 0;
+  const role = $('role').value;
+  $('play').disabled = $('step').disabled = !role;
+  if (!role) {
+    $('turnLabel').textContent = 'Choisis ton rôle pour commencer la draft';
+    $('swapMate').replaceChildren(); $('swapTurn').disabled = true;
+    $('results').replaceChildren(); $('roster').replaceChildren(); return;
+  }
+  alliedOrder = DraftTimeline.defaultSlots($('side').value);
+  draftFrames = DraftTimeline.frames($('side').value, undefined, role, alliedOrder);
   $('allyTitle').textContent = 'Mon équipe · ' + ($('side').value === 'blue' ? 'Bleu' : 'Rouge');
   $('enemyTitle').textContent = 'Adversaires · ' + ($('side').value === 'blue' ? 'Rouge' : 'Bleu');
   $('play').textContent = '▶ Lancer la draft';
   showFrame();
 }
 $('play').onclick = () => {
+  if (!$('role').value) return;
   if (playing) return pauseDraft();
   if (frameIndex === draftFrames.length - 1) resetDraft();
   playing = true; $('play').textContent = '⏸ Pause';
   const generation = ++playbackGeneration;
-  playbackTimer = setTimeout(() => playbackTick(generation), Number($('speed').value));
+  scheduleTick(generation);
 };
-$('step').onclick = async () => { pauseDraft(); if (frameIndex < draftFrames.length - 1) frameIndex++; await showFrame(); };
+$('step').onclick = async () => { if (!$('role').value) return; pauseDraft(); remainingMs = null; if (frameIndex < draftFrames.length - 1) frameIndex++; await showFrame(); };
 $('restart').onclick = resetDraft; $('side').onchange = resetDraft;
+$('role').onchange = () => { resetDraft(); if ($('role').value) $('play').click(); };
+function updateSwapChoices(frame) {
+  $('swapMate').replaceChildren();
+  const mine = DraftTimeline.roles.indexOf(frame.spec.role);
+  if (!frame.spec.allies[mine].champion) for (const slot of alliedOrder) {
+    if (slot === mine || frame.spec.allies[slot].champion) continue;
+    const option = document.createElement('option'); option.value = slot;
+    option.textContent = DraftTimeline.roles[slot] + ' · tour allié ' + (alliedOrder.indexOf(slot) + 1);
+    $('swapMate').append(option);
+  }
+  $('swapTurn').disabled = !$('role').value || !$('swapMate').options.length;
+}
+$('swapTurn').onclick = () => {
+  try {
+    alliedOrder = DraftTimeline.swap(draftFrames[frameIndex].spec, alliedOrder, Number($('swapMate').value));
+    draftFrames = DraftTimeline.frames($('side').value, undefined, $('role').value, alliedOrder);
+    $('swapStatus').textContent = 'Échange accepté · ton rôle reste ' + $('role').value;
+    showFrame(); // Keep the current deadline; swapping does not buy extra time.
+  } catch (error) { $('swapStatus').textContent = error.message; }
+};
+setInterval(() => {
+  const ms = deadline !== null ? Math.max(0, deadline - Date.now()) : remainingMs;
+  $('countdown').textContent = ms == null ? '' : Math.ceil(ms / 1000) + ' s' + (playing ? ' avant la prochaine étape' : ' · pause');
+}, 100);
 function card(parent, image, name, detail) {
   const row = document.createElement('div'); row.className = 'card';
   if (image) { const img = document.createElement('img'); img.src = image; img.alt = name; row.append(img); }

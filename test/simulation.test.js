@@ -7,6 +7,37 @@ const data = require('../src/data/gamedata.cache.json');
 const fixtures = require('./simulation-fixtures');
 const clone = value => JSON.parse(JSON.stringify(value));
 const timeline = require('../src/renderer/draft-timeline');
+test('all five selected roles identify the right local player on either side', async () => {
+  for (const side of ['blue', 'red']) for (const role of timeline.roles) {
+    const frames = timeline.frames(side, undefined, role);
+    const local = frames.find(f => f.phase === 'hover' && f.active.team === 'allies' && f.active.slot === timeline.roles.indexOf(role));
+    const result = await simulate(local.spec, champions, data);
+    assert.equal(result.draft.myPosition, role);
+    assert.equal(result.draft.isMyTurn, true);
+    assert.equal(result.items, null);
+  }
+});
+test('swaps preserve role and completed picks, and reject locked teammates or self', () => {
+  for (const side of ['blue', 'red']) {
+    const original = timeline.defaultSlots(side);
+    const frames = timeline.frames(side);
+    const early = frames.find(f => f.phase === 'hover' && f.active.team === 'allies');
+    const swapped = timeline.swap(early.spec, original, 1);
+    const replay = timeline.frames(side, undefined, 'Top', swapped);
+    assert.equal(replay[frames.indexOf(early)].spec.role, 'Top');
+    const before = frames.findIndex(f => f.phase === 'lock' && f.active.team === 'allies');
+    assert.throws(() => timeline.swap(frames[before].spec, original, 1));
+    assert.throws(() => timeline.swap(early.spec, original, 0));
+    const late = frames.findIndex(f => f.phase === 'hover' && f.active.team === 'allies' && f.active.slot === 2);
+    const next = timeline.swap(frames[late].spec, original, 2);
+    const changed = timeline.frames(side, undefined, 'Top', next)[late];
+    for (let i = 0; i < 5; i++) if (frames[late].spec.allies[i].champion) {
+      assert.deepEqual(changed.spec.allies[i], frames[late].spec.allies[i]);
+    }
+  }
+  assert.equal(timeline.delay('hover'), 15000);
+  assert.equal(timeline.delay('lock'), 0);
+});
 
 test('animated draft follows ranked pick order on both sides, with no future picks revealed', async () => {
   for (const side of ['blue', 'red']) {
