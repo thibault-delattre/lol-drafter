@@ -1,0 +1,5211 @@
+{
+  "patch": "16_17",
+  "tier": "Emerald+",
+  "region": "World",
+  "source": "u.gg overview champion-role game counts",
+  "fetchedAt": "2026-09-06T17:28:43.979Z",
+  "loaded": 173,
+  "totalChampions": 173,
+  "pools": {
+    "Jungle": [
+      {
+        "id": 64,
+        "name": "Lee Sin",
+        "games": 270654,
+        "roleShare": 6.793281966355617
+      },
+      {
+        "id": 104,
+        "name": "Graves",
+        "games": 209033,
+        "roleShare": 5.246625245786922
+      },
+      {
+        "id": 234,
+        "name": "Viego",
+        "games": 177281,
+        "roleShare": 4.449665699666327
+      },
+      {
+        "id": 517,
+        "name": "Sylas",
+        "games": 154189,
+        "roleShare": 3.87006788412662
+      },
+      {
+        "id": 141,
+        "name": "Kayn",
+        "games": 136157,
+        "roleShare": 3.4174735739840596
+      },
+      {
+        "id": 91,
+        "name": "Talon",
+        "games": 129508,
+        "roleShare": 3.2505869519710893
+      },
+      {
+        "id": 62,
+        "name": "Wukong",
+        "games": 123333,
+        "roleShare": 3.095597496273978
+      },
+      {
+        "id": 56,
+        "name": "Nocturne",
+        "games": 120098,
+        "roleShare": 3.014400591143589
+      },
+      {
+        "id": 59,
+        "name": "Jarvan IV",
+        "games": 116779,
+        "roleShare": 2.9310953274255787
+      },
+      {
+        "id": 121,
+        "name": "Kha'Zix",
+        "games": 114365,
+        "roleShare": 2.8705051175384813
+      },
+      {
+        "id": 120,
+        "name": "Hecarim",
+        "games": 110787,
+        "roleShare": 2.780699081508641
+      },
+      {
+        "id": 102,
+        "name": "Shyvana",
+        "games": 105859,
+        "roleShare": 2.657008711034898
+      },
+      {
+        "id": 254,
+        "name": "Vi",
+        "games": 102625,
+        "roleShare": 2.575836905411504
+      },
+      {
+        "id": 11,
+        "name": "Master Yi",
+        "games": 99904,
+        "roleShare": 2.507541146876793
+      },
+      {
+        "id": 246,
+        "name": "Qiyana",
+        "games": 96958,
+        "roleShare": 2.4335979992680983
+      },
+      {
+        "id": 35,
+        "name": "Shaco",
+        "games": 88332,
+        "roleShare": 2.2170896519250567
+      },
+      {
+        "id": 233,
+        "name": "Briar",
+        "games": 88168,
+        "roleShare": 2.2129733327777976
+      },
+      {
+        "id": 245,
+        "name": "Ekko",
+        "games": 81219,
+        "roleShare": 2.038556858666182
+      },
+      {
+        "id": 107,
+        "name": "Rengar",
+        "games": 76649,
+        "roleShare": 1.9238521116968221
+      },
+      {
+        "id": 950,
+        "name": "Naafiri",
+        "games": 76498,
+        "roleShare": 1.920062086140504
+      },
+      {
+        "id": 76,
+        "name": "Nidalee",
+        "games": 64990,
+        "roleShare": 1.6312169596364787
+      },
+      {
+        "id": 200,
+        "name": "Bel'Veth",
+        "games": 63858,
+        "roleShare": 1.6028043177175915
+      },
+      {
+        "id": 876,
+        "name": "Lillia",
+        "games": 63038,
+        "roleShare": 1.5822227219812948
+      },
+      {
+        "id": 154,
+        "name": "Zac",
+        "games": 61515,
+        "roleShare": 1.5439961728271734
+      },
+      {
+        "id": 19,
+        "name": "Warwick",
+        "games": 60170,
+        "roleShare": 1.510237335918248
+      },
+      {
+        "id": 131,
+        "name": "Diana",
+        "games": 56774,
+        "roleShare": 1.4249994101615857
+      },
+      {
+        "id": 238,
+        "name": "Zed",
+        "games": 53253,
+        "roleShare": 1.336624046030488
+      },
+      {
+        "id": 5,
+        "name": "Xin Zhao",
+        "games": 51443,
+        "roleShare": 1.2911939383686626
+      },
+      {
+        "id": 31,
+        "name": "Cho'Gath",
+        "games": 50959,
+        "roleShare": 1.2790457769828485
+      },
+      {
+        "id": 28,
+        "name": "Evelynn",
+        "games": 47470,
+        "roleShare": 1.1914735970756063
+      },
+      {
+        "id": 9,
+        "name": "Fiddlesticks",
+        "games": 47249,
+        "roleShare": 1.1859266060296043
+      },
+      {
+        "id": 203,
+        "name": "Kindred",
+        "games": 43571,
+        "roleShare": 1.0936106193002157
+      },
+      {
+        "id": 77,
+        "name": "Udyr",
+        "games": 43561,
+        "roleShare": 1.0933596242302608
+      },
+      {
+        "id": 113,
+        "name": "Sejuani",
+        "games": 40139,
+        "roleShare": 1.007469111291716
+      },
+      {
+        "id": 32,
+        "name": "Amumu",
+        "games": 39243,
+        "roleShare": 0.9849799530237627
+      },
+      {
+        "id": 20,
+        "name": "Nunu & Willump",
+        "games": 39213,
+        "roleShare": 0.9842269678138982
+      },
+      {
+        "id": 33,
+        "name": "Rammus",
+        "games": 39160,
+        "roleShare": 0.9828966939431376
+      },
+      {
+        "id": 60,
+        "name": "Elise",
+        "games": 38199,
+        "roleShare": 0.9587760677204779
+      },
+      {
+        "id": 126,
+        "name": "Jayce",
+        "games": 37456,
+        "roleShare": 0.9401271340228335
+      },
+      {
+        "id": 24,
+        "name": "Jax",
+        "games": 35277,
+        "roleShare": 0.8854353082796748
+      },
+      {
+        "id": 421,
+        "name": "Rek'Sai",
+        "games": 30815,
+        "roleShare": 0.773441308065827
+      },
+      {
+        "id": 143,
+        "name": "Zyra",
+        "games": 27473,
+        "roleShare": 0.6895587556869208
+      },
+      {
+        "id": 30,
+        "name": "Karthus",
+        "games": 27226,
+        "roleShare": 0.6833591774590364
+      },
+      {
+        "id": 133,
+        "name": "Quinn",
+        "games": 27186,
+        "roleShare": 0.682355197179217
+      },
+      {
+        "id": 427,
+        "name": "Ivern",
+        "games": 25543,
+        "roleShare": 0.6411167071856375
+      },
+      {
+        "id": 72,
+        "name": "Skarner",
+        "games": 23556,
+        "roleShare": 0.5912439867856115
+      },
+      {
+        "id": 266,
+        "name": "Aatrox",
+        "games": 23528,
+        "roleShare": 0.590541200589738
+      },
+      {
+        "id": 887,
+        "name": "Gwen",
+        "games": 21580,
+        "roleShare": 0.541647360962536
+      },
+      {
+        "id": 106,
+        "name": "Volibear",
+        "games": 20722,
+        "roleShare": 0.520111983960411
+      },
+      {
+        "id": 48,
+        "name": "Trundle",
+        "games": 20530,
+        "roleShare": 0.5152928786172782
+      },
+      {
+        "id": 799,
+        "name": "Ambessa",
+        "games": 19616,
+        "roleShare": 0.4923519292234062
+      },
+      {
+        "id": 80,
+        "name": "Pantheon",
+        "games": 18219,
+        "roleShare": 0.4572879179507156
+      },
+      {
+        "id": 163,
+        "name": "Taliyah",
+        "games": 17774,
+        "roleShare": 0.4461186373377254
+      },
+      {
+        "id": 79,
+        "name": "Gragas",
+        "games": 16340,
+        "roleShare": 0.4101259443062019
+      },
+      {
+        "id": 105,
+        "name": "Fizz",
+        "games": 15420,
+        "roleShare": 0.38703439787035704
+      },
+      {
+        "id": 805,
+        "name": "Locke",
+        "games": 15356,
+        "roleShare": 0.3854280294226461
+      },
+      {
+        "id": 122,
+        "name": "Darius",
+        "games": 15057,
+        "roleShare": 0.37792327683099647
+      },
+      {
+        "id": 75,
+        "name": "Nasus",
+        "games": 14536,
+        "roleShare": 0.36484643368634956
+      },
+      {
+        "id": 54,
+        "name": "Malphite",
+        "games": 14430,
+        "roleShare": 0.36218588594482826
+      },
+      {
+        "id": 57,
+        "name": "Maokai",
+        "games": 12856,
+        "roleShare": 0.3226792619339371
+      },
+      {
+        "id": 17,
+        "name": "Teemo",
+        "games": 11752,
+        "roleShare": 0.2949694062109232
+      },
+      {
+        "id": 78,
+        "name": "Poppy",
+        "games": 10217,
+        "roleShare": 0.25644166297285587
+      },
+      {
+        "id": 2,
+        "name": "Olaf",
+        "games": 9440,
+        "roleShare": 0.23693934603736513
+      },
+      {
+        "id": 36,
+        "name": "Dr. Mundo",
+        "games": 9228,
+        "roleShare": 0.2316182505543226
+      },
+      {
+        "id": 904,
+        "name": "Zaahen",
+        "games": 7854,
+        "roleShare": 0.19713152794252814
+      },
+      {
+        "id": 82,
+        "name": "Mordekaiser",
+        "games": 6771,
+        "roleShare": 0.1699487618664194
+      },
+      {
+        "id": 98,
+        "name": "Shen",
+        "games": 6114,
+        "roleShare": 0.1534583857703867
+      },
+      {
+        "id": 25,
+        "name": "Morgana",
+        "games": 5462,
+        "roleShare": 0.1370935072093314
+      },
+      {
+        "id": 63,
+        "name": "Brand",
+        "games": 5402,
+        "roleShare": 0.1355875367896024
+      },
+      {
+        "id": 23,
+        "name": "Tryndamere",
+        "games": 4831,
+        "roleShare": 0.12125571829518125
+      },
+      {
+        "id": 14,
+        "name": "Sion",
+        "games": 4146,
+        "roleShare": 0.10406255600327498
+      },
+      {
+        "id": 202,
+        "name": "Jhin",
+        "games": 3778,
+        "roleShare": 0.09482593742893702
+      },
+      {
+        "id": 29,
+        "name": "Twitch",
+        "games": 3059,
+        "roleShare": 0.07677939189918431
+      },
+      {
+        "id": 68,
+        "name": "Rumble",
+        "games": 2696,
+        "roleShare": 0.06766827085982377
+      },
+      {
+        "id": 92,
+        "name": "Riven",
+        "games": 2503,
+        "roleShare": 0.06282406600969544
+      },
+      {
+        "id": 164,
+        "name": "Camille",
+        "games": 2091,
+        "roleShare": 0.052483069127556195
+      },
+      {
+        "id": 111,
+        "name": "Nautilus",
+        "games": 2051,
+        "roleShare": 0.05147908884773685
+      },
+      {
+        "id": 136,
+        "name": "Aurelion Sol",
+        "games": 1958,
+        "roleShare": 0.04914483469715688
+      },
+      {
+        "id": 777,
+        "name": "Yone",
+        "games": 1780,
+        "roleShare": 0.0446771224519608
+      },
+      {
+        "id": 145,
+        "name": "Kai'Sa",
+        "games": 1716,
+        "roleShare": 0.043070754004249846
+      },
+      {
+        "id": 67,
+        "name": "Vayne",
+        "games": 1579,
+        "roleShare": 0.03963212154586859
+      },
+      {
+        "id": 83,
+        "name": "Yorick",
+        "games": 1385,
+        "roleShare": 0.03476281718874478
+      },
+      {
+        "id": 27,
+        "name": "Singed",
+        "games": 1351,
+        "roleShare": 0.033909433950898335
+      },
+      {
+        "id": 518,
+        "name": "Neeko",
+        "games": 1319,
+        "roleShare": 0.03310624972704286
+      },
+      {
+        "id": 221,
+        "name": "Zeri",
+        "games": 1283,
+        "roleShare": 0.03220266747520545
+      },
+      {
+        "id": 86,
+        "name": "Garen",
+        "games": 1057,
+        "roleShare": 0.02653017889422616
+      },
+      {
+        "id": 875,
+        "name": "Sett",
+        "games": 1047,
+        "roleShare": 0.026279183824271322
+      },
+      {
+        "id": 6,
+        "name": "Urgot",
+        "games": 708,
+        "roleShare": 0.017770450952802386
+      },
+      {
+        "id": 44,
+        "name": "Taric",
+        "games": 661,
+        "roleShare": 0.016590774124014655
+      },
+      {
+        "id": 516,
+        "name": "Ornn",
+        "games": 542,
+        "roleShare": 0.013603932791552108
+      },
+      {
+        "id": 81,
+        "name": "Ezreal",
+        "games": 532,
+        "roleShare": 0.013352937721597272
+      },
+      {
+        "id": 157,
+        "name": "Yasuo",
+        "games": 482,
+        "roleShare": 0.012097962371823093
+      },
+      {
+        "id": 10,
+        "name": "Kayle",
+        "games": 441,
+        "roleShare": 0.011068882585008264
+      },
+      {
+        "id": 74,
+        "name": "Heimerdinger",
+        "games": 418,
+        "roleShare": 0.010491593924112143
+      },
+      {
+        "id": 4,
+        "name": "Twisted Fate",
+        "games": 391,
+        "roleShare": 0.009813907235234086
+      },
+      {
+        "id": 150,
+        "name": "Gnar",
+        "games": 290,
+        "roleShare": 0.007278857028690243
+      },
+      {
+        "id": 90,
+        "name": "Malzahar",
+        "games": 263,
+        "roleShare": 0.006601170339812185
+      },
+      {
+        "id": 119,
+        "name": "Draven",
+        "games": 256,
+        "roleShare": 0.0064254737908438
+      },
+      {
+        "id": 55,
+        "name": "Katarina",
+        "games": 220,
+        "roleShare": 0.005521891539006391
+      },
+      {
+        "id": 3,
+        "name": "Galio",
+        "games": 202,
+        "roleShare": 0.005070100413087686
+      },
+      {
+        "id": 223,
+        "name": "Tahm Kench",
+        "games": 198,
+        "roleShare": 0.004969702385105751
+      },
+      {
+        "id": 69,
+        "name": "Cassiopeia",
+        "games": 185,
+        "roleShare": 0.004643408794164465
+      },
+      {
+        "id": 166,
+        "name": "Akshan",
+        "games": 183,
+        "roleShare": 0.004593209780173498
+      },
+      {
+        "id": 18,
+        "name": "Tristana",
+        "games": 178,
+        "roleShare": 0.00446771224519608
+      },
+      {
+        "id": 13,
+        "name": "Ryze",
+        "games": 170,
+        "roleShare": 0.0042669161892322114
+      },
+      {
+        "id": 240,
+        "name": "Kled",
+        "games": 155,
+        "roleShare": 0.003890423584299957
+      },
+      {
+        "id": 895,
+        "name": "Nilah",
+        "games": 143,
+        "roleShare": 0.003589229500354154
+      },
+      {
+        "id": 897,
+        "name": "K'Sante",
+        "games": 139,
+        "roleShare": 0.00348883147237222
+      },
+      {
+        "id": 41,
+        "name": "Gangplank",
+        "games": 137,
+        "roleShare": 0.0034386324583812523
+      },
+      {
+        "id": 89,
+        "name": "Leona",
+        "games": 129,
+        "roleShare": 0.0032378364024173837
+      },
+      {
+        "id": 96,
+        "name": "Kog'Maw",
+        "games": 116,
+        "roleShare": 0.002911542811476097
+      },
+      {
+        "id": 38,
+        "name": "Kassadin",
+        "games": 113,
+        "roleShare": 0.002836244290489646
+      },
+      {
+        "id": 42,
+        "name": "Corki",
+        "games": 107,
+        "roleShare": 0.0026856472485167447
+      },
+      {
+        "id": 53,
+        "name": "Blitzcrank",
+        "games": 99,
+        "roleShare": 0.0024848511925528757
+      },
+      {
+        "id": 39,
+        "name": "Irelia",
+        "games": 98,
+        "roleShare": 0.002459751685557392
+      },
+      {
+        "id": 58,
+        "name": "Renekton",
+        "games": 92,
+        "roleShare": 0.0023091546435844907
+      },
+      {
+        "id": 51,
+        "name": "Caitlyn",
+        "games": 83,
+        "roleShare": 0.0020832590806251386
+      },
+      {
+        "id": 127,
+        "name": "Lissandra",
+        "games": 78,
+        "roleShare": 0.0019577615456477203
+      },
+      {
+        "id": 222,
+        "name": "Jinx",
+        "games": 77,
+        "roleShare": 0.0019326620386522367
+      },
+      {
+        "id": 555,
+        "name": "Pyke",
+        "games": 72,
+        "roleShare": 0.0018071645036748189
+      },
+      {
+        "id": 420,
+        "name": "Illaoi",
+        "games": 69,
+        "roleShare": 0.001731865982688368
+      },
+      {
+        "id": 99,
+        "name": "Lux",
+        "games": 68,
+        "roleShare": 0.0017067664756928844
+      },
+      {
+        "id": 114,
+        "name": "Fiora",
+        "games": 67,
+        "roleShare": 0.0016816669686974008
+      },
+      {
+        "id": 7,
+        "name": "LeBlanc",
+        "games": 62,
+        "roleShare": 0.001556169433719983
+      },
+      {
+        "id": 50,
+        "name": "Swain",
+        "games": 62,
+        "roleShare": 0.001556169433719983
+      },
+      {
+        "id": 236,
+        "name": "Lucian",
+        "games": 58,
+        "roleShare": 0.0014557714057380484
+      },
+      {
+        "id": 103,
+        "name": "Ahri",
+        "games": 56,
+        "roleShare": 0.0014055723917470813
+      },
+      {
+        "id": 12,
+        "name": "Alistar",
+        "games": 51,
+        "roleShare": 0.0012800748567696634
+      },
+      {
+        "id": 84,
+        "name": "Akali",
+        "games": 50,
+        "roleShare": 0.0012549753497741796
+      },
+      {
+        "id": 526,
+        "name": "Rell",
+        "games": 48,
+        "roleShare": 0.0012047763357832125
+      },
+      {
+        "id": 22,
+        "name": "Ashe",
+        "games": 44,
+        "roleShare": 0.0011043783078012782
+      },
+      {
+        "id": 412,
+        "name": "Thresh",
+        "games": 44,
+        "roleShare": 0.0011043783078012782
+      },
+      {
+        "id": 1,
+        "name": "Annie",
+        "games": 41,
+        "roleShare": 0.0010290797868148273
+      },
+      {
+        "id": 110,
+        "name": "Varus",
+        "games": 41,
+        "roleShare": 0.0010290797868148273
+      },
+      {
+        "id": 910,
+        "name": "Hwei",
+        "games": 41,
+        "roleShare": 0.0010290797868148273
+      },
+      {
+        "id": 201,
+        "name": "Braum",
+        "games": 38,
+        "roleShare": 0.0009537812658283766
+      },
+      {
+        "id": 360,
+        "name": "Samira",
+        "games": 38,
+        "roleShare": 0.0009537812658283766
+      },
+      {
+        "id": 429,
+        "name": "Kalista",
+        "games": 38,
+        "roleShare": 0.0009537812658283766
+      },
+      {
+        "id": 893,
+        "name": "Aurora",
+        "games": 36,
+        "roleShare": 0.0009035822518374094
+      },
+      {
+        "id": 34,
+        "name": "Anivia",
+        "games": 34,
+        "roleShare": 0.0008533832378464422
+      },
+      {
+        "id": 16,
+        "name": "Soraka",
+        "games": 32,
+        "roleShare": 0.000803184223855475
+      },
+      {
+        "id": 134,
+        "name": "Syndra",
+        "games": 32,
+        "roleShare": 0.000803184223855475
+      },
+      {
+        "id": 117,
+        "name": "Lulu",
+        "games": 31,
+        "roleShare": 0.0007780847168599915
+      },
+      {
+        "id": 804,
+        "name": "Yunara",
+        "games": 30,
+        "roleShare": 0.0007529852098645079
+      },
+      {
+        "id": 45,
+        "name": "Veigar",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 85,
+        "name": "Kennen",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 268,
+        "name": "Azir",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 101,
+        "name": "Xerath",
+        "games": 28,
+        "roleShare": 0.0007027861958735406
+      },
+      {
+        "id": 142,
+        "name": "Zoe",
+        "games": 27,
+        "roleShare": 0.0006776866888780571
+      },
+      {
+        "id": 432,
+        "name": "Bard",
+        "games": 26,
+        "roleShare": 0.0006525871818825735
+      },
+      {
+        "id": 497,
+        "name": "Rakan",
+        "games": 26,
+        "roleShare": 0.0006525871818825735
+      },
+      {
+        "id": 523,
+        "name": "Aphelios",
+        "games": 23,
+        "roleShare": 0.0005772886608961227
+      },
+      {
+        "id": 112,
+        "name": "Viktor",
+        "games": 22,
+        "roleShare": 0.0005521891539006391
+      },
+      {
+        "id": 147,
+        "name": "Seraphine",
+        "games": 22,
+        "roleShare": 0.0005521891539006391
+      },
+      {
+        "id": 800,
+        "name": "Mel",
+        "games": 20,
+        "roleShare": 0.0005019901399096719
+      },
+      {
+        "id": 8,
+        "name": "Vladimir",
+        "games": 19,
+        "roleShare": 0.0004768906329141883
+      },
+      {
+        "id": 115,
+        "name": "Ziggs",
+        "games": 19,
+        "roleShare": 0.0004768906329141883
+      },
+      {
+        "id": 498,
+        "name": "Xayah",
+        "games": 19,
+        "roleShare": 0.0004768906329141883
+      },
+      {
+        "id": 901,
+        "name": "Smolder",
+        "games": 18,
+        "roleShare": 0.0004517911259187047
+      },
+      {
+        "id": 26,
+        "name": "Zilean",
+        "games": 17,
+        "roleShare": 0.0004266916189232211
+      },
+      {
+        "id": 711,
+        "name": "Vex",
+        "games": 17,
+        "roleShare": 0.0004266916189232211
+      },
+      {
+        "id": 21,
+        "name": "Miss Fortune",
+        "games": 15,
+        "roleShare": 0.00037649260493225395
+      },
+      {
+        "id": 40,
+        "name": "Janna",
+        "games": 14,
+        "roleShare": 0.0003513930979367703
+      },
+      {
+        "id": 43,
+        "name": "Karma",
+        "games": 13,
+        "roleShare": 0.00032629359094128675
+      },
+      {
+        "id": 350,
+        "name": "Yuumi",
+        "games": 11,
+        "roleShare": 0.00027609457695031955
+      },
+      {
+        "id": 161,
+        "name": "Vel'Koz",
+        "games": 10,
+        "roleShare": 0.00025099506995483593
+      },
+      {
+        "id": 37,
+        "name": "Sona",
+        "games": 9,
+        "roleShare": 0.00022589556295935236
+      },
+      {
+        "id": 235,
+        "name": "Senna",
+        "games": 9,
+        "roleShare": 0.00022589556295935236
+      },
+      {
+        "id": 15,
+        "name": "Sivir",
+        "games": 8,
+        "roleShare": 0.00020079605596386876
+      },
+      {
+        "id": 61,
+        "name": "Orianna",
+        "games": 8,
+        "roleShare": 0.00020079605596386876
+      },
+      {
+        "id": 267,
+        "name": "Nami",
+        "games": 8,
+        "roleShare": 0.00020079605596386876
+      },
+      {
+        "id": 902,
+        "name": "Milio",
+        "games": 7,
+        "roleShare": 0.00017569654896838516
+      },
+      {
+        "id": 888,
+        "name": "Renata Glasc",
+        "games": 4,
+        "roleShare": 0.00010039802798193438
+      }
+    ],
+    "Support": [
+      {
+        "id": 412,
+        "name": "Thresh",
+        "games": 301433,
+        "roleShare": 7.565819692169606
+      },
+      {
+        "id": 117,
+        "name": "Lulu",
+        "games": 226733,
+        "roleShare": 5.690886519606982
+      },
+      {
+        "id": 111,
+        "name": "Nautilus",
+        "games": 220017,
+        "roleShare": 5.522318230625314
+      },
+      {
+        "id": 267,
+        "name": "Nami",
+        "games": 185342,
+        "roleShare": 4.6519928255569205
+      },
+      {
+        "id": 147,
+        "name": "Seraphine",
+        "games": 173506,
+        "roleShare": 4.354915060758376
+      },
+      {
+        "id": 89,
+        "name": "Leona",
+        "games": 155659,
+        "roleShare": 3.9069641594099807
+      },
+      {
+        "id": 43,
+        "name": "Karma",
+        "games": 140924,
+        "roleShare": 3.53712292383153
+      },
+      {
+        "id": 902,
+        "name": "Milio",
+        "games": 137160,
+        "roleShare": 3.44264837950053
+      },
+      {
+        "id": 555,
+        "name": "Pyke",
+        "games": 126551,
+        "roleShare": 3.1763677097854446
+      },
+      {
+        "id": 99,
+        "name": "Lux",
+        "games": 125622,
+        "roleShare": 3.1530502677866403
+      },
+      {
+        "id": 53,
+        "name": "Blitzcrank",
+        "games": 125452,
+        "roleShare": 3.148783351597408
+      },
+      {
+        "id": 235,
+        "name": "Senna",
+        "games": 109876,
+        "roleShare": 2.7578334306357553
+      },
+      {
+        "id": 350,
+        "name": "Yuumi",
+        "games": 109043,
+        "roleShare": 2.736925541308518
+      },
+      {
+        "id": 16,
+        "name": "Soraka",
+        "games": 101441,
+        "roleShare": 2.5461190891288514
+      },
+      {
+        "id": 432,
+        "name": "Bard",
+        "games": 100963,
+        "roleShare": 2.53412152478501
+      },
+      {
+        "id": 12,
+        "name": "Alistar",
+        "games": 100151,
+        "roleShare": 2.5137407251046775
+      },
+      {
+        "id": 201,
+        "name": "Braum",
+        "games": 98706,
+        "roleShare": 2.4774719374962038
+      },
+      {
+        "id": 25,
+        "name": "Morgana",
+        "games": 86195,
+        "roleShare": 2.1634520054757083
+      },
+      {
+        "id": 40,
+        "name": "Janna",
+        "games": 80765,
+        "roleShare": 2.0271616824902323
+      },
+      {
+        "id": 526,
+        "name": "Rell",
+        "games": 77480,
+        "roleShare": 1.9447098020100688
+      },
+      {
+        "id": 80,
+        "name": "Pantheon",
+        "games": 72967,
+        "roleShare": 1.8314357269394514
+      },
+      {
+        "id": 497,
+        "name": "Rakan",
+        "games": 70453,
+        "roleShare": 1.7683355663528058
+      },
+      {
+        "id": 26,
+        "name": "Zilean",
+        "games": 65777,
+        "roleShare": 1.6509702716419243
+      },
+      {
+        "id": 37,
+        "name": "Sona",
+        "games": 59542,
+        "roleShare": 1.4944748455250843
+      },
+      {
+        "id": 101,
+        "name": "Xerath",
+        "games": 57522,
+        "roleShare": 1.4437738413942074
+      },
+      {
+        "id": 161,
+        "name": "Vel'Koz",
+        "games": 53699,
+        "roleShare": 1.3478184261504735
+      },
+      {
+        "id": 50,
+        "name": "Swain",
+        "games": 50226,
+        "roleShare": 1.260647838355159
+      },
+      {
+        "id": 164,
+        "name": "Camille",
+        "games": 50132,
+        "roleShare": 1.2582884846975835
+      },
+      {
+        "id": 63,
+        "name": "Brand",
+        "games": 48315,
+        "roleShare": 1.2126826804867898
+      },
+      {
+        "id": 143,
+        "name": "Zyra",
+        "games": 46745,
+        "roleShare": 1.1732764545038807
+      },
+      {
+        "id": 223,
+        "name": "Tahm Kench",
+        "games": 42234,
+        "roleShare": 1.060052578447254
+      },
+      {
+        "id": 78,
+        "name": "Poppy",
+        "games": 41591,
+        "roleShare": 1.0439135954491583
+      },
+      {
+        "id": 57,
+        "name": "Maokai",
+        "games": 33454,
+        "roleShare": 0.8396789070269082
+      },
+      {
+        "id": 518,
+        "name": "Neeko",
+        "games": 30231,
+        "roleShare": 0.7587831959804645
+      },
+      {
+        "id": 44,
+        "name": "Taric",
+        "games": 28365,
+        "roleShare": 0.7119475159268922
+      },
+      {
+        "id": 517,
+        "name": "Sylas",
+        "games": 27268,
+        "roleShare": 0.6844133567528466
+      },
+      {
+        "id": 888,
+        "name": "Renata Glasc",
+        "games": 27091,
+        "roleShare": 0.6799707440146461
+      },
+      {
+        "id": 35,
+        "name": "Shaco",
+        "games": 24699,
+        "roleShare": 0.6199327232814493
+      },
+      {
+        "id": 98,
+        "name": "Shen",
+        "games": 23317,
+        "roleShare": 0.585245204613691
+      },
+      {
+        "id": 3,
+        "name": "Galio",
+        "games": 19945,
+        "roleShare": 0.5006096670249203
+      },
+      {
+        "id": 142,
+        "name": "Zoe",
+        "games": 18705,
+        "roleShare": 0.46948627835052065
+      },
+      {
+        "id": 7,
+        "name": "LeBlanc",
+        "games": 16358,
+        "roleShare": 0.4105777354321206
+      },
+      {
+        "id": 800,
+        "name": "Mel",
+        "games": 14590,
+        "roleShare": 0.36620180706410566
+      },
+      {
+        "id": 22,
+        "name": "Ashe",
+        "games": 13858,
+        "roleShare": 0.34782896794341167
+      },
+      {
+        "id": 60,
+        "name": "Elise",
+        "games": 13322,
+        "roleShare": 0.33437563219383243
+      },
+      {
+        "id": 910,
+        "name": "Hwei",
+        "games": 12950,
+        "roleShare": 0.32503861559151254
+      },
+      {
+        "id": 45,
+        "name": "Veigar",
+        "games": 12483,
+        "roleShare": 0.3133171458246217
+      },
+      {
+        "id": 32,
+        "name": "Amumu",
+        "games": 11124,
+        "roleShare": 0.2792069158177595
+      },
+      {
+        "id": 9,
+        "name": "Fiddlesticks",
+        "games": 9985,
+        "roleShare": 0.25061857734990367
+      },
+      {
+        "id": 17,
+        "name": "Teemo",
+        "games": 9830,
+        "roleShare": 0.24672815376560372
+      },
+      {
+        "id": 34,
+        "name": "Anivia",
+        "games": 9223,
+        "roleShare": 0.2314927530193452
+      },
+      {
+        "id": 59,
+        "name": "Jarvan IV",
+        "games": 8054,
+        "roleShare": 0.20215142934162486
+      },
+      {
+        "id": 29,
+        "name": "Twitch",
+        "games": 7726,
+        "roleShare": 0.19391879104710624
+      },
+      {
+        "id": 54,
+        "name": "Malphite",
+        "games": 6202,
+        "roleShare": 0.15566714238598925
+      },
+      {
+        "id": 154,
+        "name": "Zac",
+        "games": 6197,
+        "roleShare": 0.15554164485101182
+      },
+      {
+        "id": 4,
+        "name": "Twisted Fate",
+        "games": 6184,
+        "roleShare": 0.15521535126007055
+      },
+      {
+        "id": 1,
+        "name": "Annie",
+        "games": 5217,
+        "roleShare": 0.13094412799543792
+      },
+      {
+        "id": 79,
+        "name": "Gragas",
+        "games": 4977,
+        "roleShare": 0.12492024631652185
+      },
+      {
+        "id": 127,
+        "name": "Lissandra",
+        "games": 4689,
+        "roleShare": 0.11769158830182258
+      },
+      {
+        "id": 76,
+        "name": "Nidalee",
+        "games": 4625,
+        "roleShare": 0.11608521985411163
+      },
+      {
+        "id": 72,
+        "name": "Skarner",
+        "games": 4398,
+        "roleShare": 0.11038763176613685
+      },
+      {
+        "id": 14,
+        "name": "Sion",
+        "games": 4375,
+        "roleShare": 0.10981034310524072
+      },
+      {
+        "id": 64,
+        "name": "Lee Sin",
+        "games": 4187,
+        "roleShare": 0.10509163579008982
+      },
+      {
+        "id": 134,
+        "name": "Syndra",
+        "games": 4078,
+        "roleShare": 0.1023557895275821
+      },
+      {
+        "id": 145,
+        "name": "Kai'Sa",
+        "games": 3827,
+        "roleShare": 0.09605581327171572
+      },
+      {
+        "id": 875,
+        "name": "Sett",
+        "games": 3738,
+        "roleShare": 0.09382195714911767
+      },
+      {
+        "id": 74,
+        "name": "Heimerdinger",
+        "games": 3666,
+        "roleShare": 0.09201479264544286
+      },
+      {
+        "id": 81,
+        "name": "Ezreal",
+        "games": 3635,
+        "roleShare": 0.09123670792858286
+      },
+      {
+        "id": 427,
+        "name": "Ivern",
+        "games": 3522,
+        "roleShare": 0.08840046363809322
+      },
+      {
+        "id": 21,
+        "name": "Miss Fortune",
+        "games": 3437,
+        "roleShare": 0.08626700554347712
+      },
+      {
+        "id": 31,
+        "name": "Cho'Gath",
+        "games": 3353,
+        "roleShare": 0.0841586469558565
+      },
+      {
+        "id": 163,
+        "name": "Taliyah",
+        "games": 3072,
+        "roleShare": 0.0771056854901256
+      },
+      {
+        "id": 246,
+        "name": "Qiyana",
+        "games": 2846,
+        "roleShare": 0.0714331969091463
+      },
+      {
+        "id": 20,
+        "name": "Nunu & Willump",
+        "games": 2648,
+        "roleShare": 0.06646349452404056
+      },
+      {
+        "id": 254,
+        "name": "Vi",
+        "games": 2560,
+        "roleShare": 0.064254737908438
+      },
+      {
+        "id": 805,
+        "name": "Locke",
+        "games": 2433,
+        "roleShare": 0.06106710052001159
+      },
+      {
+        "id": 33,
+        "name": "Rammus",
+        "games": 2429,
+        "roleShare": 0.06096670249202965
+      },
+      {
+        "id": 27,
+        "name": "Singed",
+        "games": 2428,
+        "roleShare": 0.06094160298503417
+      },
+      {
+        "id": 103,
+        "name": "Ahri",
+        "games": 2334,
+        "roleShare": 0.05858224932745871
+      },
+      {
+        "id": 24,
+        "name": "Jax",
+        "games": 2311,
+        "roleShare": 0.058004960666562584
+      },
+      {
+        "id": 48,
+        "name": "Trundle",
+        "games": 2292,
+        "roleShare": 0.0575280700336484
+      },
+      {
+        "id": 107,
+        "name": "Rengar",
+        "games": 2267,
+        "roleShare": 0.05690058235876131
+      },
+      {
+        "id": 115,
+        "name": "Ziggs",
+        "games": 2139,
+        "roleShare": 0.053687845463339406
+      },
+      {
+        "id": 238,
+        "name": "Zed",
+        "games": 2107,
+        "roleShare": 0.05288466123948393
+      },
+      {
+        "id": 90,
+        "name": "Malzahar",
+        "games": 1967,
+        "roleShare": 0.04937073026011623
+      },
+      {
+        "id": 85,
+        "name": "Kennen",
+        "games": 1932,
+        "roleShare": 0.048492247515274305
+      },
+      {
+        "id": 202,
+        "name": "Jhin",
+        "games": 1775,
+        "roleShare": 0.04455162491698338
+      },
+      {
+        "id": 62,
+        "name": "Wukong",
+        "games": 1729,
+        "roleShare": 0.043397047595191134
+      },
+      {
+        "id": 245,
+        "name": "Ekko",
+        "games": 1654,
+        "roleShare": 0.04151458457052987
+      },
+      {
+        "id": 55,
+        "name": "Katarina",
+        "games": 1648,
+        "roleShare": 0.04136398752855697
+      },
+      {
+        "id": 112,
+        "name": "Viktor",
+        "games": 1580,
+        "roleShare": 0.03965722105286408
+      },
+      {
+        "id": 113,
+        "name": "Sejuani",
+        "games": 1579,
+        "roleShare": 0.03963212154586859
+      },
+      {
+        "id": 105,
+        "name": "Fizz",
+        "games": 1543,
+        "roleShare": 0.03872853929403119
+      },
+      {
+        "id": 96,
+        "name": "Kog'Maw",
+        "games": 1538,
+        "roleShare": 0.03860304175905377
+      },
+      {
+        "id": 75,
+        "name": "Nasus",
+        "games": 1536,
+        "roleShare": 0.0385528427450628
+      },
+      {
+        "id": 711,
+        "name": "Vex",
+        "games": 1468,
+        "roleShare": 0.036846076269369914
+      },
+      {
+        "id": 157,
+        "name": "Yasuo",
+        "games": 1367,
+        "roleShare": 0.03431102606282607
+      },
+      {
+        "id": 266,
+        "name": "Aatrox",
+        "games": 1342,
+        "roleShare": 0.033683538387938985
+      },
+      {
+        "id": 136,
+        "name": "Aurelion Sol",
+        "games": 1315,
+        "roleShare": 0.03300585169906093
+      },
+      {
+        "id": 126,
+        "name": "Jayce",
+        "games": 1306,
+        "roleShare": 0.03277995613610157
+      },
+      {
+        "id": 897,
+        "name": "K'Sante",
+        "games": 1298,
+        "roleShare": 0.032579160080137705
+      },
+      {
+        "id": 516,
+        "name": "Ornn",
+        "games": 1293,
+        "roleShare": 0.032453662545160286
+      },
+      {
+        "id": 11,
+        "name": "Master Yi",
+        "games": 1261,
+        "roleShare": 0.03165047832130481
+      },
+      {
+        "id": 61,
+        "name": "Orianna",
+        "games": 1196,
+        "roleShare": 0.03001901036659838
+      },
+      {
+        "id": 10,
+        "name": "Kayle",
+        "games": 1166,
+        "roleShare": 0.02926602515673387
+      },
+      {
+        "id": 233,
+        "name": "Briar",
+        "games": 1142,
+        "roleShare": 0.028663636988842264
+      },
+      {
+        "id": 110,
+        "name": "Varus",
+        "games": 1137,
+        "roleShare": 0.028538139453864846
+      },
+      {
+        "id": 429,
+        "name": "Kalista",
+        "games": 1015,
+        "roleShare": 0.025475999600415848
+      },
+      {
+        "id": 133,
+        "name": "Quinn",
+        "games": 995,
+        "roleShare": 0.024974009460506177
+      },
+      {
+        "id": 36,
+        "name": "Dr. Mundo",
+        "games": 928,
+        "roleShare": 0.023292342491808775
+      },
+      {
+        "id": 67,
+        "name": "Vayne",
+        "games": 831,
+        "roleShare": 0.020857690313246868
+      },
+      {
+        "id": 122,
+        "name": "Darius",
+        "games": 816,
+        "roleShare": 0.020481197708314615
+      },
+      {
+        "id": 28,
+        "name": "Evelynn",
+        "games": 754,
+        "roleShare": 0.018925028274594632
+      },
+      {
+        "id": 240,
+        "name": "Kled",
+        "games": 754,
+        "roleShare": 0.018925028274594632
+      },
+      {
+        "id": 166,
+        "name": "Akshan",
+        "games": 745,
+        "roleShare": 0.01869913271163528
+      },
+      {
+        "id": 68,
+        "name": "Rumble",
+        "games": 741,
+        "roleShare": 0.018598734683653344
+      },
+      {
+        "id": 30,
+        "name": "Karthus",
+        "games": 740,
+        "roleShare": 0.01857363517665786
+      },
+      {
+        "id": 234,
+        "name": "Viego",
+        "games": 732,
+        "roleShare": 0.01837283912069399
+      },
+      {
+        "id": 51,
+        "name": "Caitlyn",
+        "games": 666,
+        "roleShare": 0.016716271658992074
+      },
+      {
+        "id": 82,
+        "name": "Mordekaiser",
+        "games": 622,
+        "roleShare": 0.015611893351190795
+      },
+      {
+        "id": 5,
+        "name": "Xin Zhao",
+        "games": 597,
+        "roleShare": 0.014984405676303707
+      },
+      {
+        "id": 950,
+        "name": "Naafiri",
+        "games": 577,
+        "roleShare": 0.014482415536394034
+      },
+      {
+        "id": 904,
+        "name": "Zaahen",
+        "games": 575,
+        "roleShare": 0.014432216522403066
+      },
+      {
+        "id": 893,
+        "name": "Aurora",
+        "games": 560,
+        "roleShare": 0.014055723917470814
+      },
+      {
+        "id": 777,
+        "name": "Yone",
+        "games": 539,
+        "roleShare": 0.013528634270565658
+      },
+      {
+        "id": 421,
+        "name": "Rek'Sai",
+        "games": 532,
+        "roleShare": 0.013352937721597272
+      },
+      {
+        "id": 114,
+        "name": "Fiora",
+        "games": 460,
+        "roleShare": 0.011545773217922453
+      },
+      {
+        "id": 131,
+        "name": "Diana",
+        "games": 459,
+        "roleShare": 0.01152067371092697
+      },
+      {
+        "id": 84,
+        "name": "Akali",
+        "games": 400,
+        "roleShare": 0.010039802798193437
+      },
+      {
+        "id": 19,
+        "name": "Warwick",
+        "games": 385,
+        "roleShare": 0.009663310193261184
+      },
+      {
+        "id": 92,
+        "name": "Riven",
+        "games": 378,
+        "roleShare": 0.009487613644292799
+      },
+      {
+        "id": 69,
+        "name": "Cassiopeia",
+        "games": 374,
+        "roleShare": 0.009387215616310864
+      },
+      {
+        "id": 6,
+        "name": "Urgot",
+        "games": 345,
+        "roleShare": 0.00865932991344184
+      },
+      {
+        "id": 106,
+        "name": "Volibear",
+        "games": 342,
+        "roleShare": 0.00858403139245539
+      },
+      {
+        "id": 86,
+        "name": "Garen",
+        "games": 314,
+        "roleShare": 0.007881245196581848
+      },
+      {
+        "id": 799,
+        "name": "Ambessa",
+        "games": 307,
+        "roleShare": 0.007705548647613463
+      },
+      {
+        "id": 83,
+        "name": "Yorick",
+        "games": 288,
+        "roleShare": 0.0072286580146992754
+      },
+      {
+        "id": 804,
+        "name": "Yunara",
+        "games": 283,
+        "roleShare": 0.007103160479721858
+      },
+      {
+        "id": 91,
+        "name": "Talon",
+        "games": 275,
+        "roleShare": 0.006902364423757988
+      },
+      {
+        "id": 23,
+        "name": "Tryndamere",
+        "games": 274,
+        "roleShare": 0.006877264916762505
+      },
+      {
+        "id": 18,
+        "name": "Tristana",
+        "games": 266,
+        "roleShare": 0.006676468860798636
+      },
+      {
+        "id": 222,
+        "name": "Jinx",
+        "games": 261,
+        "roleShare": 0.006550971325821218
+      },
+      {
+        "id": 141,
+        "name": "Kayn",
+        "games": 247,
+        "roleShare": 0.006199578227884448
+      },
+      {
+        "id": 420,
+        "name": "Illaoi",
+        "games": 237,
+        "roleShare": 0.005948583157929612
+      },
+      {
+        "id": 41,
+        "name": "Gangplank",
+        "games": 225,
+        "roleShare": 0.005647389073983809
+      },
+      {
+        "id": 2,
+        "name": "Olaf",
+        "games": 220,
+        "roleShare": 0.005521891539006391
+      },
+      {
+        "id": 39,
+        "name": "Irelia",
+        "games": 217,
+        "roleShare": 0.00544659301801994
+      },
+      {
+        "id": 77,
+        "name": "Udyr",
+        "games": 199,
+        "roleShare": 0.004994801892101235
+      },
+      {
+        "id": 236,
+        "name": "Lucian",
+        "games": 196,
+        "roleShare": 0.004919503371114784
+      },
+      {
+        "id": 200,
+        "name": "Bel'Veth",
+        "games": 191,
+        "roleShare": 0.004794005836137366
+      },
+      {
+        "id": 104,
+        "name": "Graves",
+        "games": 184,
+        "roleShare": 0.004618309287168981
+      },
+      {
+        "id": 150,
+        "name": "Gnar",
+        "games": 182,
+        "roleShare": 0.004568110273178014
+      },
+      {
+        "id": 268,
+        "name": "Azir",
+        "games": 182,
+        "roleShare": 0.004568110273178014
+      },
+      {
+        "id": 221,
+        "name": "Zeri",
+        "games": 169,
+        "roleShare": 0.004241816682236728
+      },
+      {
+        "id": 8,
+        "name": "Vladimir",
+        "games": 168,
+        "roleShare": 0.004216717175241244
+      },
+      {
+        "id": 56,
+        "name": "Nocturne",
+        "games": 160,
+        "roleShare": 0.004015921119277375
+      },
+      {
+        "id": 13,
+        "name": "Ryze",
+        "games": 149,
+        "roleShare": 0.0037398265423270556
+      },
+      {
+        "id": 901,
+        "name": "Smolder",
+        "games": 143,
+        "roleShare": 0.003589229500354154
+      },
+      {
+        "id": 121,
+        "name": "Kha'Zix",
+        "games": 140,
+        "roleShare": 0.0035139309793677034
+      },
+      {
+        "id": 58,
+        "name": "Renekton",
+        "games": 134,
+        "roleShare": 0.0033633339373948016
+      },
+      {
+        "id": 119,
+        "name": "Draven",
+        "games": 112,
+        "roleShare": 0.0028111447834941626
+      },
+      {
+        "id": 203,
+        "name": "Kindred",
+        "games": 99,
+        "roleShare": 0.0024848511925528757
+      },
+      {
+        "id": 42,
+        "name": "Corki",
+        "games": 98,
+        "roleShare": 0.002459751685557392
+      },
+      {
+        "id": 523,
+        "name": "Aphelios",
+        "games": 97,
+        "roleShare": 0.0024346521785619086
+      },
+      {
+        "id": 887,
+        "name": "Gwen",
+        "games": 82,
+        "roleShare": 0.0020581595736296546
+      },
+      {
+        "id": 15,
+        "name": "Sivir",
+        "games": 76,
+        "roleShare": 0.0019075625316567531
+      },
+      {
+        "id": 498,
+        "name": "Xayah",
+        "games": 70,
+        "roleShare": 0.0017569654896838517
+      },
+      {
+        "id": 38,
+        "name": "Kassadin",
+        "games": 64,
+        "roleShare": 0.00160636844771095
+      },
+      {
+        "id": 360,
+        "name": "Samira",
+        "games": 62,
+        "roleShare": 0.001556169433719983
+      },
+      {
+        "id": 102,
+        "name": "Shyvana",
+        "games": 59,
+        "roleShare": 0.001480870912733532
+      },
+      {
+        "id": 876,
+        "name": "Lillia",
+        "games": 58,
+        "roleShare": 0.0014557714057380484
+      },
+      {
+        "id": 120,
+        "name": "Hecarim",
+        "games": 24,
+        "roleShare": 0.0006023881678916063
+      },
+      {
+        "id": 895,
+        "name": "Nilah",
+        "games": 23,
+        "roleShare": 0.0005772886608961227
+      }
+    ],
+    "Bot": [
+      {
+        "id": 145,
+        "name": "Kai'Sa",
+        "games": 401215,
+        "roleShare": 10.07029869919295
+      },
+      {
+        "id": 222,
+        "name": "Jinx",
+        "games": 339202,
+        "roleShare": 8.513802971882026
+      },
+      {
+        "id": 202,
+        "name": "Jhin",
+        "games": 318260,
+        "roleShare": 7.988169096382609
+      },
+      {
+        "id": 51,
+        "name": "Caitlyn",
+        "games": 299543,
+        "roleShare": 7.518381623948143
+      },
+      {
+        "id": 81,
+        "name": "Ezreal",
+        "games": 253723,
+        "roleShare": 6.368322213415084
+      },
+      {
+        "id": 18,
+        "name": "Tristana",
+        "games": 186885,
+        "roleShare": 4.690721364850952
+      },
+      {
+        "id": 804,
+        "name": "Yunara",
+        "games": 179349,
+        "roleShare": 4.501571480132987
+      },
+      {
+        "id": 236,
+        "name": "Lucian",
+        "games": 167559,
+        "roleShare": 4.205648292656235
+      },
+      {
+        "id": 22,
+        "name": "Ashe",
+        "games": 124353,
+        "roleShare": 3.1211989934093713
+      },
+      {
+        "id": 29,
+        "name": "Twitch",
+        "games": 113006,
+        "roleShare": 2.836394887531619
+      },
+      {
+        "id": 21,
+        "name": "Miss Fortune",
+        "games": 111713,
+        "roleShare": 2.803941224986459
+      },
+      {
+        "id": 221,
+        "name": "Zeri",
+        "games": 98970,
+        "roleShare": 2.4840982073430116
+      },
+      {
+        "id": 523,
+        "name": "Aphelios",
+        "games": 96157,
+        "roleShare": 2.413493294164716
+      },
+      {
+        "id": 498,
+        "name": "Xayah",
+        "games": 92162,
+        "roleShare": 2.313220763717759
+      },
+      {
+        "id": 15,
+        "name": "Sivir",
+        "games": 85681,
+        "roleShare": 2.1505508588800297
+      },
+      {
+        "id": 360,
+        "name": "Samira",
+        "games": 78320,
+        "roleShare": 1.9657933878862752
+      },
+      {
+        "id": 119,
+        "name": "Draven",
+        "games": 74289,
+        "roleShare": 1.8646172751874808
+      },
+      {
+        "id": 112,
+        "name": "Viktor",
+        "games": 70109,
+        "roleShare": 1.7597013359463594
+      },
+      {
+        "id": 67,
+        "name": "Vayne",
+        "games": 69052,
+        "roleShare": 1.733171157052133
+      },
+      {
+        "id": 901,
+        "name": "Smolder",
+        "games": 68631,
+        "roleShare": 1.7226042646070345
+      },
+      {
+        "id": 429,
+        "name": "Kalista",
+        "games": 57769,
+        "roleShare": 1.4499734196220917
+      },
+      {
+        "id": 110,
+        "name": "Varus",
+        "games": 51978,
+        "roleShare": 1.3046221746112463
+      },
+      {
+        "id": 157,
+        "name": "Yasuo",
+        "games": 48103,
+        "roleShare": 1.2073615850037474
+      },
+      {
+        "id": 134,
+        "name": "Syndra",
+        "games": 46889,
+        "roleShare": 1.1768907835112303
+      },
+      {
+        "id": 115,
+        "name": "Ziggs",
+        "games": 41122,
+        "roleShare": 1.0321419266682763
+      },
+      {
+        "id": 147,
+        "name": "Seraphine",
+        "games": 40288,
+        "roleShare": 1.011208937834043
+      },
+      {
+        "id": 45,
+        "name": "Veigar",
+        "games": 39105,
+        "roleShare": 0.981516221058386
+      },
+      {
+        "id": 96,
+        "name": "Kog'Maw",
+        "games": 37110,
+        "roleShare": 0.9314427046023962
+      },
+      {
+        "id": 42,
+        "name": "Corki",
+        "games": 37009,
+        "roleShare": 0.9289076543958523
+      },
+      {
+        "id": 101,
+        "name": "Xerath",
+        "games": 33079,
+        "roleShare": 0.8302665919036019
+      },
+      {
+        "id": 800,
+        "name": "Mel",
+        "games": 31353,
+        "roleShare": 0.7869448428293971
+      },
+      {
+        "id": 910,
+        "name": "Hwei",
+        "games": 27511,
+        "roleShare": 0.6905125369527492
+      },
+      {
+        "id": 895,
+        "name": "Nilah",
+        "games": 22382,
+        "roleShare": 0.5617771655729138
+      },
+      {
+        "id": 99,
+        "name": "Lux",
+        "games": 20174,
+        "roleShare": 0.506357454126886
+      },
+      {
+        "id": 55,
+        "name": "Katarina",
+        "games": 19055,
+        "roleShare": 0.4782711057989399
+      },
+      {
+        "id": 50,
+        "name": "Swain",
+        "games": 16934,
+        "roleShare": 0.4250350514615192
+      },
+      {
+        "id": 136,
+        "name": "Aurelion Sol",
+        "games": 15271,
+        "roleShare": 0.38329457132802996
+      },
+      {
+        "id": 63,
+        "name": "Brand",
+        "games": 13597,
+        "roleShare": 0.34127799661759045
+      },
+      {
+        "id": 8,
+        "name": "Vladimir",
+        "games": 12725,
+        "roleShare": 0.31939122651752877
+      },
+      {
+        "id": 235,
+        "name": "Senna",
+        "games": 12250,
+        "roleShare": 0.30746896069467405
+      },
+      {
+        "id": 161,
+        "name": "Vel'Koz",
+        "games": 12195,
+        "roleShare": 0.3060884878099224
+      },
+      {
+        "id": 30,
+        "name": "Karthus",
+        "games": 11481,
+        "roleShare": 0.28816743981514714
+      },
+      {
+        "id": 69,
+        "name": "Cassiopeia",
+        "games": 6680,
+        "roleShare": 0.16766470672983042
+      },
+      {
+        "id": 777,
+        "name": "Yone",
+        "games": 5779,
+        "roleShare": 0.14505005092689968
+      },
+      {
+        "id": 90,
+        "name": "Malzahar",
+        "games": 4933,
+        "roleShare": 0.12381586800872058
+      },
+      {
+        "id": 163,
+        "name": "Taliyah",
+        "games": 3949,
+        "roleShare": 0.09911795312516472
+      },
+      {
+        "id": 223,
+        "name": "Tahm Kench",
+        "games": 3797,
+        "roleShare": 0.09530282806185121
+      },
+      {
+        "id": 805,
+        "name": "Locke",
+        "games": 3325,
+        "roleShare": 0.08345586075998296
+      },
+      {
+        "id": 39,
+        "name": "Irelia",
+        "games": 2845,
+        "roleShare": 0.07140809740215083
+      },
+      {
+        "id": 143,
+        "name": "Zyra",
+        "games": 2757,
+        "roleShare": 0.06919934078654827
+      },
+      {
+        "id": 74,
+        "name": "Heimerdinger",
+        "games": 2711,
+        "roleShare": 0.06804476346475602
+      },
+      {
+        "id": 166,
+        "name": "Akshan",
+        "games": 2620,
+        "roleShare": 0.06576070832816702
+      },
+      {
+        "id": 4,
+        "name": "Twisted Fate",
+        "games": 2405,
+        "roleShare": 0.060364314324138045
+      },
+      {
+        "id": 34,
+        "name": "Anivia",
+        "games": 2392,
+        "roleShare": 0.06003802073319676
+      },
+      {
+        "id": 893,
+        "name": "Aurora",
+        "games": 2043,
+        "roleShare": 0.051278292791772984
+      },
+      {
+        "id": 103,
+        "name": "Ahri",
+        "games": 1996,
+        "roleShare": 0.05009861596298525
+      },
+      {
+        "id": 17,
+        "name": "Teemo",
+        "games": 1861,
+        "roleShare": 0.04671018251859497
+      },
+      {
+        "id": 517,
+        "name": "Sylas",
+        "games": 1860,
+        "roleShare": 0.04668508301159949
+      },
+      {
+        "id": 11,
+        "name": "Master Yi",
+        "games": 1815,
+        "roleShare": 0.045555605196802726
+      },
+      {
+        "id": 238,
+        "name": "Zed",
+        "games": 1721,
+        "roleShare": 0.043196251539227265
+      },
+      {
+        "id": 114,
+        "name": "Fiora",
+        "games": 1714,
+        "roleShare": 0.043020554990258884
+      },
+      {
+        "id": 2,
+        "name": "Olaf",
+        "games": 1707,
+        "roleShare": 0.0428448584412905
+      },
+      {
+        "id": 31,
+        "name": "Cho'Gath",
+        "games": 1490,
+        "roleShare": 0.03739826542327056
+      },
+      {
+        "id": 126,
+        "name": "Jayce",
+        "games": 1405,
+        "roleShare": 0.03526480732865445
+      },
+      {
+        "id": 14,
+        "name": "Sion",
+        "games": 1248,
+        "roleShare": 0.031324184730363525
+      },
+      {
+        "id": 142,
+        "name": "Zoe",
+        "games": 1232,
+        "roleShare": 0.030922592618435787
+      },
+      {
+        "id": 887,
+        "name": "Gwen",
+        "games": 1224,
+        "roleShare": 0.03072179656247192
+      },
+      {
+        "id": 246,
+        "name": "Qiyana",
+        "games": 1204,
+        "roleShare": 0.030219806422562247
+      },
+      {
+        "id": 245,
+        "name": "Ekko",
+        "games": 1196,
+        "roleShare": 0.03001901036659838
+      },
+      {
+        "id": 234,
+        "name": "Viego",
+        "games": 1151,
+        "roleShare": 0.028889532551801617
+      },
+      {
+        "id": 127,
+        "name": "Lissandra",
+        "games": 1128,
+        "roleShare": 0.028312243890905496
+      },
+      {
+        "id": 1,
+        "name": "Annie",
+        "games": 1125,
+        "roleShare": 0.028236945369919043
+      },
+      {
+        "id": 61,
+        "name": "Orianna",
+        "games": 1125,
+        "roleShare": 0.028236945369919043
+      },
+      {
+        "id": 117,
+        "name": "Lulu",
+        "games": 1095,
+        "roleShare": 0.027483960160054537
+      },
+      {
+        "id": 80,
+        "name": "Pantheon",
+        "games": 1057,
+        "roleShare": 0.02653017889422616
+      },
+      {
+        "id": 92,
+        "name": "Riven",
+        "games": 1005,
+        "roleShare": 0.025225004530461014
+      },
+      {
+        "id": 27,
+        "name": "Singed",
+        "games": 1001,
+        "roleShare": 0.02512460650247908
+      },
+      {
+        "id": 950,
+        "name": "Naafiri",
+        "games": 996,
+        "roleShare": 0.02499910896750166
+      },
+      {
+        "id": 13,
+        "name": "Ryze",
+        "games": 988,
+        "roleShare": 0.024798312911537793
+      },
+      {
+        "id": 25,
+        "name": "Morgana",
+        "games": 945,
+        "roleShare": 0.023719034110731996
+      },
+      {
+        "id": 26,
+        "name": "Zilean",
+        "games": 893,
+        "roleShare": 0.02241385974696685
+      },
+      {
+        "id": 711,
+        "name": "Vex",
+        "games": 878,
+        "roleShare": 0.022037367142034595
+      },
+      {
+        "id": 133,
+        "name": "Quinn",
+        "games": 853,
+        "roleShare": 0.021409879467147508
+      },
+      {
+        "id": 107,
+        "name": "Rengar",
+        "games": 835,
+        "roleShare": 0.020958088341228802
+      },
+      {
+        "id": 75,
+        "name": "Nasus",
+        "games": 804,
+        "roleShare": 0.02018000362436881
+      },
+      {
+        "id": 268,
+        "name": "Azir",
+        "games": 781,
+        "roleShare": 0.019602714963472687
+      },
+      {
+        "id": 7,
+        "name": "LeBlanc",
+        "games": 747,
+        "roleShare": 0.018749331725626244
+      },
+      {
+        "id": 105,
+        "name": "Fizz",
+        "games": 746,
+        "roleShare": 0.018724232218630763
+      },
+      {
+        "id": 203,
+        "name": "Kindred",
+        "games": 736,
+        "roleShare": 0.018473237148675926
+      },
+      {
+        "id": 10,
+        "name": "Kayle",
+        "games": 679,
+        "roleShare": 0.01704256524993336
+      },
+      {
+        "id": 43,
+        "name": "Karma",
+        "games": 653,
+        "roleShare": 0.016389978068050787
+      },
+      {
+        "id": 16,
+        "name": "Soraka",
+        "games": 641,
+        "roleShare": 0.016088783984104984
+      },
+      {
+        "id": 84,
+        "name": "Akali",
+        "games": 616,
+        "roleShare": 0.015461296309217894
+      },
+      {
+        "id": 267,
+        "name": "Nami",
+        "games": 579,
+        "roleShare": 0.014532614550385
+      },
+      {
+        "id": 875,
+        "name": "Sett",
+        "games": 552,
+        "roleShare": 0.013854927861506943
+      },
+      {
+        "id": 24,
+        "name": "Jax",
+        "games": 526,
+        "roleShare": 0.01320234067962437
+      },
+      {
+        "id": 86,
+        "name": "Garen",
+        "games": 503,
+        "roleShare": 0.012625052018728248
+      },
+      {
+        "id": 888,
+        "name": "Renata Glasc",
+        "games": 499,
+        "roleShare": 0.012524653990746313
+      },
+      {
+        "id": 54,
+        "name": "Malphite",
+        "games": 490,
+        "roleShare": 0.012298758427786962
+      },
+      {
+        "id": 85,
+        "name": "Kennen",
+        "games": 488,
+        "roleShare": 0.012248559413795995
+      },
+      {
+        "id": 98,
+        "name": "Shen",
+        "games": 483,
+        "roleShare": 0.012123061878818576
+      },
+      {
+        "id": 131,
+        "name": "Diana",
+        "games": 469,
+        "roleShare": 0.011771668780881806
+      },
+      {
+        "id": 518,
+        "name": "Neeko",
+        "games": 466,
+        "roleShare": 0.011696370259895355
+      },
+      {
+        "id": 104,
+        "name": "Graves",
+        "games": 457,
+        "roleShare": 0.011470474696936003
+      },
+      {
+        "id": 902,
+        "name": "Milio",
+        "games": 457,
+        "roleShare": 0.011470474696936003
+      },
+      {
+        "id": 122,
+        "name": "Darius",
+        "games": 452,
+        "roleShare": 0.011344977161958585
+      },
+      {
+        "id": 36,
+        "name": "Dr. Mundo",
+        "games": 414,
+        "roleShare": 0.010391195896130209
+      },
+      {
+        "id": 350,
+        "name": "Yuumi",
+        "games": 409,
+        "roleShare": 0.01026569836115279
+      },
+      {
+        "id": 41,
+        "name": "Gangplank",
+        "games": 392,
+        "roleShare": 0.009839006742229569
+      },
+      {
+        "id": 3,
+        "name": "Galio",
+        "games": 390,
+        "roleShare": 0.009788807728238601
+      },
+      {
+        "id": 62,
+        "name": "Wukong",
+        "games": 385,
+        "roleShare": 0.009663310193261184
+      },
+      {
+        "id": 799,
+        "name": "Ambessa",
+        "games": 384,
+        "roleShare": 0.0096382106862657
+      },
+      {
+        "id": 555,
+        "name": "Pyke",
+        "games": 378,
+        "roleShare": 0.009487613644292799
+      },
+      {
+        "id": 233,
+        "name": "Briar",
+        "games": 376,
+        "roleShare": 0.009437414630301831
+      },
+      {
+        "id": 266,
+        "name": "Aatrox",
+        "games": 358,
+        "roleShare": 0.008985623504383127
+      },
+      {
+        "id": 412,
+        "name": "Thresh",
+        "games": 358,
+        "roleShare": 0.008985623504383127
+      },
+      {
+        "id": 111,
+        "name": "Nautilus",
+        "games": 347,
+        "roleShare": 0.008709528927432807
+      },
+      {
+        "id": 59,
+        "name": "Jarvan IV",
+        "games": 340,
+        "roleShare": 0.008533832378464423
+      },
+      {
+        "id": 82,
+        "name": "Mordekaiser",
+        "games": 329,
+        "roleShare": 0.008257737801514103
+      },
+      {
+        "id": 240,
+        "name": "Kled",
+        "games": 321,
+        "roleShare": 0.008056941745550234
+      },
+      {
+        "id": 37,
+        "name": "Sona",
+        "games": 319,
+        "roleShare": 0.008006742731559267
+      },
+      {
+        "id": 164,
+        "name": "Camille",
+        "games": 314,
+        "roleShare": 0.007881245196581848
+      },
+      {
+        "id": 64,
+        "name": "Lee Sin",
+        "games": 304,
+        "roleShare": 0.007630250126627013
+      },
+      {
+        "id": 76,
+        "name": "Nidalee",
+        "games": 282,
+        "roleShare": 0.007078060972726374
+      },
+      {
+        "id": 40,
+        "name": "Janna",
+        "games": 281,
+        "roleShare": 0.0070529614657308904
+      },
+      {
+        "id": 5,
+        "name": "Xin Zhao",
+        "games": 261,
+        "roleShare": 0.006550971325821218
+      },
+      {
+        "id": 23,
+        "name": "Tryndamere",
+        "games": 256,
+        "roleShare": 0.0064254737908438
+      },
+      {
+        "id": 91,
+        "name": "Talon",
+        "games": 233,
+        "roleShare": 0.005848185129947677
+      },
+      {
+        "id": 12,
+        "name": "Alistar",
+        "games": 225,
+        "roleShare": 0.005647389073983809
+      },
+      {
+        "id": 38,
+        "name": "Kassadin",
+        "games": 224,
+        "roleShare": 0.005622289566988325
+      },
+      {
+        "id": 79,
+        "name": "Gragas",
+        "games": 222,
+        "roleShare": 0.005572090552997358
+      },
+      {
+        "id": 106,
+        "name": "Volibear",
+        "games": 217,
+        "roleShare": 0.00544659301801994
+      },
+      {
+        "id": 201,
+        "name": "Braum",
+        "games": 213,
+        "roleShare": 0.005346194990038006
+      },
+      {
+        "id": 6,
+        "name": "Urgot",
+        "games": 201,
+        "roleShare": 0.005045000906092202
+      },
+      {
+        "id": 904,
+        "name": "Zaahen",
+        "games": 192,
+        "roleShare": 0.00481910534313285
+      },
+      {
+        "id": 53,
+        "name": "Blitzcrank",
+        "games": 185,
+        "roleShare": 0.004643408794164465
+      },
+      {
+        "id": 497,
+        "name": "Rakan",
+        "games": 183,
+        "roleShare": 0.004593209780173498
+      },
+      {
+        "id": 58,
+        "name": "Renekton",
+        "games": 180,
+        "roleShare": 0.004517911259187047
+      },
+      {
+        "id": 141,
+        "name": "Kayn",
+        "games": 167,
+        "roleShare": 0.004191617668245761
+      },
+      {
+        "id": 83,
+        "name": "Yorick",
+        "games": 165,
+        "roleShare": 0.004141418654254793
+      },
+      {
+        "id": 516,
+        "name": "Ornn",
+        "games": 155,
+        "roleShare": 0.003890423584299957
+      },
+      {
+        "id": 526,
+        "name": "Rell",
+        "games": 154,
+        "roleShare": 0.0038653240773044734
+      },
+      {
+        "id": 121,
+        "name": "Kha'Zix",
+        "games": 153,
+        "roleShare": 0.00384022457030899
+      },
+      {
+        "id": 150,
+        "name": "Gnar",
+        "games": 148,
+        "roleShare": 0.003714727035331572
+      },
+      {
+        "id": 48,
+        "name": "Trundle",
+        "games": 146,
+        "roleShare": 0.003664528021340605
+      },
+      {
+        "id": 897,
+        "name": "K'Sante",
+        "games": 142,
+        "roleShare": 0.0035641299933586706
+      },
+      {
+        "id": 89,
+        "name": "Leona",
+        "games": 137,
+        "roleShare": 0.0034386324583812523
+      },
+      {
+        "id": 432,
+        "name": "Bard",
+        "games": 132,
+        "roleShare": 0.0033131349234038344
+      },
+      {
+        "id": 68,
+        "name": "Rumble",
+        "games": 131,
+        "roleShare": 0.003288035416408351
+      },
+      {
+        "id": 44,
+        "name": "Taric",
+        "games": 126,
+        "roleShare": 0.003162537881430933
+      },
+      {
+        "id": 254,
+        "name": "Vi",
+        "games": 116,
+        "roleShare": 0.002911542811476097
+      },
+      {
+        "id": 77,
+        "name": "Udyr",
+        "games": 101,
+        "roleShare": 0.002535050206543843
+      },
+      {
+        "id": 9,
+        "name": "Fiddlesticks",
+        "games": 99,
+        "roleShare": 0.0024848511925528757
+      },
+      {
+        "id": 78,
+        "name": "Poppy",
+        "games": 92,
+        "roleShare": 0.0023091546435844907
+      },
+      {
+        "id": 427,
+        "name": "Ivern",
+        "games": 92,
+        "roleShare": 0.0023091546435844907
+      },
+      {
+        "id": 154,
+        "name": "Zac",
+        "games": 90,
+        "roleShare": 0.0022589556295935236
+      },
+      {
+        "id": 60,
+        "name": "Elise",
+        "games": 89,
+        "roleShare": 0.00223385612259804
+      },
+      {
+        "id": 33,
+        "name": "Rammus",
+        "games": 82,
+        "roleShare": 0.0020581595736296546
+      },
+      {
+        "id": 421,
+        "name": "Rek'Sai",
+        "games": 82,
+        "roleShare": 0.0020581595736296546
+      },
+      {
+        "id": 20,
+        "name": "Nunu & Willump",
+        "games": 79,
+        "roleShare": 0.001982861052643204
+      },
+      {
+        "id": 420,
+        "name": "Illaoi",
+        "games": 77,
+        "roleShare": 0.0019326620386522367
+      },
+      {
+        "id": 35,
+        "name": "Shaco",
+        "games": 75,
+        "roleShare": 0.0018824630246612696
+      },
+      {
+        "id": 19,
+        "name": "Warwick",
+        "games": 74,
+        "roleShare": 0.001857363517665786
+      },
+      {
+        "id": 56,
+        "name": "Nocturne",
+        "games": 72,
+        "roleShare": 0.0018071645036748189
+      },
+      {
+        "id": 57,
+        "name": "Maokai",
+        "games": 71,
+        "roleShare": 0.0017820649966793353
+      },
+      {
+        "id": 113,
+        "name": "Sejuani",
+        "games": 52,
+        "roleShare": 0.001305174363765147
+      },
+      {
+        "id": 200,
+        "name": "Bel'Veth",
+        "games": 42,
+        "roleShare": 0.001054179293810311
+      },
+      {
+        "id": 72,
+        "name": "Skarner",
+        "games": 33,
+        "roleShare": 0.0008282837308509586
+      },
+      {
+        "id": 32,
+        "name": "Amumu",
+        "games": 31,
+        "roleShare": 0.0007780847168599915
+      },
+      {
+        "id": 102,
+        "name": "Shyvana",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 28,
+        "name": "Evelynn",
+        "games": 27,
+        "roleShare": 0.0006776866888780571
+      },
+      {
+        "id": 120,
+        "name": "Hecarim",
+        "games": 21,
+        "roleShare": 0.0005270896469051555
+      },
+      {
+        "id": 876,
+        "name": "Lillia",
+        "games": 20,
+        "roleShare": 0.0005019901399096719
+      }
+    ],
+    "Top": [
+      {
+        "id": 75,
+        "name": "Nasus",
+        "games": 166564,
+        "roleShare": 4.18067428319573
+      },
+      {
+        "id": 777,
+        "name": "Yone",
+        "games": 162571,
+        "roleShare": 4.080451951762764
+      },
+      {
+        "id": 122,
+        "name": "Darius",
+        "games": 141911,
+        "roleShare": 3.5618961372360722
+      },
+      {
+        "id": 86,
+        "name": "Garen",
+        "games": 140229,
+        "roleShare": 3.519678766469669
+      },
+      {
+        "id": 54,
+        "name": "Malphite",
+        "games": 133292,
+        "roleShare": 3.3455634864419994
+      },
+      {
+        "id": 24,
+        "name": "Jax",
+        "games": 118637,
+        "roleShare": 2.977730211423187
+      },
+      {
+        "id": 266,
+        "name": "Aatrox",
+        "games": 118591,
+        "roleShare": 2.976575634101395
+      },
+      {
+        "id": 58,
+        "name": "Renekton",
+        "games": 111092,
+        "roleShare": 2.7883544311422637
+      },
+      {
+        "id": 126,
+        "name": "Jayce",
+        "games": 109459,
+        "roleShare": 2.7473669362186386
+      },
+      {
+        "id": 875,
+        "name": "Sett",
+        "games": 109190,
+        "roleShare": 2.740615168836854
+      },
+      {
+        "id": 41,
+        "name": "Gangplank",
+        "games": 108677,
+        "roleShare": 2.727739121748171
+      },
+      {
+        "id": 82,
+        "name": "Mordekaiser",
+        "games": 101919,
+        "roleShare": 2.5581166534726925
+      },
+      {
+        "id": 39,
+        "name": "Irelia",
+        "games": 90216,
+        "roleShare": 2.264377123104548
+      },
+      {
+        "id": 164,
+        "name": "Camille",
+        "games": 86975,
+        "roleShare": 2.1830296209321856
+      },
+      {
+        "id": 799,
+        "name": "Ambessa",
+        "games": 81235,
+        "roleShare": 2.03895845077811
+      },
+      {
+        "id": 17,
+        "name": "Teemo",
+        "games": 79570,
+        "roleShare": 1.9971677716306295
+      },
+      {
+        "id": 897,
+        "name": "K'Sante",
+        "games": 74220,
+        "roleShare": 1.8628854092047924
+      },
+      {
+        "id": 36,
+        "name": "Dr. Mundo",
+        "games": 73201,
+        "roleShare": 1.8373090115763946
+      },
+      {
+        "id": 114,
+        "name": "Fiora",
+        "games": 72694,
+        "roleShare": 1.8245835615296844
+      },
+      {
+        "id": 98,
+        "name": "Shen",
+        "games": 72630,
+        "roleShare": 1.8229771930819736
+      },
+      {
+        "id": 150,
+        "name": "Gnar",
+        "games": 71711,
+        "roleShare": 1.799910746153124
+      },
+      {
+        "id": 157,
+        "name": "Yasuo",
+        "games": 70050,
+        "roleShare": 1.7582204650336257
+      },
+      {
+        "id": 516,
+        "name": "Ornn",
+        "games": 66649,
+        "roleShare": 1.6728570417419861
+      },
+      {
+        "id": 2,
+        "name": "Olaf",
+        "games": 66592,
+        "roleShare": 1.6714263698432434
+      },
+      {
+        "id": 23,
+        "name": "Tryndamere",
+        "games": 63643,
+        "roleShare": 1.5974079237135623
+      },
+      {
+        "id": 106,
+        "name": "Volibear",
+        "games": 62219,
+        "roleShare": 1.5616662257519938
+      },
+      {
+        "id": 83,
+        "name": "Yorick",
+        "games": 61118,
+        "roleShare": 1.5340316685499664
+      },
+      {
+        "id": 31,
+        "name": "Cho'Gath",
+        "games": 58860,
+        "roleShare": 1.4773569817541643
+      },
+      {
+        "id": 14,
+        "name": "Sion",
+        "games": 56292,
+        "roleShare": 1.4129014477897626
+      },
+      {
+        "id": 80,
+        "name": "Pantheon",
+        "games": 55458,
+        "roleShare": 1.3919684589555292
+      },
+      {
+        "id": 887,
+        "name": "Gwen",
+        "games": 55262,
+        "roleShare": 1.3870489555844143
+      },
+      {
+        "id": 420,
+        "name": "Illaoi",
+        "games": 53380,
+        "roleShare": 1.3398116834189142
+      },
+      {
+        "id": 27,
+        "name": "Singed",
+        "games": 52263,
+        "roleShare": 1.311775534104959
+      },
+      {
+        "id": 904,
+        "name": "Zaahen",
+        "games": 52237,
+        "roleShare": 1.3111229469230765
+      },
+      {
+        "id": 84,
+        "name": "Akali",
+        "games": 51915,
+        "roleShare": 1.3030409056705308
+      },
+      {
+        "id": 6,
+        "name": "Urgot",
+        "games": 48079,
+        "roleShare": 1.2067591968358558
+      },
+      {
+        "id": 92,
+        "name": "Riven",
+        "games": 46495,
+        "roleShare": 1.1670015777550098
+      },
+      {
+        "id": 79,
+        "name": "Gragas",
+        "games": 46098,
+        "roleShare": 1.1570370734778028
+      },
+      {
+        "id": 10,
+        "name": "Kayle",
+        "games": 43392,
+        "roleShare": 1.0891178075480241
+      },
+      {
+        "id": 85,
+        "name": "Kennen",
+        "games": 41985,
+        "roleShare": 1.0538028012053786
+      },
+      {
+        "id": 67,
+        "name": "Vayne",
+        "games": 41169,
+        "roleShare": 1.033321603497064
+      },
+      {
+        "id": 240,
+        "name": "Kled",
+        "games": 36062,
+        "roleShare": 0.9051384212711294
+      },
+      {
+        "id": 48,
+        "name": "Trundle",
+        "games": 35613,
+        "roleShare": 0.8938687426301573
+      },
+      {
+        "id": 223,
+        "name": "Tahm Kench",
+        "games": 33163,
+        "roleShare": 0.8323749504912225
+      },
+      {
+        "id": 68,
+        "name": "Rumble",
+        "games": 32333,
+        "roleShare": 0.811542359684971
+      },
+      {
+        "id": 19,
+        "name": "Warwick",
+        "games": 26634,
+        "roleShare": 0.6685002693177101
+      },
+      {
+        "id": 8,
+        "name": "Vladimir",
+        "games": 25436,
+        "roleShare": 0.6384310599371207
+      },
+      {
+        "id": 74,
+        "name": "Heimerdinger",
+        "games": 24255,
+        "roleShare": 0.6087885421754546
+      },
+      {
+        "id": 517,
+        "name": "Sylas",
+        "games": 22740,
+        "roleShare": 0.5707627890772969
+      },
+      {
+        "id": 78,
+        "name": "Poppy",
+        "games": 19267,
+        "roleShare": 0.48359220128198244
+      },
+      {
+        "id": 62,
+        "name": "Wukong",
+        "games": 19164,
+        "roleShare": 0.4810069520614476
+      },
+      {
+        "id": 133,
+        "name": "Quinn",
+        "games": 17348,
+        "roleShare": 0.4354262473576494
+      },
+      {
+        "id": 34,
+        "name": "Anivia",
+        "games": 15290,
+        "roleShare": 0.38377146196094414
+      },
+      {
+        "id": 13,
+        "name": "Ryze",
+        "games": 15044,
+        "roleShare": 0.3775969832400552
+      },
+      {
+        "id": 238,
+        "name": "Zed",
+        "games": 14604,
+        "roleShare": 0.3665532001620424
+      },
+      {
+        "id": 110,
+        "name": "Varus",
+        "games": 14147,
+        "roleShare": 0.35508272546510644
+      },
+      {
+        "id": 69,
+        "name": "Cassiopeia",
+        "games": 11580,
+        "roleShare": 0.2906522910077
+      },
+      {
+        "id": 50,
+        "name": "Swain",
+        "games": 10779,
+        "roleShare": 0.27054758590431766
+      },
+      {
+        "id": 154,
+        "name": "Zac",
+        "games": 10501,
+        "roleShare": 0.2635699229595732
+      },
+      {
+        "id": 77,
+        "name": "Udyr",
+        "games": 10259,
+        "roleShare": 0.2574958422666662
+      },
+      {
+        "id": 11,
+        "name": "Master Yi",
+        "games": 9815,
+        "roleShare": 0.24635166116067148
+      },
+      {
+        "id": 90,
+        "name": "Malzahar",
+        "games": 9775,
+        "roleShare": 0.24534768088085213
+      },
+      {
+        "id": 893,
+        "name": "Aurora",
+        "games": 9107,
+        "roleShare": 0.2285812102078691
+      },
+      {
+        "id": 127,
+        "name": "Lissandra",
+        "games": 9019,
+        "roleShare": 0.22637245359226654
+      },
+      {
+        "id": 57,
+        "name": "Maokai",
+        "games": 7720,
+        "roleShare": 0.19376819400513334
+      },
+      {
+        "id": 805,
+        "name": "Locke",
+        "games": 7611,
+        "roleShare": 0.19103234774262565
+      },
+      {
+        "id": 4,
+        "name": "Twisted Fate",
+        "games": 7021,
+        "roleShare": 0.1762236386152903
+      },
+      {
+        "id": 112,
+        "name": "Viktor",
+        "games": 6398,
+        "roleShare": 0.16058664575710405
+      },
+      {
+        "id": 107,
+        "name": "Rengar",
+        "games": 6139,
+        "roleShare": 0.15408587344527377
+      },
+      {
+        "id": 9,
+        "name": "Fiddlesticks",
+        "games": 6109,
+        "roleShare": 0.15333288823540928
+      },
+      {
+        "id": 63,
+        "name": "Brand",
+        "games": 5726,
+        "roleShare": 0.14371977705613906
+      },
+      {
+        "id": 26,
+        "name": "Zilean",
+        "games": 5631,
+        "roleShare": 0.1413353238915681
+      },
+      {
+        "id": 246,
+        "name": "Qiyana",
+        "games": 5501,
+        "roleShare": 0.13807238798215526
+      },
+      {
+        "id": 141,
+        "name": "Kayn",
+        "games": 5501,
+        "roleShare": 0.13807238798215526
+      },
+      {
+        "id": 429,
+        "name": "Kalista",
+        "games": 5489,
+        "roleShare": 0.13777119389820944
+      },
+      {
+        "id": 113,
+        "name": "Sejuani",
+        "games": 5294,
+        "roleShare": 0.13287679003409014
+      },
+      {
+        "id": 3,
+        "name": "Galio",
+        "games": 4934,
+        "roleShare": 0.12384096751571605
+      },
+      {
+        "id": 103,
+        "name": "Ahri",
+        "games": 4874,
+        "roleShare": 0.12233499709598704
+      },
+      {
+        "id": 145,
+        "name": "Kai'Sa",
+        "games": 4839,
+        "roleShare": 0.12145651435114511
+      },
+      {
+        "id": 950,
+        "name": "Naafiri",
+        "games": 4755,
+        "roleShare": 0.11934815576352449
+      },
+      {
+        "id": 233,
+        "name": "Briar",
+        "games": 4684,
+        "roleShare": 0.11756609076684515
+      },
+      {
+        "id": 901,
+        "name": "Smolder",
+        "games": 4663,
+        "roleShare": 0.11703900111994
+      },
+      {
+        "id": 5,
+        "name": "Xin Zhao",
+        "games": 4168,
+        "roleShare": 0.10461474515717563
+      },
+      {
+        "id": 105,
+        "name": "Fizz",
+        "games": 4067,
+        "roleShare": 0.10207969495063178
+      },
+      {
+        "id": 166,
+        "name": "Akshan",
+        "games": 4054,
+        "roleShare": 0.10175340135969049
+      },
+      {
+        "id": 45,
+        "name": "Veigar",
+        "games": 4051,
+        "roleShare": 0.10167810283870404
+      },
+      {
+        "id": 102,
+        "name": "Shyvana",
+        "games": 3975,
+        "roleShare": 0.0997705403070473
+      },
+      {
+        "id": 136,
+        "name": "Aurelion Sol",
+        "games": 3481,
+        "roleShare": 0.08737138385127839
+      },
+      {
+        "id": 43,
+        "name": "Karma",
+        "games": 3390,
+        "roleShare": 0.08508732871468938
+      },
+      {
+        "id": 55,
+        "name": "Katarina",
+        "games": 3333,
+        "roleShare": 0.08365665681594682
+      },
+      {
+        "id": 245,
+        "name": "Ekko",
+        "games": 3323,
+        "roleShare": 0.08340566174599198
+      },
+      {
+        "id": 268,
+        "name": "Azir",
+        "games": 3311,
+        "roleShare": 0.08310446766204618
+      },
+      {
+        "id": 72,
+        "name": "Skarner",
+        "games": 3292,
+        "roleShare": 0.082627577029132
+      },
+      {
+        "id": 7,
+        "name": "LeBlanc",
+        "games": 3190,
+        "roleShare": 0.08006742731559267
+      },
+      {
+        "id": 18,
+        "name": "Tristana",
+        "games": 3183,
+        "roleShare": 0.07989173076662429
+      },
+      {
+        "id": 64,
+        "name": "Lee Sin",
+        "games": 3113,
+        "roleShare": 0.07813476527694042
+      },
+      {
+        "id": 38,
+        "name": "Kassadin",
+        "games": 3061,
+        "roleShare": 0.07682959091317529
+      },
+      {
+        "id": 104,
+        "name": "Graves",
+        "games": 3049,
+        "roleShare": 0.07652839682922948
+      },
+      {
+        "id": 142,
+        "name": "Zoe",
+        "games": 2706,
+        "roleShare": 0.06791926592977861
+      },
+      {
+        "id": 134,
+        "name": "Syndra",
+        "games": 2665,
+        "roleShare": 0.06689018614296378
+      },
+      {
+        "id": 96,
+        "name": "Kog'Maw",
+        "games": 2564,
+        "roleShare": 0.06435513593641994
+      },
+      {
+        "id": 161,
+        "name": "Vel'Koz",
+        "games": 2496,
+        "roleShare": 0.06264836946072705
+      },
+      {
+        "id": 910,
+        "name": "Hwei",
+        "games": 2283,
+        "roleShare": 0.05730217447068905
+      },
+      {
+        "id": 131,
+        "name": "Diana",
+        "games": 2268,
+        "roleShare": 0.05692568186575679
+      },
+      {
+        "id": 202,
+        "name": "Jhin",
+        "games": 2251,
+        "roleShare": 0.05649899024683357
+      },
+      {
+        "id": 234,
+        "name": "Viego",
+        "games": 2188,
+        "roleShare": 0.054917721306118106
+      },
+      {
+        "id": 421,
+        "name": "Rek'Sai",
+        "games": 2164,
+        "roleShare": 0.0543153331382265
+      },
+      {
+        "id": 1,
+        "name": "Annie",
+        "games": 2105,
+        "roleShare": 0.05283446222549297
+      },
+      {
+        "id": 60,
+        "name": "Elise",
+        "games": 2083,
+        "roleShare": 0.052282273071592326
+      },
+      {
+        "id": 119,
+        "name": "Draven",
+        "games": 2019,
+        "roleShare": 0.05067590462388138
+      },
+      {
+        "id": 51,
+        "name": "Caitlyn",
+        "games": 2003,
+        "roleShare": 0.05027431251195364
+      },
+      {
+        "id": 35,
+        "name": "Shaco",
+        "games": 2000,
+        "roleShare": 0.05019901399096719
+      },
+      {
+        "id": 42,
+        "name": "Corki",
+        "games": 1948,
+        "roleShare": 0.04889383962720204
+      },
+      {
+        "id": 76,
+        "name": "Nidalee",
+        "games": 1826,
+        "roleShare": 0.045831699773753044
+      },
+      {
+        "id": 427,
+        "name": "Ivern",
+        "games": 1707,
+        "roleShare": 0.0428448584412905
+      },
+      {
+        "id": 236,
+        "name": "Lucian",
+        "games": 1625,
+        "roleShare": 0.04078669886766084
+      },
+      {
+        "id": 25,
+        "name": "Morgana",
+        "games": 1597,
+        "roleShare": 0.0400839126717873
+      },
+      {
+        "id": 111,
+        "name": "Nautilus",
+        "games": 1596,
+        "roleShare": 0.04005881316479182
+      },
+      {
+        "id": 22,
+        "name": "Ashe",
+        "games": 1557,
+        "roleShare": 0.039079932391967956
+      },
+      {
+        "id": 518,
+        "name": "Neeko",
+        "games": 1551,
+        "roleShare": 0.038929335349995056
+      },
+      {
+        "id": 30,
+        "name": "Karthus",
+        "games": 1527,
+        "roleShare": 0.03832694718210345
+      },
+      {
+        "id": 56,
+        "name": "Nocturne",
+        "games": 1475,
+        "roleShare": 0.0370217728183383
+      },
+      {
+        "id": 81,
+        "name": "Ezreal",
+        "games": 1474,
+        "roleShare": 0.03699667331134282
+      },
+      {
+        "id": 254,
+        "name": "Vi",
+        "games": 1463,
+        "roleShare": 0.0367205787343925
+      },
+      {
+        "id": 99,
+        "name": "Lux",
+        "games": 1339,
+        "roleShare": 0.033608239866952536
+      },
+      {
+        "id": 12,
+        "name": "Alistar",
+        "games": 1213,
+        "roleShare": 0.0304457019855216
+      },
+      {
+        "id": 33,
+        "name": "Rammus",
+        "games": 1213,
+        "roleShare": 0.0304457019855216
+      },
+      {
+        "id": 711,
+        "name": "Vex",
+        "games": 1155,
+        "roleShare": 0.02898993057978355
+      },
+      {
+        "id": 59,
+        "name": "Jarvan IV",
+        "games": 1150,
+        "roleShare": 0.028864433044806133
+      },
+      {
+        "id": 117,
+        "name": "Lulu",
+        "games": 1147,
+        "roleShare": 0.028789134523819683
+      },
+      {
+        "id": 91,
+        "name": "Talon",
+        "games": 1135,
+        "roleShare": 0.02848794043987388
+      },
+      {
+        "id": 221,
+        "name": "Zeri",
+        "games": 1023,
+        "roleShare": 0.025676795656379717
+      },
+      {
+        "id": 163,
+        "name": "Taliyah",
+        "games": 950,
+        "roleShare": 0.023844531645709415
+      },
+      {
+        "id": 876,
+        "name": "Lillia",
+        "games": 930,
+        "roleShare": 0.023342541505799744
+      },
+      {
+        "id": 16,
+        "name": "Soraka",
+        "games": 902,
+        "roleShare": 0.022639755309926204
+      },
+      {
+        "id": 235,
+        "name": "Senna",
+        "games": 783,
+        "roleShare": 0.019652913977463656
+      },
+      {
+        "id": 61,
+        "name": "Orianna",
+        "games": 743,
+        "roleShare": 0.01864893369764431
+      },
+      {
+        "id": 800,
+        "name": "Mel",
+        "games": 710,
+        "roleShare": 0.01782064996679335
+      },
+      {
+        "id": 101,
+        "name": "Xerath",
+        "games": 672,
+        "roleShare": 0.016866868700964977
+      },
+      {
+        "id": 200,
+        "name": "Bel'Veth",
+        "games": 671,
+        "roleShare": 0.016841769193969493
+      },
+      {
+        "id": 40,
+        "name": "Janna",
+        "games": 578,
+        "roleShare": 0.014507515043389518
+      },
+      {
+        "id": 523,
+        "name": "Aphelios",
+        "games": 549,
+        "roleShare": 0.013779629340520494
+      },
+      {
+        "id": 29,
+        "name": "Twitch",
+        "games": 459,
+        "roleShare": 0.01152067371092697
+      },
+      {
+        "id": 412,
+        "name": "Thresh",
+        "games": 446,
+        "roleShare": 0.011194380119985683
+      },
+      {
+        "id": 20,
+        "name": "Nunu & Willump",
+        "games": 445,
+        "roleShare": 0.0111692806129902
+      },
+      {
+        "id": 115,
+        "name": "Ziggs",
+        "games": 435,
+        "roleShare": 0.010918285543035363
+      },
+      {
+        "id": 32,
+        "name": "Amumu",
+        "games": 430,
+        "roleShare": 0.010792788008057946
+      },
+      {
+        "id": 28,
+        "name": "Evelynn",
+        "games": 429,
+        "roleShare": 0.010767688501062462
+      },
+      {
+        "id": 143,
+        "name": "Zyra",
+        "games": 426,
+        "roleShare": 0.010692389980076012
+      },
+      {
+        "id": 147,
+        "name": "Seraphine",
+        "games": 366,
+        "roleShare": 0.009186419560346996
+      },
+      {
+        "id": 44,
+        "name": "Taric",
+        "games": 350,
+        "roleShare": 0.008784827448419259
+      },
+      {
+        "id": 804,
+        "name": "Yunara",
+        "games": 291,
+        "roleShare": 0.007303956535685726
+      },
+      {
+        "id": 120,
+        "name": "Hecarim",
+        "games": 273,
+        "roleShare": 0.006852165409767021
+      },
+      {
+        "id": 360,
+        "name": "Samira",
+        "games": 273,
+        "roleShare": 0.006852165409767021
+      },
+      {
+        "id": 498,
+        "name": "Xayah",
+        "games": 256,
+        "roleShare": 0.0064254737908438
+      },
+      {
+        "id": 89,
+        "name": "Leona",
+        "games": 251,
+        "roleShare": 0.0062999762558663824
+      },
+      {
+        "id": 526,
+        "name": "Rell",
+        "games": 245,
+        "roleShare": 0.006149379213893481
+      },
+      {
+        "id": 21,
+        "name": "Miss Fortune",
+        "games": 241,
+        "roleShare": 0.006048981185911547
+      },
+      {
+        "id": 53,
+        "name": "Blitzcrank",
+        "games": 236,
+        "roleShare": 0.005923483650934128
+      },
+      {
+        "id": 222,
+        "name": "Jinx",
+        "games": 211,
+        "roleShare": 0.005295995976047039
+      },
+      {
+        "id": 497,
+        "name": "Rakan",
+        "games": 204,
+        "roleShare": 0.005120299427078654
+      },
+      {
+        "id": 121,
+        "name": "Kha'Zix",
+        "games": 172,
+        "roleShare": 0.004317115203223179
+      },
+      {
+        "id": 203,
+        "name": "Kindred",
+        "games": 171,
+        "roleShare": 0.004292015696227695
+      },
+      {
+        "id": 15,
+        "name": "Sivir",
+        "games": 161,
+        "roleShare": 0.004041020626272858
+      },
+      {
+        "id": 432,
+        "name": "Bard",
+        "games": 141,
+        "roleShare": 0.003539030486363187
+      },
+      {
+        "id": 895,
+        "name": "Nilah",
+        "games": 129,
+        "roleShare": 0.0032378364024173837
+      },
+      {
+        "id": 37,
+        "name": "Sona",
+        "games": 115,
+        "roleShare": 0.0028864433044806133
+      },
+      {
+        "id": 201,
+        "name": "Braum",
+        "games": 100,
+        "roleShare": 0.0025099506995483593
+      },
+      {
+        "id": 555,
+        "name": "Pyke",
+        "games": 95,
+        "roleShare": 0.0023844531645709414
+      },
+      {
+        "id": 902,
+        "name": "Milio",
+        "games": 81,
+        "roleShare": 0.002033060066634171
+      },
+      {
+        "id": 350,
+        "name": "Yuumi",
+        "games": 54,
+        "roleShare": 0.0013553733777561141
+      },
+      {
+        "id": 267,
+        "name": "Nami",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 888,
+        "name": "Renata Glasc",
+        "games": 18,
+        "roleShare": 0.0004517911259187047
+      }
+    ],
+    "Mid": [
+      {
+        "id": 103,
+        "name": "Ahri",
+        "games": 188518,
+        "roleShare": 4.731708859774576
+      },
+      {
+        "id": 112,
+        "name": "Viktor",
+        "games": 186326,
+        "roleShare": 4.676690740440476
+      },
+      {
+        "id": 238,
+        "name": "Zed",
+        "games": 177867,
+        "roleShare": 4.46437401076568
+      },
+      {
+        "id": 157,
+        "name": "Yasuo",
+        "games": 173157,
+        "roleShare": 4.346155332816953
+      },
+      {
+        "id": 134,
+        "name": "Syndra",
+        "games": 171770,
+        "roleShare": 4.311342316614217
+      },
+      {
+        "id": 55,
+        "name": "Katarina",
+        "games": 142721,
+        "roleShare": 3.582226737902414
+      },
+      {
+        "id": 777,
+        "name": "Yone",
+        "games": 142599,
+        "roleShare": 3.579164598048965
+      },
+      {
+        "id": 517,
+        "name": "Sylas",
+        "games": 138181,
+        "roleShare": 3.4682749761429186
+      },
+      {
+        "id": 805,
+        "name": "Locke",
+        "games": 128182,
+        "roleShare": 3.2173050056950783
+      },
+      {
+        "id": 84,
+        "name": "Akali",
+        "games": 112246,
+        "roleShare": 2.8173192622150514
+      },
+      {
+        "id": 7,
+        "name": "LeBlanc",
+        "games": 112182,
+        "roleShare": 2.8157128937673406
+      },
+      {
+        "id": 127,
+        "name": "Lissandra",
+        "games": 110339,
+        "roleShare": 2.769454502374664
+      },
+      {
+        "id": 90,
+        "name": "Malzahar",
+        "games": 104142,
+        "roleShare": 2.6139128575236525
+      },
+      {
+        "id": 105,
+        "name": "Fizz",
+        "games": 103586,
+        "roleShare": 2.5999575316341637
+      },
+      {
+        "id": 4,
+        "name": "Twisted Fate",
+        "games": 99232,
+        "roleShare": 2.490674278175828
+      },
+      {
+        "id": 101,
+        "name": "Xerath",
+        "games": 88268,
+        "roleShare": 2.215483283477346
+      },
+      {
+        "id": 8,
+        "name": "Vladimir",
+        "games": 80798,
+        "roleShare": 2.0279899662210834
+      },
+      {
+        "id": 910,
+        "name": "Hwei",
+        "games": 80496,
+        "roleShare": 2.0204099151084476
+      },
+      {
+        "id": 3,
+        "name": "Galio",
+        "games": 77929,
+        "roleShare": 1.955979480651041
+      },
+      {
+        "id": 99,
+        "name": "Lux",
+        "games": 76611,
+        "roleShare": 1.9228983304309937
+      },
+      {
+        "id": 45,
+        "name": "Veigar",
+        "games": 73319,
+        "roleShare": 1.8402707534018616
+      },
+      {
+        "id": 246,
+        "name": "Qiyana",
+        "games": 63181,
+        "roleShare": 1.585811951481649
+      },
+      {
+        "id": 13,
+        "name": "Ryze",
+        "games": 62474,
+        "roleShare": 1.568066600035842
+      },
+      {
+        "id": 245,
+        "name": "Ekko",
+        "games": 62119,
+        "roleShare": 1.5591562750524455
+      },
+      {
+        "id": 61,
+        "name": "Orianna",
+        "games": 61418,
+        "roleShare": 1.5415615206486115
+      },
+      {
+        "id": 131,
+        "name": "Diana",
+        "games": 60698,
+        "roleShare": 1.5234898756118633
+      },
+      {
+        "id": 39,
+        "name": "Irelia",
+        "games": 57410,
+        "roleShare": 1.4409626966107132
+      },
+      {
+        "id": 711,
+        "name": "Vex",
+        "games": 56797,
+        "roleShare": 1.4255766988224818
+      },
+      {
+        "id": 38,
+        "name": "Kassadin",
+        "games": 56137,
+        "roleShare": 1.4090110242054625
+      },
+      {
+        "id": 142,
+        "name": "Zoe",
+        "games": 55822,
+        "roleShare": 1.4011046795018853
+      },
+      {
+        "id": 34,
+        "name": "Anivia",
+        "games": 46882,
+        "roleShare": 1.1767150869622618
+      },
+      {
+        "id": 166,
+        "name": "Akshan",
+        "games": 44451,
+        "roleShare": 1.1156981854562413
+      },
+      {
+        "id": 75,
+        "name": "Nasus",
+        "games": 44050,
+        "roleShare": 1.1056332831510522
+      },
+      {
+        "id": 800,
+        "name": "Mel",
+        "games": 39171,
+        "roleShare": 0.9831727885200879
+      },
+      {
+        "id": 893,
+        "name": "Aurora",
+        "games": 38455,
+        "roleShare": 0.9652015415113216
+      },
+      {
+        "id": 136,
+        "name": "Aurelion Sol",
+        "games": 36265,
+        "roleShare": 0.9102336211912125
+      },
+      {
+        "id": 1,
+        "name": "Annie",
+        "games": 36036,
+        "roleShare": 0.9044858340892468
+      },
+      {
+        "id": 69,
+        "name": "Cassiopeia",
+        "games": 35585,
+        "roleShare": 0.8931659564342838
+      },
+      {
+        "id": 91,
+        "name": "Talon",
+        "games": 34842,
+        "roleShare": 0.8745170227366394
+      },
+      {
+        "id": 268,
+        "name": "Azir",
+        "games": 34663,
+        "roleShare": 0.8700242109844478
+      },
+      {
+        "id": 163,
+        "name": "Taliyah",
+        "games": 28026,
+        "roleShare": 0.7034387830554232
+      },
+      {
+        "id": 18,
+        "name": "Tristana",
+        "games": 19584,
+        "roleShare": 0.4915487449995507
+      },
+      {
+        "id": 161,
+        "name": "Vel'Koz",
+        "games": 17679,
+        "roleShare": 0.44373418417315447
+      },
+      {
+        "id": 887,
+        "name": "Gwen",
+        "games": 17568,
+        "roleShare": 0.4409481388966558
+      },
+      {
+        "id": 54,
+        "name": "Malphite",
+        "games": 16431,
+        "roleShare": 0.41240999944279094
+      },
+      {
+        "id": 126,
+        "name": "Jayce",
+        "games": 16389,
+        "roleShare": 0.41135582014898064
+      },
+      {
+        "id": 950,
+        "name": "Naafiri",
+        "games": 16083,
+        "roleShare": 0.40367537100836265
+      },
+      {
+        "id": 80,
+        "name": "Pantheon",
+        "games": 15081,
+        "roleShare": 0.37852566499888807
+      },
+      {
+        "id": 50,
+        "name": "Swain",
+        "games": 12549,
+        "roleShare": 0.3149737132863236
+      },
+      {
+        "id": 63,
+        "name": "Brand",
+        "games": 12509,
+        "roleShare": 0.31396973300650427
+      },
+      {
+        "id": 115,
+        "name": "Ziggs",
+        "games": 12498,
+        "roleShare": 0.31369363842955394
+      },
+      {
+        "id": 31,
+        "name": "Cho'Gath",
+        "games": 11361,
+        "roleShare": 0.2851554989756891
+      },
+      {
+        "id": 86,
+        "name": "Garen",
+        "games": 11135,
+        "roleShare": 0.27948301039470985
+      },
+      {
+        "id": 41,
+        "name": "Gangplank",
+        "games": 11032,
+        "roleShare": 0.27689776117417503
+      },
+      {
+        "id": 92,
+        "name": "Riven",
+        "games": 10694,
+        "roleShare": 0.2684141278097016
+      },
+      {
+        "id": 14,
+        "name": "Sion",
+        "games": 10686,
+        "roleShare": 0.2682133317537377
+      },
+      {
+        "id": 901,
+        "name": "Smolder",
+        "games": 10167,
+        "roleShare": 0.2551866876230817
+      },
+      {
+        "id": 10,
+        "name": "Kayle",
+        "games": 9814,
+        "roleShare": 0.246326561653676
+      },
+      {
+        "id": 79,
+        "name": "Gragas",
+        "games": 9233,
+        "roleShare": 0.23174374808930004
+      },
+      {
+        "id": 85,
+        "name": "Kennen",
+        "games": 7410,
+        "roleShare": 0.18598734683653342
+      },
+      {
+        "id": 23,
+        "name": "Tryndamere",
+        "games": 7336,
+        "roleShare": 0.18412998331886765
+      },
+      {
+        "id": 25,
+        "name": "Morgana",
+        "games": 7239,
+        "roleShare": 0.18169533114030575
+      },
+      {
+        "id": 81,
+        "name": "Ezreal",
+        "games": 6771,
+        "roleShare": 0.1699487618664194
+      },
+      {
+        "id": 96,
+        "name": "Kog'Maw",
+        "games": 6716,
+        "roleShare": 0.1685682889816678
+      },
+      {
+        "id": 799,
+        "name": "Ambessa",
+        "games": 6627,
+        "roleShare": 0.1663344328590698
+      },
+      {
+        "id": 26,
+        "name": "Zilean",
+        "games": 6063,
+        "roleShare": 0.15217831091361703
+      },
+      {
+        "id": 145,
+        "name": "Kai'Sa",
+        "games": 5961,
+        "roleShare": 0.1496181612000777
+      },
+      {
+        "id": 58,
+        "name": "Renekton",
+        "games": 5787,
+        "roleShare": 0.14525084698286356
+      },
+      {
+        "id": 27,
+        "name": "Singed",
+        "games": 5701,
+        "roleShare": 0.14309228938125199
+      },
+      {
+        "id": 518,
+        "name": "Neeko",
+        "games": 5578,
+        "roleShare": 0.1400050500208075
+      },
+      {
+        "id": 133,
+        "name": "Quinn",
+        "games": 5465,
+        "roleShare": 0.13716880573031784
+      },
+      {
+        "id": 74,
+        "name": "Heimerdinger",
+        "games": 5228,
+        "roleShare": 0.13122022257238825
+      },
+      {
+        "id": 42,
+        "name": "Corki",
+        "games": 5157,
+        "roleShare": 0.1294381575757089
+      },
+      {
+        "id": 20,
+        "name": "Nunu & Willump",
+        "games": 4949,
+        "roleShare": 0.12421746012064831
+      },
+      {
+        "id": 147,
+        "name": "Seraphine",
+        "games": 4858,
+        "roleShare": 0.1219334049840593
+      },
+      {
+        "id": 110,
+        "name": "Varus",
+        "games": 4228,
+        "roleShare": 0.10612071557690464
+      },
+      {
+        "id": 233,
+        "name": "Briar",
+        "games": 4102,
+        "roleShare": 0.1029581776954737
+      },
+      {
+        "id": 234,
+        "name": "Viego",
+        "games": 4007,
+        "roleShare": 0.10057372453090277
+      },
+      {
+        "id": 202,
+        "name": "Jhin",
+        "games": 3718,
+        "roleShare": 0.093319967009208
+      },
+      {
+        "id": 43,
+        "name": "Karma",
+        "games": 3643,
+        "roleShare": 0.09143750398454674
+      },
+      {
+        "id": 29,
+        "name": "Twitch",
+        "games": 3413,
+        "roleShare": 0.0856646173755855
+      },
+      {
+        "id": 68,
+        "name": "Rumble",
+        "games": 3373,
+        "roleShare": 0.08466063709576617
+      },
+      {
+        "id": 236,
+        "name": "Lucian",
+        "games": 3313,
+        "roleShare": 0.08315466667603715
+      },
+      {
+        "id": 875,
+        "name": "Sett",
+        "games": 3274,
+        "roleShare": 0.08217578590321328
+      },
+      {
+        "id": 82,
+        "name": "Mordekaiser",
+        "games": 3144,
+        "roleShare": 0.07891284999380042
+      },
+      {
+        "id": 266,
+        "name": "Aatrox",
+        "games": 3055,
+        "roleShare": 0.07667899387120237
+      },
+      {
+        "id": 30,
+        "name": "Karthus",
+        "games": 2978,
+        "roleShare": 0.07474633183255014
+      },
+      {
+        "id": 17,
+        "name": "Teemo",
+        "games": 2862,
+        "roleShare": 0.07183478902107404
+      },
+      {
+        "id": 154,
+        "name": "Zac",
+        "games": 2802,
+        "roleShare": 0.07032881860134503
+      },
+      {
+        "id": 83,
+        "name": "Yorick",
+        "games": 2719,
+        "roleShare": 0.0682455595207199
+      },
+      {
+        "id": 67,
+        "name": "Vayne",
+        "games": 2595,
+        "roleShare": 0.06513322065327992
+      },
+      {
+        "id": 240,
+        "name": "Kled",
+        "games": 2363,
+        "roleShare": 0.05931013503032773
+      },
+      {
+        "id": 51,
+        "name": "Caitlyn",
+        "games": 2339,
+        "roleShare": 0.05870774686243613
+      },
+      {
+        "id": 24,
+        "name": "Jax",
+        "games": 2310,
+        "roleShare": 0.0579798611595671
+      },
+      {
+        "id": 5,
+        "name": "Xin Zhao",
+        "games": 2272,
+        "roleShare": 0.05702607989373873
+      },
+      {
+        "id": 11,
+        "name": "Master Yi",
+        "games": 2184,
+        "roleShare": 0.05481732327813617
+      },
+      {
+        "id": 36,
+        "name": "Dr. Mundo",
+        "games": 2112,
+        "roleShare": 0.05301015877446135
+      },
+      {
+        "id": 64,
+        "name": "Lee Sin",
+        "games": 2086,
+        "roleShare": 0.052357571592578776
+      },
+      {
+        "id": 122,
+        "name": "Darius",
+        "games": 2009,
+        "roleShare": 0.05042490955392654
+      },
+      {
+        "id": 143,
+        "name": "Zyra",
+        "games": 2000,
+        "roleShare": 0.05019901399096719
+      },
+      {
+        "id": 897,
+        "name": "K'Sante",
+        "games": 1965,
+        "roleShare": 0.04932053124612527
+      },
+      {
+        "id": 429,
+        "name": "Kalista",
+        "games": 1814,
+        "roleShare": 0.04553050568980724
+      },
+      {
+        "id": 106,
+        "name": "Volibear",
+        "games": 1783,
+        "roleShare": 0.04475242097294725
+      },
+      {
+        "id": 164,
+        "name": "Camille",
+        "games": 1757,
+        "roleShare": 0.04409983379106468
+      },
+      {
+        "id": 98,
+        "name": "Shen",
+        "games": 1729,
+        "roleShare": 0.043397047595191134
+      },
+      {
+        "id": 9,
+        "name": "Fiddlesticks",
+        "games": 1634,
+        "roleShare": 0.04101259443062019
+      },
+      {
+        "id": 62,
+        "name": "Wukong",
+        "games": 1632,
+        "roleShare": 0.04096239541662923
+      },
+      {
+        "id": 114,
+        "name": "Fiora",
+        "games": 1602,
+        "roleShare": 0.04020941020676472
+      },
+      {
+        "id": 221,
+        "name": "Zeri",
+        "games": 1558,
+        "roleShare": 0.039105031898963444
+      },
+      {
+        "id": 2,
+        "name": "Olaf",
+        "games": 1531,
+        "roleShare": 0.03842734521008538
+      },
+      {
+        "id": 420,
+        "name": "Illaoi",
+        "games": 1488,
+        "roleShare": 0.03734806640927959
+      },
+      {
+        "id": 22,
+        "name": "Ashe",
+        "games": 1454,
+        "roleShare": 0.036494683171433145
+      },
+      {
+        "id": 21,
+        "name": "Miss Fortune",
+        "games": 1444,
+        "roleShare": 0.03624368810147831
+      },
+      {
+        "id": 516,
+        "name": "Ornn",
+        "games": 1419,
+        "roleShare": 0.03561620042659122
+      },
+      {
+        "id": 104,
+        "name": "Graves",
+        "games": 1279,
+        "roleShare": 0.03210226944722352
+      },
+      {
+        "id": 904,
+        "name": "Zaahen",
+        "games": 1276,
+        "roleShare": 0.03202697092623707
+      },
+      {
+        "id": 119,
+        "name": "Draven",
+        "games": 1239,
+        "roleShare": 0.031098289167404175
+      },
+      {
+        "id": 19,
+        "name": "Warwick",
+        "games": 1182,
+        "roleShare": 0.02966761726866161
+      },
+      {
+        "id": 254,
+        "name": "Vi",
+        "games": 1142,
+        "roleShare": 0.028663636988842264
+      },
+      {
+        "id": 223,
+        "name": "Tahm Kench",
+        "games": 1100,
+        "roleShare": 0.027609457695031953
+      },
+      {
+        "id": 59,
+        "name": "Jarvan IV",
+        "games": 1098,
+        "roleShare": 0.027559258681040987
+      },
+      {
+        "id": 555,
+        "name": "Pyke",
+        "games": 1026,
+        "roleShare": 0.025752094177366167
+      },
+      {
+        "id": 6,
+        "name": "Urgot",
+        "games": 958,
+        "roleShare": 0.024045327701673284
+      },
+      {
+        "id": 56,
+        "name": "Nocturne",
+        "games": 922,
+        "roleShare": 0.023141745449835875
+      },
+      {
+        "id": 113,
+        "name": "Sejuani",
+        "games": 915,
+        "roleShare": 0.022966048900867488
+      },
+      {
+        "id": 523,
+        "name": "Aphelios",
+        "games": 797,
+        "roleShare": 0.020004307075400424
+      },
+      {
+        "id": 15,
+        "name": "Sivir",
+        "games": 778,
+        "roleShare": 0.019527416442486237
+      },
+      {
+        "id": 76,
+        "name": "Nidalee",
+        "games": 743,
+        "roleShare": 0.01864893369764431
+      },
+      {
+        "id": 60,
+        "name": "Elise",
+        "games": 684,
+        "roleShare": 0.01716806278491078
+      },
+      {
+        "id": 77,
+        "name": "Udyr",
+        "games": 671,
+        "roleShare": 0.016841769193969493
+      },
+      {
+        "id": 117,
+        "name": "Lulu",
+        "games": 632,
+        "roleShare": 0.01586288842114563
+      },
+      {
+        "id": 497,
+        "name": "Rakan",
+        "games": 597,
+        "roleShare": 0.014984405676303707
+      },
+      {
+        "id": 48,
+        "name": "Trundle",
+        "games": 590,
+        "roleShare": 0.014808709127335321
+      },
+      {
+        "id": 16,
+        "name": "Soraka",
+        "games": 589,
+        "roleShare": 0.014783609620339836
+      },
+      {
+        "id": 222,
+        "name": "Jinx",
+        "games": 554,
+        "roleShare": 0.013905126875497912
+      },
+      {
+        "id": 111,
+        "name": "Nautilus",
+        "games": 536,
+        "roleShare": 0.013453335749579206
+      },
+      {
+        "id": 141,
+        "name": "Kayn",
+        "games": 526,
+        "roleShare": 0.01320234067962437
+      },
+      {
+        "id": 78,
+        "name": "Poppy",
+        "games": 518,
+        "roleShare": 0.013001544623660502
+      },
+      {
+        "id": 360,
+        "name": "Samira",
+        "games": 490,
+        "roleShare": 0.012298758427786962
+      },
+      {
+        "id": 150,
+        "name": "Gnar",
+        "games": 481,
+        "roleShare": 0.012072862864827609
+      },
+      {
+        "id": 804,
+        "name": "Yunara",
+        "games": 475,
+        "roleShare": 0.011922265822854708
+      },
+      {
+        "id": 203,
+        "name": "Kindred",
+        "games": 385,
+        "roleShare": 0.009663310193261184
+      },
+      {
+        "id": 412,
+        "name": "Thresh",
+        "games": 379,
+        "roleShare": 0.009512713151288283
+      },
+      {
+        "id": 427,
+        "name": "Ivern",
+        "games": 374,
+        "roleShare": 0.009387215616310864
+      },
+      {
+        "id": 12,
+        "name": "Alistar",
+        "games": 366,
+        "roleShare": 0.009186419560346996
+      },
+      {
+        "id": 35,
+        "name": "Shaco",
+        "games": 365,
+        "roleShare": 0.009161320053351511
+      },
+      {
+        "id": 200,
+        "name": "Bel'Veth",
+        "games": 365,
+        "roleShare": 0.009161320053351511
+      },
+      {
+        "id": 235,
+        "name": "Senna",
+        "games": 353,
+        "roleShare": 0.008860125969405708
+      },
+      {
+        "id": 28,
+        "name": "Evelynn",
+        "games": 336,
+        "roleShare": 0.008433434350482489
+      },
+      {
+        "id": 102,
+        "name": "Shyvana",
+        "games": 319,
+        "roleShare": 0.008006742731559267
+      },
+      {
+        "id": 498,
+        "name": "Xayah",
+        "games": 319,
+        "roleShare": 0.008006742731559267
+      },
+      {
+        "id": 57,
+        "name": "Maokai",
+        "games": 312,
+        "roleShare": 0.007831046182590881
+      },
+      {
+        "id": 121,
+        "name": "Kha'Zix",
+        "games": 290,
+        "roleShare": 0.007278857028690243
+      },
+      {
+        "id": 72,
+        "name": "Skarner",
+        "games": 248,
+        "roleShare": 0.006224677734879932
+      },
+      {
+        "id": 421,
+        "name": "Rek'Sai",
+        "games": 226,
+        "roleShare": 0.005672488580979292
+      },
+      {
+        "id": 53,
+        "name": "Blitzcrank",
+        "games": 194,
+        "roleShare": 0.004869304357123817
+      },
+      {
+        "id": 33,
+        "name": "Rammus",
+        "games": 184,
+        "roleShare": 0.004618309287168981
+      },
+      {
+        "id": 40,
+        "name": "Janna",
+        "games": 169,
+        "roleShare": 0.004241816682236728
+      },
+      {
+        "id": 876,
+        "name": "Lillia",
+        "games": 163,
+        "roleShare": 0.004091219640263826
+      },
+      {
+        "id": 37,
+        "name": "Sona",
+        "games": 139,
+        "roleShare": 0.00348883147237222
+      },
+      {
+        "id": 44,
+        "name": "Taric",
+        "games": 115,
+        "roleShare": 0.0028864433044806133
+      },
+      {
+        "id": 895,
+        "name": "Nilah",
+        "games": 111,
+        "roleShare": 0.002786045276498679
+      },
+      {
+        "id": 432,
+        "name": "Bard",
+        "games": 107,
+        "roleShare": 0.0026856472485167447
+      },
+      {
+        "id": 32,
+        "name": "Amumu",
+        "games": 92,
+        "roleShare": 0.0023091546435844907
+      },
+      {
+        "id": 267,
+        "name": "Nami",
+        "games": 80,
+        "roleShare": 0.0020079605596386874
+      },
+      {
+        "id": 120,
+        "name": "Hecarim",
+        "games": 74,
+        "roleShare": 0.001857363517665786
+      },
+      {
+        "id": 89,
+        "name": "Leona",
+        "games": 57,
+        "roleShare": 0.0014306718987425649
+      },
+      {
+        "id": 902,
+        "name": "Milio",
+        "games": 57,
+        "roleShare": 0.0014306718987425649
+      },
+      {
+        "id": 107,
+        "name": "Rengar",
+        "games": 42,
+        "roleShare": 0.001054179293810311
+      },
+      {
+        "id": 888,
+        "name": "Renata Glasc",
+        "games": 37,
+        "roleShare": 0.000928681758832893
+      },
+      {
+        "id": 350,
+        "name": "Yuumi",
+        "games": 31,
+        "roleShare": 0.0007780847168599915
+      },
+      {
+        "id": 201,
+        "name": "Braum",
+        "games": 29,
+        "roleShare": 0.0007278857028690242
+      },
+      {
+        "id": 526,
+        "name": "Rell",
+        "games": 25,
+        "roleShare": 0.0006274876748870898
+      }
+    ]
+  }
+}

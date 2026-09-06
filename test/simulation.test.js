@@ -7,6 +7,32 @@ const data = require('../src/data/gamedata.cache.json');
 const fixtures = require('./simulation-fixtures');
 const clone = value => JSON.parse(JSON.stringify(value));
 const timeline = require('../src/renderer/draft-timeline');
+function seeded(seed) {
+  return () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+}
+test('weighted sampling follows pick frequency rather than uniform choice', () => {
+  const random = seeded(93); const pool = [{ name: 'Common', games: 900 }, { name: 'Rare', games: 100 }];
+  let common = 0;
+  for (let i = 0; i < 10000; i++) if (timeline.weighted(pool, new Set(), random) === 'Common') common++;
+  assert.ok(common > 8700 && common < 9300);
+  assert.equal(timeline.weighted(pool, new Set(['Common']), random), 'Rare');
+});
+test('200 generated drafts use real role frequencies without repeats or banned picks', () => {
+  const popularity = require('../src/data/role-popularity.json');
+  const drafts = new Set();
+  for (let i = 1; i <= 200; i++) {
+    const random = seeded(i); const allies = timeline.randomSlots(random); const enemies = timeline.randomSlots(random);
+    const generated = timeline.generate(popularity, 'blue', allies, enemies, random);
+    const picked = [...generated.champions.blue, ...generated.champions.red];
+    assert.equal(new Set([...picked, ...generated.bans.blue, ...generated.bans.red]).size, 20);
+    for (const side of ['blue', 'red']) for (let slot = 0; slot < 5; slot++) {
+      const record = popularity.pools[timeline.roles[slot]].find(p => p.name === generated.champions[side][slot]);
+      assert.ok(record && record.games >= 300 && record.roleShare >= 0.1);
+    }
+    drafts.add(picked.join(','));
+  }
+  assert.ok(drafts.size > 190);
+});
 test('randomized rosters pick from top to bottom, including Support first, after bans', () => {
   assert.notDeepEqual(timeline.randomSlots(() => 0), timeline.randomSlots(() => 0.99));
   for (const side of ['blue', 'red']) {

@@ -9,7 +9,7 @@ const data = require('../src/data/gamedata.cache.json');
 const fixtures = require('./simulation-fixtures');
 const baselines = require('../docs/examples/baselines.json');
 const provider = { championBuild: async (id, role) => baselines.find(b => b.championId === id && b.role === role) || null };
-ipcMain.handle('sim-init', () => ({ fixtures, items: [{ id: '1043', name: 'Recurve Bow' }] }));
+ipcMain.handle('sim-init', () => ({ popularity: require('../src/data/role-popularity.json'), items: [{ id: '1043', name: 'Recurve Bow' }] }));
 ipcMain.handle('sim-run', async (_event, spec) => {
   try { return { result: await simulate(spec, champions, data, provider), source: 'Offline recorded data' }; }
   catch (error) { return { error: error.message }; }

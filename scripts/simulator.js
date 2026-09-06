@@ -5,16 +5,15 @@ const path = require('path');
 const { champions } = require('../src/data/champions.cache.json');
 const data = require('../src/data/gamedata.cache.json');
 const { simulate } = require('../src/main/simulation');
-const fixtures = require('../test/simulation-fixtures');
 const ugg = require('../src/main/ugg');
-const example = require('../docs/examples/worked-example.json');
+const recordedPopularity = require('../src/data/role-popularity.json');
 let win;
 function offlineProvider() {
   const file = path.resolve(__dirname, '../docs/examples/baselines.json');
   const records = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : [];
   return { championBuild: async (id, role) => records.find(b => b.championId === id && b.role === role) || null };
 }
-ipcMain.handle('sim-init', () => ({ fixtures: [...fixtures, example.liveInput], patch: data.version,
+ipcMain.handle('sim-init', async () => ({ popularity: await ugg.loadRolePopularity(data.version, champions) || recordedPopularity, patch: data.version,
   champions: Object.values(champions).map(c => c.name),
   items: Object.entries(data.itemNames).filter(([id]) => data.itemMeta[id]?.purchasable).map(([id, name]) => ({ id, name })) }));
 ipcMain.handle('sim-run', async (_event, spec, online) => {

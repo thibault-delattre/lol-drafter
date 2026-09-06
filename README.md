@@ -12,7 +12,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c8aa6e"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4b8bbe">
   <img alt="Electron" src="https://img.shields.io/badge/Electron-33-47848f">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-110%20offline%20%2B%2019%20live-3fb950">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-112%20offline%20%2B%2019%20live-3fb950">
 </p>
 
 LoL Draft Coach follows champion select in real time, evaluates both compositions, and recommends
@@ -189,16 +189,23 @@ Use **Échanger mon tour avec** to swap your pick order with an unlocked teammat
 the same, completed picks cannot move, and swapping does not reset the clock.
 Every pick has a hover and a separate lock-in; the production coach recalculates after each event,
 and item advice starts only after your lock. Choose blue/red side, playback speed, pause,
-step forward or restart. These are scripted fictional players, not a connection to a real match.
+step forward or restart. These are generated simulated players, not a connection to a real match.
 
-For individual custom snapshots, choose one of eight regression presets
-or the README's Ornn example, then edit the JSON: picks, hovers, bans, lane override, inventories,
-level, kills, deaths, assists and CS. Results update after editing. The item search gives you IDs
-for swords, bows, Doran items and completed equipment. Export any scenario to keep it as a regression
-case, then import it again later.
+There is no scenario picker. Each new draft samples champions from measured **u.gg champion-role
+game counts**, normalized within the role, World/Emerald+ and the same patch. High-pick-frequency
+champions appear more often; sampling is not based on win rate. Observations below 0.1% of role
+selections or 300 games are excluded to avoid extremely rare off-role picks. Remaining weights
+are renormalized after bans and prior picks. All ten picks are distinct and unbanned.
+Bans are random from the eligible champion population; they do not reproduce measured ban rates.
+The published pick frequency is a share of role selections, not u.gg's overall game pick-rate denominator.
+
+The simulator refreshes these distributions on startup (12-hour cache) and falls back to the bundled
+snapshot when unavailable. The source patch and collection date are visible. Refresh the bundled
+snapshot with `node scripts/electron.js scripts/refresh-popularity.js`. Predefined cases remain
+only in automated tests. Advanced JSON import/export remains available for reproducing bugs.
 
 Offline mode uses the recorded Gragas, Ornn, Mundo and Vayne build snapshots and clearly marks
-unavailable matchup statistics. Enable **Statistiques u.gg en ligne** to use the real statistics
+unavailable matchup statistics. **Statistiques u.gg en ligne** is enabled by default to use the real statistics
 provider (which can serve its cache). Champion portraits require access to Riot's image CDN.
 The laboratory executes the production parsers, role inference, blind picks, matchup ranking and
 item planner; it does not connect to LCU or fabricate a model response. Claude scheduling is covered

@@ -469,7 +469,44 @@ async function championBuild(championId, role, ddragonVersion, itemMeta) {
   }
 }
 
+// Normalize observed champion-role games within the same patch/rank/region.
+async function loadRolePopularity(version, champions) {
+  const patch = patchKey(version);
+  if (!patch) return null;
+  const key = `role_popularity_v1_${patch}.json`;
+  const cached = cacheRead(key);
+  if (cached) return cached;
+  const pools = Object.fromEntries(Object.keys(ROLE_IDS).map(role => [role, []]));
+  const queue = Object.values(champions); let next = 0; let loaded = 0;
+  await Promise.all(Array.from({ length: 6 }, async () => {
+    while (next < queue.length) {
+      const champ = queue[next++];
+      try {
+        const overview = await fetchJson(`https://stats2.u.gg/lol/1.5/overview/${patch}/ranked_solo_5x5/${champ.id}/1.5.0.json`);
+        loaded++;
+        for (const [role, roleId] of Object.entries(ROLE_IDS)) {
+          const bucket = pickBuildBucket(overview, roleId);
+          const record = bucket && bucket.secs[6];
+          const games = record && record[1];
+          if (Number.isFinite(games) && games > 0) pools[role].push({ id: champ.id, name: champ.name, games });
+        }
+      } catch (_) { /* Require sufficient coverage before publishing. */ }
+    }
+  }));
+  if (loaded < queue.length * 0.95 || Object.values(pools).some(pool => pool.length < 10)) return null;
+  for (const pool of Object.values(pools)) {
+    const total = pool.reduce((sum, p) => sum + p.games, 0);
+    for (const p of pool) p.roleShare = 100 * p.games / total;
+    pool.sort((a, b) => b.games - a.games);
+  }
+  const result = { patch, tier: 'Emerald+', region: 'World', source: 'u.gg overview champion-role game counts',
+    fetchedAt: new Date().toISOString(), loaded, totalChampions: queue.length, pools };
+  cacheWrite(key, result);
+  return result;
+}
+
 module.exports = {
+  loadRolePopularity,
   loadPrimaryRoles, laneMatchups, rankCounters, winRateAgainst, buildLaneStats, championBuild, pickTop, wilsonLowerBound, rankVictims, MIN_MATCHUP_GAMES,
   patchKey, previousPatch, largestBucket, pickBucket, pickBuildBucket, buildCore, rankBuildOptions, openingRecord, ROLE_IDS,
 };

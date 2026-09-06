@@ -5,6 +5,7 @@ let playbackTimer; let playing = false; let frameIndex = 0; let playbackGenerati
 let draftFrames = DraftTimeline.frames('blue');
 let alliedOrder = DraftTimeline.defaultSlots('blue');
 let enemyOrder = DraftTimeline.defaultSlots('red');
+let generatedDraft = null;
 let remainingMs = null; let deadline = null;
 function pauseDraft() {
   if (playing && deadline !== null) remainingMs = Math.max(0, deadline - Date.now());
@@ -51,9 +52,14 @@ function resetDraft() {
     $('swapMate').replaceChildren(); $('swapTurn').disabled = true;
     $('results').replaceChildren(); $('roster').replaceChildren(); return;
   }
+  if (!catalog?.popularity) {
+    $('turnLabel').textContent = 'Chargement des fréquences par rôle…';
+    $('play').disabled = $('step').disabled = true; return;
+  }
   alliedOrder = DraftTimeline.randomSlots();
   enemyOrder = DraftTimeline.randomSlots();
-  draftFrames = DraftTimeline.frames($('side').value, undefined, role, alliedOrder, enemyOrder);
+  generatedDraft = DraftTimeline.generate(catalog.popularity, $('side').value, alliedOrder, enemyOrder);
+  draftFrames = DraftTimeline.frames($('side').value, undefined, role, alliedOrder, enemyOrder, generatedDraft);
   $('allyTitle').textContent = 'Mon équipe · ' + ($('side').value === 'blue' ? 'Bleu' : 'Rouge');
   $('enemyTitle').textContent = 'Adversaires · ' + ($('side').value === 'blue' ? 'Rouge' : 'Bleu');
   $('play').textContent = '▶ Lancer la draft';
@@ -84,7 +90,7 @@ function updateSwapChoices(frame) {
 $('swapTurn').onclick = () => {
   try {
     alliedOrder = DraftTimeline.swap(draftFrames[frameIndex].spec, alliedOrder, Number($('swapMate').value));
-    draftFrames = DraftTimeline.frames($('side').value, undefined, $('role').value, alliedOrder, enemyOrder);
+    draftFrames = DraftTimeline.frames($('side').value, undefined, $('role').value, alliedOrder, enemyOrder, generatedDraft);
     $('swapStatus').textContent = 'Échange accepté · ton rôle reste ' + $('role').value;
     showFrame(); // Keep the current deadline; swapping does not buy extra time.
   } catch (error) { $('swapStatus').textContent = error.message; }
@@ -139,9 +145,7 @@ async function run() {
   $('changes').textContent = previous ? signature === previous ? 'Priorités inchangées.' : 'Lane, recommandations ou menaces modifiées. Le résultat affiché a été recalculé.' : 'Premier calcul.';
   previous = signature; $('raw').textContent = JSON.stringify(r, null, 2);
 }
-function loadPreset() { pauseDraft(); revision++; $('turnLabel').textContent = 'Scénario statique · relancer la draft pour reprendre'; $('editor').value = JSON.stringify(catalog.fixtures[$('preset').value], null, 2); run(); }
-$('run').onclick = run; $('online').onchange = run; $('preset').onchange = loadPreset;
-$('next').onclick = () => { $('preset').selectedIndex = ($('preset').selectedIndex + 1) % catalog.fixtures.length; loadPreset(); };
+$('run').onclick = run; $('online').onchange = run;
 $('editor').oninput = () => { pauseDraft(); revision++; clearTimeout(timer); timer = setTimeout(run, 600); };
 $('itemSearch').oninput = () => { $('itemResults').textContent = catalog.items.filter(it => it.name.toLowerCase().includes($('itemSearch').value.toLowerCase())).slice(0, 25).map(it => it.id + ' — ' + it.name).join('\n'); $('itemResults').style.whiteSpace = 'pre-line'; };
 $('export').onclick = () => {
@@ -152,6 +156,8 @@ $('export').onclick = () => {
 };
 $('import').onchange = async () => { pauseDraft(); const file = $('import').files[0]; if (file) { $('editor').value = await file.text(); run(); } };
 window.simulator.init().then(value => { catalog = value;
-  value.fixtures.forEach((f, i) => { const option = document.createElement('option'); option.value = i; option.textContent = f.title; $('preset').append(option); });
+  if (value.popularity) $('population').textContent = 'Tirage pondéré par rôle · u.gg ' + value.popularity.tier +
+    ' · patch ' + value.popularity.patch + ' · relevé ' + value.popularity.fetchedAt.slice(0, 10);
   resetDraft();
+  if ($('role').value) $('play').click();
 });
